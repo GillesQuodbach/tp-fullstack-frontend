@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-sm bg-light navbar-light">
+  <a class="navbar-brand" href="#">TRAININGS</a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="#" routerLink="/trainings">Liste des Formations</a>
+    </li>    
+    <li class="nav-item">
+      <a class="nav-link" href="#" routerLink="/cart">Contenu du Panier</a>
+    </li> 
+    <li>
+      <a>[{{this.cartService.getSize()}}]</a>
+    </li>
+    <li *ngIf="this.authService.isAdmin()" class="nav-item">
+      <a class="nav-link" href="#" routerLink="/training/?">Ajouter formation</a>
+    </li>
+    <li *ngIf="this.authService.isAdmin()" class="nav-item">
+      <a class="nav-link" href="#" routerLink="/admin">Administration</a>
+    </li>
+  </ul>
+  
+  <ul class="navbar-nav ms-auto">
+    <li>
+      <a class="nav-link" href="#" routerLink="/login">{{this.authService.isConnected() ? 'Deconnexion' : 'Connexion'}}</a>
+    </li>
+  </ul>
+</nav>
+
+<router-outlet> </router-outlet>

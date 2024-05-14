@@ -1,0 +1,17 @@
+.table {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.categories-main-container {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.categories-buttons {
+  padding: 8px 32px;
+}
