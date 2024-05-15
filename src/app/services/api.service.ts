@@ -30,11 +30,11 @@ export class ApiService {
   }
 
   public getUsers() {
-    return this.http.get<User[]>(environment.host + '/users');
+    return this.http.get<User[]>(environment.login + '/users');
   }
 
   public getUserByEmail(email: string) {
-    return this.http.get<User[]>(environment.host + '/users?email=' + email);
+    return this.http.get<User[]>(environment.login + '/users?email=' + email);
   }
 
   public postTraining(training: any) {

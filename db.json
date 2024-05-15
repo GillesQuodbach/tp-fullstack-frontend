@@ -45,19 +45,14 @@
   ],
   "users": [
     {
-      "email": "elbab@gmail.com",
+      "email": "quodbach.gilles@gmail.com",
       "password": "1234",
-      "roles": [
-        "ADMIN",
-        "USER"
-      ]
+      "roles": ["ADMIN", "USER"]
     },
     {
       "email": "hugo@gmail.com",
       "password": "1234",
-      "roles": [
-        "USER"
-      ]
+      "roles": ["USER"]
     }
   ]
 }
