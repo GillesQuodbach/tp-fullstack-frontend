@@ -4,6 +4,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Command } from 'src/app/model/command.model';
 import { Customer } from 'src/app/model/customer.model';
 import { ApiService } from 'src/app/services/api.service';
+import { OrderItem } from 'src/app/model/orderItem.model';
 
 @Component({
   selector: 'app-order',
@@ -46,8 +47,14 @@ export class OrderComponent implements OnInit,OnChanges,DoCheck,OnDestroy {
         next: (data) => {
           this.apiService.getCustomer(data.id).subscribe({
             next: (customerSaved) => {
-              this.apiService.postCommand(new Command(this.cartService.getAmount(), customerSaved)).subscribe();
-              this.cartService.clear();
+              this.apiService.postCommand(new Command(this.cartService.getAmount(), customerSaved)).subscribe({
+                next: (commandSaved) => {
+                  this.cartService.getCart().map((cartItem) => {
+                    this.apiService.postOrderItem(new OrderItem(cartItem.quantity, cartItem.price, commandSaved, cartItem)).subscribe();
+                  })
+                  this.cartService.clear();
+                }
+              });
             }
           })
       }});
