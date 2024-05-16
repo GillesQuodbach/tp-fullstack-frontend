@@ -23,8 +23,8 @@ export class CustomerComponent implements OnInit {
     this.customer = this.cartService.getCustomer();  
     this.myForm = this.formBuilder.group({
       name : [this.customer.name, Validators.required],
-      firstName : [this.customer.firstName, Validators.required],
-      address : [this.customer.address, [Validators.required,Validators.minLength(25)]],
+      firstName : [this.customer.lastname, Validators.required],
+      address : [this.customer.adress, [Validators.required,Validators.minLength(25)]],
       phone : [this.customer.phone, [Validators.required,Validators.maxLength(10)]],
       email : [this.customer.email, [Validators.required,Validators.pattern(environment.regExEmail)]]
     })
