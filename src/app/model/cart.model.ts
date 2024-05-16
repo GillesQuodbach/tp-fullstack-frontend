@@ -6,7 +6,7 @@ export class Cart {
     items : Map<number,Training>;
 
     constructor(){
-        this.customer = new Customer("unknown","","","","");
+        this.customer = new Customer(0, "unknown","","","","");
         this.items = new Map<number,Training>();
     }
 }

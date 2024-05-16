@@ -40,7 +40,7 @@ export class CustomerComponent implements OnInit {
    */
   onSaveCustomer(form : FormGroup){
     if(form.valid){
-      this.cartService.saveCustomer(new Customer(form.value.name,form.value.firstName,
+      this.cartService.saveCustomer(new Customer(0, form.value.name,form.value.firstName,
         form.value.address,form.value.phone,form.value.email));
       this.router.navigateByUrl('order');
     }

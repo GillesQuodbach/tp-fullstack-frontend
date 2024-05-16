@@ -11,7 +11,8 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit,OnChanges,DoCheck,OnDestroy {
-  command : Command = new Command(this.cartService.getAmount(), this.cartService.getCustomer());
+  customer : Customer | undefined;
+  error : string = "";
   dateOrder : Date = new Date();
   constructor(public cartService : CartService, private router : Router, private apiService: ApiService) { }
 
@@ -20,6 +21,7 @@ export class OrderComponent implements OnInit,OnChanges,DoCheck,OnDestroy {
   }
 
   ngOnInit(): void {
+    this.customer = this.cartService.getCustomer()
       console.log('ngOnInit');
   }
 
@@ -33,26 +35,22 @@ export class OrderComponent implements OnInit,OnChanges,DoCheck,OnDestroy {
 
   onOrder() {
     if (confirm("Aujourd'hui c'est gratuit, merci de votre visite :)")) {
-      this.saveCustomer();
-      this.cartService.clear();
+      this.saveOrder();
       this.router.navigateByUrl('');
     }
   }
 
-  saveCustomer() {
-    const newCustomer = this.cartService.getCustomer();
-    if (newCustomer) {
-      this.apiService.postCustomer(newCustomer).subscribe(
-        (response) => {
-          console.log('Client créé avec succès:', response);
-        },
-        (error) => {
-          console.error('Erreur lors de la création du client: ', error);
-        }
-      );
-    } else {
-      console.error('Impossible de créer le client car le client est null.');
+  saveOrder() {
+    if(this.customer) {
+      this.apiService.postCustomer(this.customer).subscribe({
+        next: (data) => {
+          this.apiService.getCustomer(data.id).subscribe({
+            next: (customerSaved) => {
+              this.apiService.postCommand(new Command(this.cartService.getAmount(), customerSaved)).subscribe();
+              this.cartService.clear();
+            }
+          })
+      }});
     }
   }
-  
 }

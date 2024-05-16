@@ -54,7 +54,7 @@ export class CartService {
   getCustomer() : Customer {
     let customer = localStorage.getItem('customer');
     if(customer)  return  JSON.parse(customer);
-    return new Customer("unknown","","","","");
+    return new Customer(0, "unknown","","","","");
   }
 
   clear() {

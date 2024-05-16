@@ -5,6 +5,7 @@ import { Training } from '../model/training.model';
 import { User } from '../model/user.model';
 import { Category } from '../model/category.model';
 import { Customer } from '../model/customer.model';
+import { Command } from '../model/command.model';
 
 @Injectable({
   providedIn: 'root',
@@ -55,5 +56,13 @@ export class ApiService {
 
   public postCustomer(customer: any) {
     return this.http.post<Customer>(environment.host + '/customers', customer)
+  }
+
+  public getCustomer(id: number) {
+    return this.http.get<Customer>(environment.host + '/customers/' + id)
+  }
+
+  public postCommand(command: any) {
+    return this.http.post<Command>(environment.host + '/orders', command)
   }
 }
