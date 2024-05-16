@@ -35,9 +35,9 @@ export class OrderComponent implements OnInit,OnChanges,DoCheck,OnDestroy {
   }
 
   onOrder() {
-    if (confirm("Aujourd'hui c'est gratuit, merci de votre visite :)")) {
+    if (confirm("Voulez vous confirmer la commande ?")) {
       this.saveOrder();
-      this.router.navigateByUrl('');
+      this.router.navigateByUrl('orderConfirm'); 
     }
   }
 
@@ -47,17 +47,19 @@ export class OrderComponent implements OnInit,OnChanges,DoCheck,OnDestroy {
         next: (data) => {
           this.apiService.getCustomer(data.id).subscribe({
             next: (customerSaved) => {
-              this.apiService.postCommand(new Command(this.cartService.getAmount(), customerSaved)).subscribe({
+              this.apiService.postCommand(new Command(0, this.cartService.getAmount(), customerSaved)).subscribe({
                 next: (commandSaved) => {
+                  this.cartService.setCommand(commandSaved);
                   this.cartService.getCart().map((cartItem) => {
                     this.apiService.postOrderItem(new OrderItem(cartItem.quantity, cartItem.price, commandSaved, cartItem)).subscribe();
                   })
                   this.cartService.clear();
-                }
-              });
-            }
-          })
-      }});
+                },
+                error: (err) => this.error = err});
+            },
+            error: (err) => this.error = err});
+      },
+      error: (err) => this.error = err});
     }
   }
 }

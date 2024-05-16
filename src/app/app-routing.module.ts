@@ -7,6 +7,7 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { OrderComponent } from './components/order/order.component';
 import { LoginoutComponent } from './components/loginout/loginout.component';
 import { TrainingComponent } from './components/training/training.component';
+import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
@@ -17,6 +18,10 @@ const routes : Routes = [
     { path : 'cart' , component : CartComponent },
     { 
       path : 'order' , component : OrderComponent,
+      canActivate : [UserGuard]
+    },
+    {
+      path : 'orderConfirm', component : OrderConfirmComponent,
       canActivate : [UserGuard]
     },
     { 

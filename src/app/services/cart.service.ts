@@ -1,14 +1,17 @@
 import { Injectable } from '@angular/core';
 import { Customer } from '../model/customer.model';
 import { Training } from '../model/training.model';
+import { Command } from '../model/command.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
   private cart : Map<number,Training>;
+  private command : Command | null;
 
-  constructor() {     
+  constructor() {   
+    this.command = null;  
     // au démarrage du service, je récupère le contenu du local storage : command en cours
     let cart = localStorage.getItem('cart');
     if(cart){  // le panier existe déjà
@@ -60,5 +63,17 @@ export class CartService {
   clear() {
     this.cart.clear();
     localStorage.removeItem('cart');
+  }
+
+  setCommand(command : Command) {
+    this.command = command;
+  }
+
+  getCommand() {
+    return this.command;
+  }
+
+  clearCommand() {
+    this.command = null;
   }
 }
