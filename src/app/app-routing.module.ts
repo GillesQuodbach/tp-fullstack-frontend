@@ -8,6 +8,7 @@ import { OrderComponent } from './components/order/order.component';
 import { LoginoutComponent } from './components/loginout/loginout.component';
 import { TrainingComponent } from './components/training/training.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
+import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
@@ -23,6 +24,9 @@ const routes : Routes = [
     {
       path : 'orderConfirm', component : OrderConfirmComponent,
       canActivate : [UserGuard]
+    },
+    {
+      path : 'trainingDetail', component : TrainingDetailComponent,
     },
     { 
       path : 'customer' , component : CustomerComponent,
