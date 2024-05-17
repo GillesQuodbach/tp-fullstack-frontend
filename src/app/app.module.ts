@@ -14,6 +14,7 @@ import { TrainingComponent } from './components/training/training.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminComponent } from './components/admin/admin.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { OrderConfirmComponent } from './components/order-confirm/order-confirm.
     LoginoutComponent,
     TrainingComponent,
     AdminComponent,
-    OrderConfirmComponent
+    OrderConfirmComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,
