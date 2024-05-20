@@ -14,7 +14,11 @@ import { TrainingComponent } from './components/training/training.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminComponent } from './components/admin/admin.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
+<<<<<<< HEAD
 import { TrainingCardComponent } from './components/training-card/training-card.component';
+=======
+import { ImageComponent } from './components/image/image.component';
+>>>>>>> bf464ff6b4fa1e7d92a7a078a335f45ce15cd68f
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { TrainingCardComponent } from './components/training-card/training-card.
     TrainingComponent,
     AdminComponent,
     OrderConfirmComponent,
+<<<<<<< HEAD
     TrainingCardComponent
+=======
+    ImageComponent
+>>>>>>> bf464ff6b4fa1e7d92a7a078a335f45ce15cd68f
   ],
   imports: [
     BrowserModule,

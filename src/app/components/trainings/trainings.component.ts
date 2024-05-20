@@ -18,6 +18,8 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
  * delors, il aura accès à des fonctionnalités spécifiques suplémentaires
  */
 export class TrainingsComponent implements OnInit {
+  imgPath: any = 'localhost:8080/fileSystem/cuisine.png';
+
   listTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
   error = null;
