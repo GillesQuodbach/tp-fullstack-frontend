@@ -1,0 +1,25 @@
+<ng-container *ngIf="listTrainings; else loading">
+<div class="container" style="padding-top: 15px;" >
+<div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{cardTitle}}</h5>
+      <a href = "#" class="btn btn-primary">{{btnLabel}}</a>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Langage C</li>
+      <li class="list-group-item"><i class="fa fa-cart-plus"></i></li>
+      <li class="list-group-item">Categorie</li>
+      <li class="list-group-item">$90</li>
+    </ul>
+  </div>
+</div>
+</ng-container>
+<ng-template #loading>
+    <div>Loading...</div>
+  </ng-template>
+
+
+
+
+<!--https://github.com/Gerald1614/ecommerce-angular/blob/master/src/app/shared/components/product-card/product-card.component.html-->

@@ -11,10 +11,12 @@ import { OrderConfirmComponent } from './components/order-confirm/order-confirm.
 import { AdminComponent } from './components/admin/admin.component';
 import { AdminGuard } from './guards/admin.guard';
 import { UserGuard } from './guards/user.guard';
+import { TrainingCardComponent } from './components/training-card/training-card.component';
 
 
 const routes : Routes = [
     { path : 'trainings', component : TrainingsComponent },
+    {path : 'training-card', component: TrainingCardComponent },
     { path : 'cart' , component : CartComponent },
     { 
       path : 'order' , component : OrderComponent,

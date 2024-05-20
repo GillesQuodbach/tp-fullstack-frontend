@@ -9,60 +9,23 @@
         {{ category.name }}
       </button>
     </nav>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>NOM</th>
-          <th>DESCRIPTION</th>
-          <th>PRIX</th>
-          <th>QUANTITE</th>
-          <th>PANIER</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let training of listTrainings">
-          <td>{{ training.id }}</td>
-          <td>{{ training.name }}</td>
-          <td>{{ training.description }}</td>
-          <td>{{ training.price }}</td>
-          <td>
-            <input
-              type="number"
-              name="quantity"
-              style="width: 60px"
-              [(ngModel)]="training.quantity"
-              min="1"
-              max="10"
-            />
-          </td>
-          <td>
-            <a
-              class="btn btn-outline-primary btn-sm"
-              (click)="onAddToCart(training)"
-            >
-              <i class="fa fa-shopping-cart"></i> Ajouter
-            </a>
-          </td>
-          <td *ngIf="this.authService.isAdmin()">
-            <a
-              class="btn btn-outline-danger btn-sm"
-              (click)="onDeleteTraining(training)"
-            >
-              Supprimer
-            </a>
-          </td>
-          <td *ngIf="this.authService.isAdmin()">
-            <a
-              class="btn btn-outline-secondary btn-sm"
-              (click)="onUpdateTraining(training)"
-            >
-              Mise à jour
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <ng-container *ngFor= "let training of listTrainings">
+      <div class="container" style="padding-top: 15px;" >
+      <div class="card" style="width: 18rem;">
+          <img src="..." class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">{{training.name}}</h5>
+        
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">{{training.description}}</li>
+            <li class="list-group-item"><i class="fa fa-cart-plus"></i></li>
+            <li class="list-group-item">Catégorie</li>
+            <li class="list-group-item">{{training.price}}</li>
+          </ul>
+        </div>
+      </div>
+      </ng-container>
   </ng-container>
   <ng-template #loading>
     <div>Loading...</div>
