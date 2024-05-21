@@ -29,7 +29,7 @@ export class ApiService {
   }
 
   public getTraining(id: number) {
-    return this.http.get<Training>(environment.host + '/trainings/' + id);
+    return this.http.get<Training>(environment.host + '/training/' + id);
   }
 
   public getUsers() {

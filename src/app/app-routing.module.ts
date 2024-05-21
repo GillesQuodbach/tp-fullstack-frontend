@@ -26,7 +26,7 @@ const routes : Routes = [
       canActivate : [UserGuard]
     },
     {
-      path : 'trainingDetail', component : TrainingDetailComponent,
+      path : 'trainingDetail/:id', component : TrainingDetailComponent,
     },
     { 
       path : 'customer' , component : CustomerComponent,

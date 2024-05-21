@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Training } from 'src/app/model/training.model';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { Category } from 'src/app/model/category.model';
 
 @Component({
   selector: 'app-training',
@@ -22,7 +23,8 @@ export class TrainingComponent implements OnInit {
 
   constructor(private formBuilder : FormBuilder, private apiService : ApiService, 
     private router : Router, private route:ActivatedRoute, public authService : AuthenticateService) { 
-    this.training = new Training(0,"","",0,1);
+    const defaultCategory = new Category(0, '', '');
+    this.training = new Training(0,"","",0,1, defaultCategory);
     this.myForm = this.formBuilder.group({
         id   : [this.training.id],
         name : [this.training.name, Validators.required],
@@ -74,7 +76,7 @@ export class TrainingComponent implements OnInit {
   updateTraining(form : FormGroup){
     if(form.valid) {
     this.apiService.putTraining({id :form.value.id , name:form.value.name , description:form.value.description 
-      , price:form.value.price , quantity:1}).subscribe({
+      , price:form.value.price , quantity:1, category:form.value.category}).subscribe({
         next : (data) => console.log(data),  
         error : (err) => this.error = err.message,
         complete : () => this.router.navigateByUrl('trainings')
