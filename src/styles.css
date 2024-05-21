@@ -1,1 +1,43 @@
-/* You can add global styles to this file, and also import other style files */
+body,
+.backColor{background-color: #D2D2D2;}
+
+@font-face {
+    font-family: ubuntu;
+    src: url(assets/fonts/Ubuntu-C.ttf);
+}
+@font-face {
+    font-family: Queen;
+    src: url(assets/fonts/Queen_of_Camelot.otf);
+}
+
+.borderCard{
+    text-align: center;
+    border:1px solid #A4A4A4;
+    border-radius: 10px;
+    margin: 5px; padding: 0 !important;
+    transition-duration: 200ms;
+    font-family: ubuntu;
+    font-size: 20px;
+    text-shadow: 1px 1px 2px #6B6E70;
+}
+.borderCard img {
+    width: 100%;
+}
+
+.borderCard:hover{
+    border: 1px solid #157347;
+    background: #C4C4C4;
+    box-shadow: 0 0 8px #A4D2A4;
+    transition-duration: 300ms;
+}
+
+.imageFormation {
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+}
+
+nav {
+    font-family: Queen;
+    font-size: 24px;
+    text-shadow: 1px 1px 2px #6B6E70;
+}

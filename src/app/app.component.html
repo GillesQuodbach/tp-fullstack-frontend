@@ -17,12 +17,10 @@
       <a class="nav-link" href="#" routerLink="/admin">Administration</a>
     </li>
   </ul>
-  
   <ul class="navbar-nav ms-auto">
     <li>
       <a class="nav-link" href="#" routerLink="/login">{{this.authService.isConnected() ? 'Deconnexion' : 'Connexion'}}</a>
     </li>
   </ul>
 </nav>
-
-<router-outlet> </router-outlet>
+<router-outlet class="backColor"> </router-outlet>
