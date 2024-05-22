@@ -70,4 +70,8 @@ export class ApiService {
   public postOrderItem(orderItem: any) {
     return this.http.post<OrderItem>(environment.host + '/ordersitems', orderItem)
   }
+
+  public getImg(id: number) {
+    return this.http.get<any>(environment.host + '/download/' + id)
+  }
 }

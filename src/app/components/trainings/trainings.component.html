@@ -22,6 +22,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let training of listTrainings">
+          <td><img [src]="urlImg + '/download/' + training.id" alt="Training Image"/></td>
           <td>{{ training.id }}</td>
           <td>{{ training.name }}</td>
           <td>{{ training.description }}</td>
