@@ -5,6 +5,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-trainings',
@@ -23,6 +24,7 @@ export class TrainingsComponent implements OnInit {
   listTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
   error = null;
+  urlImg : String = "";
 
   constructor(
     private cartService: CartService,
@@ -34,6 +36,7 @@ export class TrainingsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTrainings();
     this.getAllCategories();
+    this.urlImg = environment.host
   }
   /**
    * Méthode qui renvoi à partir de l'Api toutes les formations accessibles
