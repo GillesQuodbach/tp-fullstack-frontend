@@ -4,28 +4,49 @@
       <button
         class="categories-buttons btn btn-success"
         *ngFor="let category of listCategories"
-        (click)="displayTrainingsByCategory(category.id)"
-      >
+        (click)="displayTrainingsByCategory(category.id)">
         {{ category.name }}
       </button>
     </nav>
-    <ng-container *ngFor= "let training of listTrainings">
-      <div class="container" style="padding-top: 15px;" >
-      <div class="card" style="width: 18rem;">
-          <img src="..." class="card-img-top" alt="...">
-          <div class="card-body">
-            <h5 class="card-title">{{training.name}}</h5>
-        
+
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md" *ngFor= "let training of listTrainings">
+          
+          <div class="grid" style="padding-top: 55px;">
+            <div class="card" style="width: 18rem;">
+               
+              <div class="image text-center">
+                  <img src="assets/img/404.png" class="card-img-top" alt="..." style="width: 200px">
+              </div>
+                
+                
+                <div class="card-body">
+                  <div class="align-items-center">
+                 
+                    <div class="row align-items-center">
+                    <div class="grid">
+                      <h5 class="card-title margin-left: 10px;" >{{ training.name }}</h5>
+                      <div class="icon-cart">
+                        <button><i class="fa fa-shopping-cart"></i></button>
+                      </div>
+                    </div>
+                    </div>
+             
+               
+                  <div class="prix">
+                    Prix : {{ training.price }}
+                  </div>
+                    
+                  </div>
+                </div>
+            </div>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">{{training.description}}</li>
-            <li class="list-group-item"><i class="fa fa-cart-plus"></i></li>
-            <li class="list-group-item">Catégorie</li>
-            <li class="list-group-item">{{training.price}}</li>
-          </ul>
         </div>
       </div>
-      </ng-container>
+    </div>
+
+  
   </ng-container>
   <ng-template #loading>
     <div>Loading...</div>

@@ -12,6 +12,21 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
+
 .categories-buttons {
   padding: 8px 32px;
 }
+
+
+.title-icon-container {
+  display: flex;
+}
+
+/*
+.card-title {
+  margin-right: 150px;
+}
+
+.prix {
+  display: flex;
+}*/
