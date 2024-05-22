@@ -37,7 +37,7 @@
                     <button *ngIf="!status" type="submit" class="btn btn-lg mt-3 me-3" style="background-color: #5984F1;"><i class="fa fa-save"></i> Ajouter en base</button>
                     <button *ngIf="status" type="submit" class="btn btn-lg mt-3 me-3" style="background-color: #5984F1;"><i class="fa fa-edit"></i> Mise à jour</button>
                     <button *ngIf="status" class="btn btn-danger btn-lg mt-3"><i class="fa fa-trash"></i></button>
-                    <div class="text-danger"></div>     
+                    <div *ngIf="error" class="text-danger">{{error}}</div>     
                 </div>
                 <button *ngIf="status" type="submit" class="btn btn-lg mt-3" style="background-color: #FFDD64;">
                     <i class="fa fa-shopping-cart"></i> Ajouter

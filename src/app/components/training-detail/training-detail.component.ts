@@ -82,6 +82,7 @@ export class TrainingDetailComponent implements OnInit {
         complete: () => this.router.navigateByUrl('trainings'),
       });
     }
+    else this.error = 'Veuillez saisir tous les champs';
   }
 
     /**
@@ -105,6 +106,6 @@ export class TrainingDetailComponent implements OnInit {
           complete : () => this.router.navigateByUrl('trainings')
         })
       }
-      else this.error = 'pb de saisi';
+      else this.error = 'Veuillez saisir tous les champs';   
     }
 }

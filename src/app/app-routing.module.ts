@@ -6,7 +6,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { OrderComponent } from './components/order/order.component';
 import { LoginoutComponent } from './components/loginout/loginout.component';
-import { TrainingComponent } from './components/training/training.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { AdminComponent } from './components/admin/admin.component';
@@ -33,10 +32,6 @@ const routes : Routes = [
       canActivate : [UserGuard]
     },
     { path : 'login' , component : LoginoutComponent},
-    { 
-      path : 'training/:id' , component : TrainingComponent,
-      canActivate : [UserGuard]
-    },
     { 
       path : 'admin' , component : AdminComponent,
       canActivate : [AdminGuard]
