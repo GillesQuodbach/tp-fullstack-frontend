@@ -1,10 +1,12 @@
-<div class="container" class="backColor">
+<div class="container">
   <ng-container *ngIf="listTrainings; else loading">
-    <nav class="categories-main-container">
-      <button class="categories-buttons btn btn-success" *ngFor="let category of listCategories"
-        (click)="displayTrainingsByCategory(category.id)">
-        {{ category.name }}
-      </button>
+    <nav class="navbar navbar-expand-lg navigationCategories">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active" *ngFor="let category of listCategories"
+          (click)="displayTrainingsByCategory(category.id)"><a class="nav-link">{{ category.name }}</a></li>
+        </ul>
+      </div>
     </nav>
     <div class="container">
       <ul class="cards">
@@ -12,6 +14,7 @@
           <li>
             <a href="#" class="carte">
               <img src="assets/img/default.jpg" alt="default" class="card__image">
+              <div class="backUpper"></div>
               <div class="card__overlay">
                 <div class="card__header">
                   <svg class="card__arc" xmlns="http://www.w3.org/2000/svg">

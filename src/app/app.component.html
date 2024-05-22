@@ -1,15 +1,8 @@
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-  <a class="navbar-brand" href="#">TRAININGS</a>
+<nav class="navbar navbar-expand-sm navigation">
+  <a class="navbar-brand" href="#" routerLink="/trainings">
+    <h1 style="margin: 0 1em;">MyShopApp</h1>
+  </a>
   <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/trainings">Liste des Formations</a>
-    </li>    
-    <li class="nav-item">
-      <a class="nav-link" href="#" routerLink="/cart">Contenu du Panier</a>
-    </li> 
-    <li>
-      <a>[{{this.cartService.getSize()}}]</a>
-    </li>
     <li *ngIf="this.authService.isAdmin()" class="nav-item">
       <a class="nav-link" href="#" routerLink="/training/?">Ajouter formation</a>
     </li>
@@ -18,9 +11,21 @@
     </li>
   </ul>
   <ul class="navbar-nav ms-auto">
+    <p style="margin: 0.4em 1em;">Rechercher</p>
+    <input class="form-control mr-sm-2 formulaireRecherche" type="search" aria-label="Search">
     <li>
-      <a class="nav-link" href="#" routerLink="/login">{{this.authService.isConnected() ? 'Deconnexion' : 'Connexion'}}</a>
+      <a class="nav-link connexion" href="#" routerLink="/login">
+        <img src="assets/img/user.png" alt="Utilisateur">
+      </a>
     </li>
   </ul>
+  <div class="panier">
+    <a class="nav-link" href="#" routerLink="/cart">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+        <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2"/>
+      </svg>
+    </a>
+    <a>[{{this.cartService.getSize()}}]</a>
+  </div>
 </nav>
 <router-outlet class="backColor"> </router-outlet>

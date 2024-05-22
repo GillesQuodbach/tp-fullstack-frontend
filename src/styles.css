@@ -2,8 +2,7 @@
     --surface-color: #e5eaf8;
 }
 * {box-sizing: border-box;}
-body,
-.backColor{background-color: white;}
+body{background-color: #FFF;}
 
 @font-face {
     font-family: Ubuntu;
@@ -38,10 +37,11 @@ body,
     border-radius: 30px;
     overflow: hidden;
     text-decoration: none;
+    box-shadow: 2px 3px 5px grey;
 }
 
 .card__image {      
-    width: 99.9%;
+    width: 100%;
     height: auto;
 }
 
@@ -101,6 +101,8 @@ body,
     height: 50px;
     border-radius: 50%;
     border: none;
+    font-size: 25px;
+    box-shadow: 1px 2px 3px lightgrey;
 }
 
 .card__title {
@@ -140,4 +142,34 @@ body,
     border-radius: 0;
 }
 
-nav{font-family: Vds;}
+.backUpper {height: 55px;}
+
+/* Navigation */
+.navigation,
+.navigation a {
+    background: #69F5ED;
+    color: #000;
+    font-size: 24px;
+}
+
+.connexion {
+    text-align: center;
+    margin: 0 1em;
+}
+
+.formulaireRecherche {
+    height: 38px;
+    border-radius: 8px !important;
+    border: none !important;
+    margin: 0.7em 1em;
+}
+
+.navigationCategories {
+    margin: 0 !important;
+}
+
+.panier {
+
+    top: 75px;
+    text-align: right;
+}
