@@ -21,21 +21,10 @@ export class TrainingComponent implements OnInit {
   error: string = '';
   status: boolean = false;
 
-<<<<<<< HEAD
   constructor(private formBuilder : FormBuilder, private apiService : ApiService, 
     private router : Router, private route:ActivatedRoute, public authService : AuthenticateService) { 
     const defaultCategory = new Category(0, '', '');
-    this.training = new Training(0,"","",0,1, defaultCategory);
-=======
-  constructor(
-    private formBuilder: FormBuilder,
-    private apiService: ApiService,
-    private router: Router,
-    private route: ActivatedRoute,
-    public authService: AuthenticateService
-  ) {
-    this.training = new Training(0, '', '', 0, 1, null);
->>>>>>> 1a7fd2f5540455e744baf50b979a146585b5cbd3
+    this.training = new Training(0,"","",0,1, "", defaultCategory);
     this.myForm = this.formBuilder.group({
       id: [this.training.id],
       name: [this.training.name, Validators.required],
@@ -94,18 +83,7 @@ export class TrainingComponent implements OnInit {
    * Méthode de mise à jour d'une nouvelle formation
    * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
    */
-<<<<<<< HEAD
-  updateTraining(form : FormGroup){
-    if(form.valid) {
-    this.apiService.putTraining({id :form.value.id , name:form.value.name , description:form.value.description 
-      , price:form.value.price , quantity:1, category:form.value.category}).subscribe({
-        next : (data) => console.log(data),  
-        error : (err) => this.error = err.message,
-        complete : () => this.router.navigateByUrl('trainings')
-      })
-    }
-    else this.error = 'pb de saisi';
-=======
+
   updateTraining(form: FormGroup) {
     if (form.valid) {
       this.apiService
@@ -122,6 +100,5 @@ export class TrainingComponent implements OnInit {
           complete: () => this.router.navigateByUrl('trainings'),
         });
     } else this.error = 'pb de saisi';
->>>>>>> 1a7fd2f5540455e744baf50b979a146585b5cbd3
   }
 }

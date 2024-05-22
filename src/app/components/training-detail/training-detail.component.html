@@ -1,12 +1,12 @@
 <div class="container mt-3">
     <button class="btn btn-lg"><i class="fa fa-arrow-left"></i></button>
-    <form [formGroup]="myForm" (ngSubmit)="updateTraining(myForm)">
+    <form [formGroup]="myForm" (ngSubmit)="onAddTraining(myForm)">
         <div class="row">
             <div class="col-md-6">
                 <div class="container">
-                    <img src="assets/img/informatique.jpg" class="img-thumbnail" alt="...">
+                    <img [src]="status ? urlImg + '/download/' + training.id : 'assets/img/informatique.jpg'" class="img-thumbnail" alt="...">
                     <div class="form-group mt-3">
-                        <input type="file" formControlName="picture" class="form-control">
+                        <input type="file" formControlName="img" class="form-control">
                     </div>
                 </div>
             </div>
@@ -14,12 +14,12 @@
                 <div class="form-group">
                     <label class="control-label">Categorie : </label>
                     <select formControlName="category" class="form-select" aria-label="Default select example" style="background-color: #69F5ED;">
-                        <option *ngFor="let category of categories" [value]="category">{{ category.name }}</option>
+                        <option *ngFor="let category of categories" [ngValue]="category">{{ category.name }}</option>
                     </select>
                 </div>                
                 <div *ngIf="myForm.value.id" class="form-group mt-3">
                     <label class="control-label">Id : </label>
-                    <input type="text" formControlName="id" class="form-control" readonly>
+                    <input type="number" formControlName="id" class="form-control" readonly>
                 </div> 
                 <div class="form-group mt-3">
                     <label class="control-label">Nom de la formation : </label>
@@ -31,7 +31,7 @@
                 </div>    
                 <div class="form-group mt-3">
                     <label class="control-label">Prix : </label>
-                    <input type="text" formControlName="price" class="form-control">
+                    <input type="number" formControlName="price" class="form-control">
                 </div>   
                 <div>
                     <button *ngIf="!status" type="submit" class="btn btn-lg mt-3 me-3" style="background-color: #5984F1;"><i class="fa fa-save"></i> Ajouter en base</button>

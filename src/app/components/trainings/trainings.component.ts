@@ -20,7 +20,6 @@ import { environment } from 'src/environments/environment';
  */
 export class TrainingsComponent implements OnInit {
   imgPath: any = 'localhost:8080/fileSystem/cuisine.png';
-
   listTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
   error = null;

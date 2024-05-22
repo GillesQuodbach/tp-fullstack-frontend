@@ -4,6 +4,7 @@ import { Training } from 'src/app/model/training.model';
 import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category.model';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-training-detail',
@@ -15,21 +16,28 @@ export class TrainingDetailComponent implements OnInit {
   training : Training;
   error : string = "";
   status : boolean = false;
+  urlImg : String = "";
   categories : Category[];
 
-  constructor(private formBuilder : FormBuilder, private apiService : ApiService,
-    private router : Router,private route:ActivatedRoute
-  ) {
+  constructor(
+    private formBuilder : FormBuilder,
+    private apiService : ApiService,
+    private router : Router,
+    private route:ActivatedRoute) {
+
     const defaultCategory = new Category(0, '', '');
-    this.training = new Training(0, "", "", 0, 1, defaultCategory);
+    this.training = new Training(0, "", "", 0, 1, "",defaultCategory);
+    this.categories = [];
+    this.urlImg = environment.host
+
     this.myForm = this.formBuilder.group({
       id: [this.training.id],
       name: [this.training.name, Validators.required],
       description: [this.training.description, Validators.required],
       price: [this.training.price, [Validators.required, Validators.min(50)]],
+      img: [this.training.img],
       category: [this.training.category, Validators.required]
     })
-    this.categories = [];
    }
 
    ngOnInit(): void {
@@ -45,10 +53,34 @@ export class TrainingDetailComponent implements OnInit {
             this.training = data;
             console.log(this.training);
             this.myForm.setValue({id : this.training.id , name : this.training.name, description : this.training.description, 
-              price : this.training.price, category : this.training.category});
+              price : this.training.price, img: this.training.img, category : this.training.category});
         },
         error : (err) => this.error = err
       })
+    }
+  }
+
+  /**
+   * Méthode de création d'une nouvelle formation
+   * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
+   */
+  onAddTraining(form: FormGroup) {
+    if(form.valid) {
+      if(this.status) this.updateTraining(form);
+      else
+        this.apiService.postTraining({
+          name: form.value.name,
+          description: form.value.description,
+          price: form.value.price,
+          quantity: 1,
+          img: form.value.img,
+          category: form.value.category,
+      })
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (err) => (this.error = err.message),
+        complete: () => this.router.navigateByUrl('trainings'),
+      });
     }
   }
 
@@ -58,8 +90,16 @@ export class TrainingDetailComponent implements OnInit {
    */
     updateTraining(form : FormGroup){
       if(form.valid) {
-      this.apiService.postTraining({id :form.value.id , name:form.value.name , description:form.value.description 
-        , price:form.value.price , quantity:1, category:form.value.category.id}).subscribe({
+      this.apiService.postTraining({
+        id :form.value.id, 
+        name:form.value.name , 
+        description:form.value.description,
+        price:form.value.price, 
+        quantity:1, 
+        img: form.value.img,
+        category:form.value.category
+      })
+      .subscribe({
           next : (data) => console.log(data),  
           error : (err) => this.error = err.message,
           complete : () => this.router.navigateByUrl('trainings')
