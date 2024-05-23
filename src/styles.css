@@ -1,13 +1,8 @@
-:root {
-    --surface-color: #e5eaf8;
-}
 * {box-sizing: border-box;}
 body{background-color: #FFF;}
+.text-right {text-align: right;}
+.text-centre{text-align: center;}
 
-@font-face {
-    font-family: Ubuntu;
-    src: url(assets/fonts/Ubuntu-C.ttf);
-}
 @font-face {
     font-family: Giuconda;
     src: url(assets/fonts/Giuconda_Regular.ttf);
@@ -20,129 +15,6 @@ body{background-color: #FFF;}
     font-family: Questrial;
     src: url(assets/fonts/Questrial-Regular.ttf);
 }
-
-.cards{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 3rem;
-    margin: 4rem 2vw;
-    padding: 0px;
-    list-style-type: none;
-}
-
-.carte {
-    position: relative;
-    display: block;
-    height: 100%;
-    border-radius: 30px;
-    overflow: hidden;
-    text-decoration: none;
-    box-shadow: 2px 3px 5px grey;
-}
-
-.card__image {      
-    width: 100%;
-    height: auto;
-}
-
-.card__overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 1;
-    border-radius: 20px;
-    background-color: var(--surface-color);
-    transform: translateY(100%);
-    transition: .2s ease-in-out;
-}
-
-.carte:hover .card__overlay {
-    transform: translateY(0);
-}
-
-.card__header {
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 2em;
-    padding: 2em;
-    border-radius: 40px 0 0 0;
-    background-color: var(--surface-color);
-    transform: translateY(-100%);
-    transition: .2s ease-in-out;
-}
-
-.card__header-text{
-    width : 100%
-}
-
-.card__arc {
-    width: 80px;
-    height: 80px;
-    position: absolute;
-    bottom: 100%;
-    right: 0;
-    z-index: 1;
-}
-
-.card__arc path {
-    fill: var(--surface-color);
-    d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
-}       
-
-.carte:hover .card__header {
-    transform: translateY(0);
-}
-
-.card__thumb {
-    flex-shrink: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    border: none;
-    font-size: 25px;
-    box-shadow: 1px 2px 3px lightgrey;
-}
-
-.card__title {
-    font-size: 1em;
-    margin: 0 0 .3em;
-    color: #212016;
-    font-family: Questrial;
-    font-size: 29px;
-}
-
-.card__tagline {
-    display: block;
-    margin: 1em 0;
-    font-size: .8em; 
-    color: #212016;
-    font-family: Ubuntu;
-    font-size: 20px;
-}
-
-.card__status {
-    font-size: .8em;
-    color: #212016;
-    font-family: Ubuntu;
-    font-size: 18px;
-    text-align: center;
-}
-
-.card__description {
-    padding: 0 2em 2em;
-    margin: 0;
-    color: #212016;
-    font-family: Ubuntu;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 3;
-    overflow: hidden;
-    border-radius: 0;
-}
-
-.backUpper {height: 55px;}
 
 /* Navigation */
 .navigation,
@@ -162,16 +34,6 @@ body{background-color: #FFF;}
     border-radius: 8px !important;
     border: none !important;
     margin: 0.7em 1em;
-}
-
-.navigationCategories {
-    margin: 0 !important;
-    width: 100%;
-    top: -60px;
-}
-.navigationCategories a {
-    color: #000;
-    font-size: 16px;
 }
 
 .panier {

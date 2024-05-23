@@ -4,34 +4,40 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active" *ngFor="let category of listCategories"
-          (click)="displayTrainingsByCategory(category.id)"><a class="nav-link">{{ category.name }}</a></li>
+            (click)="displayTrainingsByCategory(category.id)"><a class="nav-link">{{ category.name }}</a></li>
         </ul>
       </div>
     </nav>
     <div class="container">
-      <ul class="cards">
-        <div *ngFor="let training of listTrainings">
-          <li>
-            <a href="#" class="carte">
-              <img src="assets/img/default.jpg" alt="default" class="card__image">
-              <div class="backUpper"></div>
-              <div class="card__overlay">
-                <div class="card__header">
-                  <svg class="card__arc" xmlns="http://www.w3.org/2000/svg">
-                    <path />
-                  </svg>
-                  <div class="card__header-text">
-                    <h3 class="card__title">{{ training.name }}</h3>
-                    <span class="card__status">prix: {{ training.price }} €</span>
+      <div class="row">
+        <div *ngFor="let training of listTrainings" class="col-lg-4 col-md-6 cartes">
+          <div class="container debutCarte">
+            <div class="row">
+              <div class="col-12">
+                <div class="container contenuCarte">
+                  <div class="row">
+                    <div class="col-12">
+                      <img src="assets/img/default.jpg" alt="default" class="card_image">
+                    </div>
                   </div>
-                  <button class="card__thumb"><i class="fa fa-shopping-cart"></i></button>
                 </div>
-                <p class="card__description">{{training.description}}</p>
+                <div class="row infosCarte">
+                  <div class="col-9">
+                    <h3>{{ training.name }}</h3>
+                  </div>
+                  <div class="col-3 text-centre">
+                    <button class="cartPanier"><i class="fa fa-shopping-cart"></i></button>
+                  </div>
+                  <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-3 text-right">$ {{ training.price }}</div>
+                  </div>
+                </div>
               </div>
-            </a>
-          </li>
+            </div>
+          </div>
         </div>
-      </ul>
+      </div>
     </div>
   </ng-container>
   <ng-template #loading>
