@@ -1,9 +1,15 @@
+.cartes {
+  margin: 0; padding: 20px 0;
+  border-radius: 5px;
+}
+
 .navigationCategories {
-  margin: 0 !important;
+  margin: 0;
   width: 100%;
   top: -60px;
 }
 .navigationCategories a {
   color: #000;
   font-size: 20px;
+  margin: 0 20px;
 }
