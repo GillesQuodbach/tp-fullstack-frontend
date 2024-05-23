@@ -154,7 +154,7 @@ body{background-color: #FFF;}
 
 .connexion {
     text-align: center;
-    margin: 0 1em;
+    margin: 0 -2em 0 1em;
 }
 
 .formulaireRecherche {
@@ -166,10 +166,25 @@ body{background-color: #FFF;}
 
 .navigationCategories {
     margin: 0 !important;
+    width: 100%;
+    top: -60px;
+}
+.navigationCategories a {
+    color: #000;
+    font-size: 16px;
 }
 
 .panier {
-
-    top: 75px;
+    position: inherit;
+    top: 60px;
     text-align: right;
+}
+.panier a {
+    color: #000;
+    margin: 0 1em;
+}
+
+.fondMenu {
+    height: 60px;
+    background: #e5eaf8;
 }
