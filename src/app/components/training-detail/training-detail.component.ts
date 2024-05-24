@@ -5,6 +5,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category.model';
 import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-training-detail',
@@ -17,13 +18,16 @@ export class TrainingDetailComponent implements OnInit {
   error : string = "";
   status : boolean = false;
   urlImg : String = "";
+  selectedFile : File | null = null;
+  selectedFileName : String = "";
   categories : Category[];
 
   constructor(
     private formBuilder : FormBuilder,
     private apiService : ApiService,
     private router : Router,
-    private route:ActivatedRoute) {
+    private route:ActivatedRoute,
+    private http: HttpClient) {
 
     const defaultCategory = new Category(0, '', '');
     this.training = new Training(0, "", "", 0, 1, "",defaultCategory);
@@ -61,19 +65,30 @@ export class TrainingDetailComponent implements OnInit {
   }
 
   /**
-   * Méthode de création d'une nouvelle formation
+   * Méthode appelée lorsqu'un fichier est sélectionné par l'utilisateur via un élément d'entrée de type fichier.
+   * @param event L'événement déclenché lorsque l'utilisateur sélectionne un fichier.
+   */
+  onFileSelected(event: any) {
+    const input = event.target as HTMLInputElement;
+    this.selectedFile = event.target.files[0] as File;
+    if(input.files) {
+      this.selectedFileName = input.files[0].name;
+    }
+  }
+
+  /**
+   * Méthode de création d'une nouvelle formation avec une image par défaut.
    * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
    */
   onAddTraining(form: FormGroup) {
     if(form.valid) {
-      if(this.status) this.updateTraining(form);
-      else
+      if(this.selectedFile == null) { // Si aucun fichier n'est sélectionner.
         this.apiService.postTraining({
           name: form.value.name,
           description: form.value.description,
           price: form.value.price,
           quantity: 1,
-          img: form.value.img,
+          img: "default.jpg",
           category: form.value.category,
       })
       .subscribe({
@@ -81,31 +96,92 @@ export class TrainingDetailComponent implements OnInit {
         error: (err) => (this.error = err.message),
         complete: () => this.router.navigateByUrl('trainings'),
       });
-    }
-    else this.error = 'Veuillez saisir tous les champs';
+      } else {
+        this.onAddTrainingWithNewImg(form)  // Si un fichier est sélectionner.
+      }
+    } else this.error = 'Veuillez saisir tous les champs';
   }
 
     /**
-   * Méthode de mise à jour d'une nouvelle formation
+   * Méthode de création d'une nouvelle formation avec une image choisie.
+   * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
+   */
+  onAddTrainingWithNewImg(form: FormGroup) {
+    const formData = new FormData();
+    formData.append('file', this.selectedFile as File, this.selectedFile?.name);
+    this.apiService.postImg(formData).subscribe(
+      (response) => {
+        console.log(response);
+        this.apiService.postTraining({
+          name: form.value.name,
+          description: form.value.description,
+          price: form.value.price,
+          quantity: 1,
+          img: this.selectedFileName,
+          category: form.value.category,
+        })
+        .subscribe({
+          next: (data) => console.log(data),
+          error: (err) => (this.error = err.message),
+          complete: () => this.router.navigateByUrl('trainings'),
+        });
+      },
+      (errror) => {
+        console.error(errror);
+      }
+    )
+  }
+
+    /**
+   * Méthode de mise à jour d'une nouvelle formation avec la même image.
    * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
    */
     updateTraining(form : FormGroup){
       if(form.valid) {
-      this.apiService.postTraining({
-        id :form.value.id, 
-        name:form.value.name , 
-        description:form.value.description,
-        price:form.value.price, 
-        quantity:1, 
-        img: form.value.img,
-        category:form.value.category
-      })
-      .subscribe({
-          next : (data) => console.log(data),  
-          error : (err) => this.error = err.message,
-          complete : () => this.router.navigateByUrl('trainings')
-        })
-      }
-      else this.error = 'Veuillez saisir tous les champs';   
+        if(this.selectedFile == null) { // Si aucun fichier n'est sélectionner donc même image.
+          this.apiService.postTraining({
+            id :form.value.id, 
+            name:form.value.name , 
+            description:form.value.description,
+            price:form.value.price, 
+            quantity:1, 
+            img: form.value.img,
+            category:form.value.category
+          })
+          .subscribe({
+              next : (data) => console.log(data),  
+              error : (err) => this.error = err.message,
+              complete : () => this.router.navigateByUrl('trainings')
+            })
+        } else this.updateTrainingWithNewImg(form); // Si un fichier est sélectionner donc nouvelle image.
+      } else this.error = 'Veuillez saisir tous les champs';   
+    }
+
+  /**
+   * Méthode de mise à jour d'une nouvelle formation avec la même image.
+   * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
+   */
+    updateTrainingWithNewImg(form: FormGroup) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile as File, this.selectedFile?.name);
+      this.apiService.updateImgTraining(formData, form.value.id).subscribe(
+        (response) => {
+          console.log(response);
+          this.apiService.postTraining({
+            id :form.value.id, 
+            name:form.value.name , 
+            description:form.value.description,
+            price:form.value.price, 
+            quantity:1, 
+            img: this.selectedFileName,
+            category:form.value.category
+          })
+          .subscribe({
+            next : (data) => console.log(data),  
+            error : (err) => this.error = err.message,
+            complete : () => this.router.navigateByUrl('trainings')
+          })
+        }
+      )
     }
 }

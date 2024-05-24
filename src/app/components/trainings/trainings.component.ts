@@ -92,7 +92,7 @@ export class TrainingsComponent implements OnInit {
    * @param training
    */
   onUpdateTraining(training: Training) {
-    this.router.navigateByUrl('training/' + training.id);
+    this.router.navigateByUrl('trainingDetail/' + training.id);
   }
 
   // Affichage des training par catégories

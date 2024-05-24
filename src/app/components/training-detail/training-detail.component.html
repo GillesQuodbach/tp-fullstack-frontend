@@ -1,12 +1,12 @@
 <div class="container mt-3">
     <button class="btn btn-lg"><i class="fa fa-arrow-left"></i></button>
-    <form [formGroup]="myForm" (ngSubmit)="onAddTraining(myForm)">
+    <form [formGroup]="myForm" (ngSubmit)="status ? updateTraining(myForm) : onAddTraining(myForm)"  enctype="multipart/form-data">
         <div class="row">
             <div class="col-md-6">
                 <div class="container">
                     <img [src]="status ? urlImg + '/download/' + training.id : 'assets/img/informatique.jpg'" class="img-thumbnail" alt="...">
                     <div class="form-group mt-3">
-                        <input type="file" formControlName="img" class="form-control">
+                        <input id="file" type="file" class="form-control" (change)="onFileSelected($event)">
                     </div>
                 </div>
             </div>

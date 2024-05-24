@@ -74,4 +74,12 @@ export class ApiService {
   public getImg(id: number) {
     return this.http.get<any>(environment.host + '/download/' + id)
   }
+
+  public postImg(formData: FormData) {
+    return this.http.post<any>(environment.host + "/download", formData)
+  }
+
+  public updateImgTraining(formData: FormData, id: number) {
+    return this.http.post<any>(environment.host + "/download/" + id, formData)
+  }
 }
