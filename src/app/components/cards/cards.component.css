@@ -18,6 +18,10 @@
 .infosCarte{
     padding-top: 15px;
 }
+.infosCarte a {
+    color: #000;
+    text-decoration: none;
+}
 
 .prix {
     font-size:20px;
