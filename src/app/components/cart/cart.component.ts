@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Training } from 'src/app/model/training.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { CartService } from 'src/app/services/cart.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-cart',
@@ -18,11 +19,13 @@ export class CartComponent implements OnInit {
   empty_cart : boolean = false;
   amount : number = 0;
   error : string | undefined;
+  urlApi : String = "";
   constructor(private cartService : CartService , private router : Router, private authService : AuthenticateService) { }
 
   ngOnInit(): void {
     this.amount = this.cartService.getAmount();
     this.initCart();
+    this.urlApi = environment.host;
   }
 
   initCart(){
@@ -40,8 +43,8 @@ export class CartComponent implements OnInit {
       if(this.authService.isConnected()) {
         this.router.navigateByUrl('customer');  
       }
-      else this.error = 'vous devez être connecté pour passer commande';
+      else this.error = 'Vous devez être connecté pour passer commande';
     }
-    else this.error = 'panier vide';
+    else this.error = 'Panier vide';
   }
 }
