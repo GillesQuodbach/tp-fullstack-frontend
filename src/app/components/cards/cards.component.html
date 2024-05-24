@@ -1,0 +1,25 @@
+<div class="container debutCarte">
+    <div class="row">
+        <div class="col-12">
+            <div class="container contenuCarte">
+                <div class="row">
+                    <div class="col-12">
+                        <a href=""><img [src]="urlImage + '/download/' + training?.id" alt="training image" class="card_image"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row infosCarte">
+                <div class="col-9">
+                    <a href=""><h3>{{ training?.name }}</h3></a>
+                </div>
+                <div class="col-3 text-centre">
+                    <button class="cartPanier"><i class="fa fa-shopping-cart"></i></button>
+                </div>
+                <div class="row">
+                    <div class="col-9"></div>
+                    <div class="col-3 text-right prix">$ {{ training?.price }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

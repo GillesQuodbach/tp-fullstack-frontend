@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+* {box-sizing: border-box;}
+body{background-color: #FFF;}
+.text-right {text-align: right;}
+.text-centre{text-align: center;}
+
+@font-face {
+    font-family: Giuconda;
+    src: url(assets/fonts/Giuconda_Regular.ttf);
+}
+@font-face {
+    font-family: Vds;
+    src: url(assets/fonts/VDS_Thin.ttf);
+}
+@font-face {
+    font-family: Questrial;
+    src: url(assets/fonts/Questrial-Regular.ttf);
+}
+
+/* Navigation */
+.navigation,
+.navigation a {
+    background: #69F5ED;
+    color: #000;
+    height: 75px;
+    font-size: 24px;
+}
+
+.connexion {
+    text-align: center;
+    margin: 5px -5em 0 1em;
+}
+
+.formulaireRecherche {
+    height: 38px;
+    border-radius: 8px !important;
+    border: none !important;
+    margin: 15px 1em;
+}
+
+.panier {
+    position: inherit;
+    top: 70px;
+    text-align: right;
+}
+.panier a {
+    color: #000;
+    margin: 0 1em;
+}
+
+.fondMenu {
+    height: 60px;
+    background: #e5eaf8;
+}

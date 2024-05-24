@@ -1,69 +1,20 @@
 <div class="container">
   <ng-container *ngIf="listTrainings; else loading">
-    <nav class="categories-main-container">
-      <button
-        class="categories-buttons btn btn-success"
-        *ngFor="let category of listCategories"
-        (click)="displayTrainingsByCategory(category.id)"
-      >
-        {{ category.name }}
-      </button>
+    <nav class="navbar navbar-expand-lg navigationCategories">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active" *ngFor="let category of listCategories"
+            (click)="displayTrainingsByCategory(category.id)"><a class="nav-link">{{ category.name }}</a></li>
+        </ul>
+      </div>
     </nav>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>NOM</th>
-          <th>DESCRIPTION</th>
-          <th>PRIX</th>
-          <th>QUANTITE</th>
-          <th>PANIER</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let training of listTrainings">
-          <td><img [src]="urlImg + '/download/' + training.id" alt="Training Image"/></td>
-          <td>{{ training.id }}</td>
-          <td>{{ training.name }}</td>
-          <td>{{ training.description }}</td>
-          <td>{{ training.price }}</td>
-          <td>
-            <input
-              type="number"
-              name="quantity"
-              style="width: 60px"
-              [(ngModel)]="training.quantity"
-              min="1"
-              max="10"
-            />
-          </td>
-          <td>
-            <a
-              class="btn btn-outline-primary btn-sm"
-              (click)="onAddToCart(training)"
-            >
-              <i class="fa fa-shopping-cart"></i> Ajouter
-            </a>
-          </td>
-          <td *ngIf="this.authService.isAdmin()">
-            <a
-              class="btn btn-outline-danger btn-sm"
-              (click)="onDeleteTraining(training)"
-            >
-              Supprimer
-            </a>
-          </td>
-          <td *ngIf="this.authService.isAdmin()">
-            <a
-              class="btn btn-outline-secondary btn-sm"
-              (click)="onUpdateTraining(training)"
-            >
-              Mise à jour
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="container">
+      <div class="row">
+          <div *ngFor="let training of listTrainings" class="col-lg-4 col-md-6 cartes">
+              <app-cards [training]="training"></app-cards>
+          </div>
+      </div>
+  </div>
   </ng-container>
   <ng-template #loading>
     <div>Loading...</div>
