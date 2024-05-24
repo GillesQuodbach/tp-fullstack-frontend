@@ -5,6 +5,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-trainings',
@@ -18,9 +19,11 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
  * delors, il aura accès à des fonctionnalités spécifiques suplémentaires
  */
 export class TrainingsComponent implements OnInit {
+  imgPath: any = 'localhost:8080/fileSystem/cuisine.png';
   listTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
   error = null;
+  urlImg : String = "";
 
   constructor(
     private cartService: CartService,
@@ -32,6 +35,7 @@ export class TrainingsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTrainings();
     this.getAllCategories();
+    this.urlImg = environment.host
   }
   /**
    * Méthode qui renvoi à partir de l'Api toutes les formations accessibles
@@ -88,7 +92,7 @@ export class TrainingsComponent implements OnInit {
    * @param training
    */
   onUpdateTraining(training: Training) {
-    this.router.navigateByUrl('training/' + training.id);
+    this.router.navigateByUrl('trainingDetail/' + training.id);
   }
 
   // Affichage des training par catégories

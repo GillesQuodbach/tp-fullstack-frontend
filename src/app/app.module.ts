@@ -10,11 +10,11 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { CustomerComponent } from './components/customer/customer.component';
 import { OrderComponent } from './components/order/order.component';
 import { LoginoutComponent } from './components/loginout/loginout.component';
-import { TrainingComponent } from './components/training/training.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AdminComponent } from './components/admin/admin.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 import { CardsComponent } from './components/cards/cards.component';
+import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,10 +25,10 @@ import { CardsComponent } from './components/cards/cards.component';
     CustomerComponent,
     OrderComponent,
     LoginoutComponent,
-    TrainingComponent,
     AdminComponent,
     OrderConfirmComponent,
-    CardsComponent
+    CardsComponent,
+    TrainingDetailComponent
   ],
   imports: [
     BrowserModule,
