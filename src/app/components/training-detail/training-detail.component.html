@@ -1,5 +1,7 @@
 <div class="container mt-3">
-  <button class="btn btn-lg"><i class="fa fa-arrow-left"></i></button>
+  <button class="btn btn-lg" (click)="goHome()">
+    <i class="fa fa-arrow-left"></i>
+  </button>
   <form
     [formGroup]="myForm"
     (ngSubmit)="status ? updateTraining(myForm) : onAddTraining(myForm)"

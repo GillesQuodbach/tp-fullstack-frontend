@@ -23,7 +23,7 @@ export class TrainingsComponent implements OnInit {
   listTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
   error = null;
-  urlImg : String = "";
+  urlImg: String = '';
 
   constructor(
     private cartService: CartService,
@@ -35,7 +35,7 @@ export class TrainingsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllTrainings();
     this.getAllCategories();
-    this.urlImg = environment.host
+    this.urlImg = environment.host;
   }
   /**
    * Méthode qui renvoi à partir de l'Api toutes les formations accessibles
@@ -91,7 +91,8 @@ export class TrainingsComponent implements OnInit {
    * En renvoyant ici vers le composant dédié à la mise à jour
    * @param training
    */
-  onUpdateTraining(training: Training) {
+  onUpdateTraining(event: Event, training: Training) {
+    event.preventDefault();
     this.router.navigateByUrl('trainingDetail/' + training.id);
   }
 

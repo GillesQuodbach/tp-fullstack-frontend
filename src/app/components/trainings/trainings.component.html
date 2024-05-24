@@ -3,18 +3,28 @@
     <nav class="navbar navbar-expand-lg navigationCategories">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active" *ngFor="let category of listCategories"
-            (click)="displayTrainingsByCategory(category.id)"><a class="nav-link">{{ category.name }}</a></li>
+          <li
+            class="nav-item active"
+            *ngFor="let category of listCategories"
+            (click)="displayTrainingsByCategory(category.id)"
+          >
+            <a class="nav-link">{{ category.name }}</a>
+          </li>
         </ul>
       </div>
     </nav>
     <div class="container">
       <div class="row">
-          <div *ngFor="let training of listTrainings" class="col-lg-4 col-md-6 cartes">
-              <app-cards [training]="training"></app-cards>
-          </div>
+        <div
+          *ngFor="let training of listTrainings"
+          class="col-lg-4 col-md-6 cartes"
+        >
+          <a (click)="onUpdateTraining($event, training)">
+            <app-cards [training]="training"></app-cards>
+          </a>
+        </div>
       </div>
-  </div>
+    </div>
   </ng-container>
   <ng-template #loading>
     <div>Loading...</div>
