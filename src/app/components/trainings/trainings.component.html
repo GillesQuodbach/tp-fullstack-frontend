@@ -18,10 +18,9 @@
         <div
           *ngFor="let training of listTrainings"
           class="col-lg-4 col-md-6 cartes"
-        >
-          <a (click)="onUpdateTraining($event, training)">
-            <app-cards [training]="training"></app-cards>
-          </a>
+        >            
+        <app-cards [training]="training"></app-cards>
+
         </div>
       </div>
     </div>

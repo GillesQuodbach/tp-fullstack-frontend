@@ -32,3 +32,59 @@
     border: none;
     font-size: 30px;
 }
+
+.cartPanier {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+}
+
+.cartPanier i {
+    font-size: 24px; 
+    color: #333; 
+    transition: transform 0.3s ease; 
+}
+
+.cartPanier:hover i {
+    transform: scale(1.2); 
+}
+
+.cartPanier {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+    position: relative;
+}
+
+.cartPanier i {
+    font-size: 24px;
+    color: #333;
+}
+
+.counter {
+    position: absolute;
+    top: -10px; 
+    right: -10px; 
+    background-color: #FF5733; 
+    color: white; 
+    border-radius: 50%; 
+    padding: 5px 8px;
+    font-size: 12px; 
+    opacity: 0;
+    animation: counterAnimation 1s ease-out forwards; 
+}
+
+@keyframes counterAnimation {
+    0% {
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+    100% {
+        opacity: 0; 
+        transform: translateY(-50px); 
+    }
+}

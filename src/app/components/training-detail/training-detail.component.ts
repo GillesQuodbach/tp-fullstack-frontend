@@ -55,7 +55,7 @@ export class TrainingDetailComponent implements OnInit {
       this.apiService.getTraining(id).subscribe({
         next: (data) => {
           this.training = data;
-          console.log(this.training);
+          console.log(this.training.category.name);
           this.myForm.setValue({
             id: this.training.id,
             name: this.training.name,
@@ -203,5 +203,9 @@ export class TrainingDetailComponent implements OnInit {
             complete: () => this.router.navigateByUrl('trainings'),
           });
       });
+  }
+
+  navigateToHome() {
+    this.router.navigateByUrl('trainings');
   }
 }
