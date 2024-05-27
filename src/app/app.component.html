@@ -3,12 +3,12 @@
     <h1 style="margin: 0 1em;">MyShopApp</h1>
   </a>
   <ul class="navbar-nav">
-    <li *ngIf="this.authService.isAdmin()" class="nav-item">
-      <a class="nav-link" href="#" routerLink="/trainingDetail/?">Ajouter formation</a>
-    </li>
-    <li *ngIf="this.authService.isAdmin()" class="nav-item">
-      <a class="nav-link" href="#" routerLink="/admin">Administration</a>
-    </li>
+      <li *ngIf="this.authService.isAdmin()" class="nav-item">
+        <a class="nav-link" href="#" routerLink="/trainingDetail/?">Ajouter formation</a>
+      </li>
+      <li *ngIf="this.authService.isAdmin()" class="nav-item">
+        <a class="nav-link" href="#" routerLink="/admin">Administration</a>
+      </li>
   </ul>
   <ul class="navbar-nav ms-auto">
     <p style="margin: 14px 1em;">Rechercher</p>
