@@ -35,6 +35,7 @@ export class CartComponent implements OnInit {
 
   onRemoveFromCart(training : Training){
     this.cartService.removeTraining(training);
+    this.amount = this.cartService.getAmount();
     this.initCart();
   }
 
