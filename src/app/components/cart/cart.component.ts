@@ -28,6 +28,10 @@ export class CartComponent implements OnInit {
     this.urlApi = environment.host;
   }
 
+  navigateToHome() {
+    this.router.navigateByUrl('trainings');
+  }
+
   initCart(){
     this.cart = this.cartService.getCart();
     this.empty_cart = (this.cart.length > 0) ? false : true;

@@ -36,6 +36,7 @@ export class TrainingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.idCategorySelected = this.categoryService.getSelectedIdCategory();
+    console.log("Id de la catégory séléctionner:" + this.idCategorySelected)
     if(this.idCategorySelected == 0) {
       this.getAllTrainings();
     }else {
@@ -65,6 +66,7 @@ export class TrainingsComponent implements OnInit {
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     });
+    this.categoryService.clearSelectedIdCategory();
   }
 
   /**
@@ -99,5 +101,6 @@ export class TrainingsComponent implements OnInit {
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     });
+    this.categoryService.setSelectedIdCategory(id);
   }
 }
