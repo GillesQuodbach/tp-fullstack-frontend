@@ -12,6 +12,8 @@ import { OrderItem } from '../model/orderItem.model';
   providedIn: 'root',
 })
 export class ApiService {
+  search:string = "";
+
   constructor(private http: HttpClient) {}
 
   public getCategories() {
@@ -26,6 +28,9 @@ export class ApiService {
 
   public getTrainings() {
     return this.http.get<Training[]>(environment.host + '/trainings');
+  }
+  public getTrainingsByName(name:string){
+    return this.http.get<Training[]>(environment.host + "/trainingsSearch?keyword=" + name);
   }
 
   public getTraining(id: number) {

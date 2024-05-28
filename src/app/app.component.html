@@ -4,7 +4,6 @@
   </a>
 
   <ul class="navbar-nav">  
-   
       <li *ngIf="this.authService.isAdmin()" class="nav-item">
         <a class="nav-link h-auto" href="#" routerLink="/trainingDetail/?">Ajouter formation</a>
       </li>
@@ -12,14 +11,11 @@
       <li *ngIf="this.authService.isAdmin()" class="nav-item">
         <a class="nav-link h-auto" href="#" routerLink="/admin">Administration</a>
       </li>
-   
   </ul>
-
-
-  <ul class="navbar-nav ms-auto d-flex">
-    <p style="margin: 14px 1em;">Rechercher</p>
-    <input class="form-control mr-sm-2 formulaireRecherche" type="search" aria-label="Search">
-
+  <ul class="navbar-nav ms-auto">
+    <li>
+      <app-search></app-search>
+    </li>
     <li>
       <a
         class="nav-link connexion"
