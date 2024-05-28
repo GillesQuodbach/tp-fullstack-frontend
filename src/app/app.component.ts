@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component } from '@angular/core';                                                                        
 import { AuthenticateService } from './services/authenticate.service';
 import { CartService } from './services/cart.service';
+import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,11 @@ import { CartService } from './services/cart.service';
 export class AppComponent {
   title = 'trainings-front-app';
 
-  constructor(public cartService : CartService, public authService : AuthenticateService){
+  constructor(
+    public cartService : CartService, public authService : AuthenticateService
+  ){
 
   }
   onLogin(){
   }
 }
-
-

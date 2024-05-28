@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Training } from 'src/app/model/training.model';
 import { Category } from 'src/app/model/category.model';
 import { CartService } from 'src/app/services/cart.service';
@@ -7,6 +7,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { environment } from 'src/environments/environment';
 import { CategoryService } from 'src/app/services/category.service';
+import { SearchService } from 'src/app/services/search.service';
 
 @Component({
   selector: 'app-trainings',
@@ -21,18 +22,21 @@ import { CategoryService } from 'src/app/services/category.service';
  */
 export class TrainingsComponent implements OnInit {
   listTrainings: Training[] | undefined;
+  listFiltredTrainings : Training[] | undefined;
   listCategories: Category[] | undefined;
   idCategorySelected: number | undefined;
   nameCategorySelected: string = '';
   error = null;
-  urlImg: String = '';
+  urlImg : String = "";
+  keyword : string = "";
 
   constructor(
     private categoryService: CategoryService,
     private cartService: CartService,
     private router: Router,
     private apiService: ApiService,
-    public authService: AuthenticateService
+    public authService: AuthenticateService,
+    public searchService : SearchService
   ) {}
 
   ngOnInit(): void {
@@ -46,7 +50,20 @@ export class TrainingsComponent implements OnInit {
     }
     this.getAllCategories();
     this.urlImg = environment.host;
+    this.searchService.searchKeyword$.subscribe(kw => {
+      this.keyword = kw;
+      this.filterTrainings();
+    });
   }
+
+  filterTrainings(){
+    if (this.keyword == ""){
+      this.listFiltredTrainings = this.listTrainings;
+    } else {
+      this.listFiltredTrainings = this.listTrainings?.filter(training => training.name.toLowerCase().includes(this.keyword));
+    }
+  }
+
   /**
    * Méthode qui renvoi à partir de l'Api toutes les formations accessibles
    * en cas de problème avec l'api, un message d'erreur sera relayé et affiché
@@ -64,7 +81,7 @@ export class TrainingsComponent implements OnInit {
    */
   getAllTrainings() {
     this.apiService.getTrainings().subscribe({
-      next: (data) => (this.listTrainings = data),
+      next: (data) => (this.listTrainings = data, this.listFiltredTrainings = data),
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     });

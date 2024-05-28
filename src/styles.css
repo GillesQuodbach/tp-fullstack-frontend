@@ -27,14 +27,6 @@ body{background-color: #FFF;}
 
 .connexion {
     text-align: center;
-    margin: 0 -6em 0 2em;
-}
-
-.formulaireRecherche {
-    height: 38px;
-    border-radius: 8px !important;
-    border: none !important;
-    margin: 15px 1em;
 }
 
 .panier {
