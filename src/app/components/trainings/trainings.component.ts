@@ -61,17 +61,6 @@ export class TrainingsComponent implements OnInit {
   }
 
   /**
-   * Méthode permettant à tous l'ajout d'une formation au panier en utilisant le service dédié
-   * @param training
-   */
-  onAddToCart(training: Training) {
-    if (training.quantity > 0) {
-      this.cartService.addTraining(training);
-      //this.router.navigateByUrl('cart');
-    }
-  }
-
-  /**
    * Méthode permettant uniquement à l'Admin de supprimer une formation de l'ensemble des formations
    * Une fois la formation supprimée dans l'api, la liste des formations est raffraichie
    * @param training

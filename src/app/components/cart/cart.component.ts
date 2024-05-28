@@ -48,4 +48,22 @@ export class CartComponent implements OnInit {
     }
     else this.error = 'Panier vide';
   }
+
+  decreaseQuantity(training: Training) {
+    if(training.quantity == 1) {
+      this.onRemoveFromCart(training);
+    }else {
+      training.quantity = training.quantity - 1;
+    }
+    this.amount = this.cartService.getAmount();
+  }
+
+  increaseQuantity(training: Training) {
+    if(training.quantity == 10) {
+      training.quantity = 10;
+    } else {
+      training.quantity = training.quantity + 1;
+    }
+    this.amount = this.cartService.getAmount();
+  }
 }
