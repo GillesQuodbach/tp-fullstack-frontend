@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { max } from 'rxjs';
 
 @Component({
   selector: 'app-training-detail',
@@ -21,6 +22,7 @@ export class TrainingDetailComponent implements OnInit {
   selectedFile: File | null = null;
   selectedFileName: String = '';
   categories: Category[];
+  isUpdateAllowed: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,7 +57,7 @@ export class TrainingDetailComponent implements OnInit {
       this.apiService.getTraining(id).subscribe({
         next: (data) => {
           this.training = data;
-          console.log(this.training.category.name);
+
           this.myForm.setValue({
             id: this.training.id,
             name: this.training.name,
@@ -84,9 +86,51 @@ export class TrainingDetailComponent implements OnInit {
    */
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
-    this.selectedFile = event.target.files[0] as File;
-    if (input.files) {
-      this.selectedFileName = input.files[0].name;
+
+    if (input.files && input.files[0]) {
+      const file = input.files[0] as File;
+
+      // * Limitation du POIDS de l'image
+      const maxSizeInBytes = 3 * 1024 * 1024;
+      if (file.size > maxSizeInBytes) {
+        this.error = 'Le fichier dépasse la taille limite de 3Mb';
+        this.selectedFile = null;
+        this.selectedFileName = '';
+        this.isUpdateAllowed = false;
+        return;
+      }
+
+      // * Limitation de la taille en PIXEL
+      // Création d'un objet image pour check les dimensions
+
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+
+      img.onload = () => {
+        const maxWidth = 100;
+        const maxHeight = 100;
+
+        URL.revokeObjectURL(img.src);
+
+        if (img.width > maxWidth || img.height > maxHeight) {
+          this.error = "Dimension maximales de l'image 500px x 500px";
+          this.selectedFile = null;
+          this.selectedFileName = '';
+          this.isUpdateAllowed = false;
+          return;
+        } else {
+          this.selectedFile = file;
+          this.selectedFile = null;
+          this.error = '';
+        }
+      };
+
+      img.onerror = () => {
+        this.error = 'Vérifiaction impossible';
+        this.selectedFile = null;
+        this.selectedFileName = '';
+        URL.revokeObjectURL(img.src);
+      };
     }
   }
 
@@ -127,7 +171,6 @@ export class TrainingDetailComponent implements OnInit {
     formData.append('file', this.selectedFile as File, this.selectedFile?.name);
     this.apiService.postImg(formData).subscribe(
       (response) => {
-        console.log(response);
         this.apiService
           .postTraining({
             name: form.value.name,
