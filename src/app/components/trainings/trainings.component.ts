@@ -23,6 +23,7 @@ export class TrainingsComponent implements OnInit {
   listTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
   idCategorySelected: number | undefined;
+  nameCategorySelected: string = '';
   error = null;
   urlImg: String = '';
 
@@ -36,11 +37,12 @@ export class TrainingsComponent implements OnInit {
 
   ngOnInit(): void {
     this.idCategorySelected = this.categoryService.getSelectedIdCategory();
+    this.nameCategorySelected = this.categoryService.getSelectedNameCategory();
     console.log("Id de la catégory séléctionner:" + this.idCategorySelected)
     if(this.idCategorySelected == 0) {
       this.getAllTrainings();
     }else {
-      this.displayTrainingsByCategory(this.idCategorySelected);
+      this.displayTrainingsByCategory(this.idCategorySelected, this.nameCategorySelected);
     }
     this.getAllCategories();
     this.urlImg = environment.host;
@@ -67,6 +69,7 @@ export class TrainingsComponent implements OnInit {
       complete: () => (this.error = null),
     });
     this.categoryService.clearSelectedIdCategory();
+    this.categoryService.clearSelectedNameCategory();
   }
 
   /**
@@ -95,12 +98,14 @@ export class TrainingsComponent implements OnInit {
   }
 
   // Affichage des training par catégories
-  displayTrainingsByCategory(id: number) {
+  displayTrainingsByCategory(id: number, name: string) {
     this.apiService.getTrainingsByCategory(id).subscribe({
       next: (data) => (this.listTrainings = data),
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     });
     this.categoryService.setSelectedIdCategory(id);
+    this.categoryService.setSelectedNameCategory(name);
+    this.nameCategorySelected = name;
   }
 }

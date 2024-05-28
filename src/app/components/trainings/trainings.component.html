@@ -7,7 +7,7 @@
           <li
             class="nav-item active"
             *ngFor="let category of listCategories"
-            (click)="displayTrainingsByCategory(category.id)"
+            (click)="displayTrainingsByCategory(category.id, category.name)"
           >
             <a class="nav-link">{{ category.name }}</a>
           </li>
@@ -15,6 +15,7 @@
       </div>
     </nav>
     <div class="container">
+      <p class="h4" style="background-color: yellow; border-radius: 5px; padding: 10px;">Catégorie sélectionnée : <strong>{{ nameCategorySelected }}</strong></h4>
       <div class="row">
         <div
           *ngFor="let training of listTrainings"
