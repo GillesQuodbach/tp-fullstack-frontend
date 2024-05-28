@@ -2,7 +2,7 @@
   <button class="btn btn-lg mb-3" (click)="navigateToHome()">
     <i class="fa fa-arrow-left"></i>
   </button>
-  <form [formGroup]="myForm" (ngSubmit)="onAddTraining(myForm)">
+  <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div class="row">
       <div class="col-md-6">
         <div class="container">
@@ -37,9 +37,7 @@
           >
             <option
               *ngFor="let category of categories"
-              [ngValue]="category"
-              [selected]="category.name === training.category.name"
-            >
+              [ngValue]="category">
               {{ category.name }}
             </option>
           </select>

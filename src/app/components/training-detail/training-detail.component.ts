@@ -76,8 +76,12 @@ export class TrainingDetailComponent implements OnInit {
     this.router.navigateByUrl('trainings');
   }
 
-  onUpdateTraining(training: Training) {
-    this.router.navigateByUrl('trainingDetail/' + training.id);
+  onSubmit(form: FormGroup) {
+    if (this.status) {
+      this.updateTraining(form);
+    } else {
+      this.onAddTraining(form);
+    }
   }
 
   /**
@@ -86,51 +90,9 @@ export class TrainingDetailComponent implements OnInit {
    */
   onFileSelected(event: any) {
     const input = event.target as HTMLInputElement;
-
-    if (input.files && input.files[0]) {
-      const file = input.files[0] as File;
-
-      // * Limitation du POIDS de l'image
-      const maxSizeInBytes = 3 * 1024 * 1024;
-      if (file.size > maxSizeInBytes) {
-        this.error = 'Le fichier dépasse la taille limite de 3Mb';
-        this.selectedFile = null;
-        this.selectedFileName = '';
-        this.isUpdateAllowed = false;
-        return;
-      }
-
-      // * Limitation de la taille en PIXEL
-      // Création d'un objet image pour check les dimensions
-
-      const img = new Image();
-      img.src = URL.createObjectURL(file);
-
-      img.onload = () => {
-        const maxWidth = 100;
-        const maxHeight = 100;
-
-        URL.revokeObjectURL(img.src);
-
-        if (img.width > maxWidth || img.height > maxHeight) {
-          this.error = "Dimension maximales de l'image 500px x 500px";
-          this.selectedFile = null;
-          this.selectedFileName = '';
-          this.isUpdateAllowed = false;
-          return;
-        } else {
-          this.selectedFile = file;
-          this.selectedFile = null;
-          this.error = '';
-        }
-      };
-
-      img.onerror = () => {
-        this.error = 'Vérifiaction impossible';
-        this.selectedFile = null;
-        this.selectedFileName = '';
-        URL.revokeObjectURL(img.src);
-      };
+    this.selectedFile = event.target.files[0] as File;
+    if (input.files) {
+      this.selectedFileName = input.files[0].name;
     }
   }
 
