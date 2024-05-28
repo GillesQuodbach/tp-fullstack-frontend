@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category.model';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { max } from 'rxjs';
 
 @Component({
   selector: 'app-training-detail',
@@ -21,6 +22,7 @@ export class TrainingDetailComponent implements OnInit {
   selectedFile: File | null = null;
   selectedFileName: String = '';
   categories: Category[];
+  isUpdateAllowed: boolean = true;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -55,7 +57,7 @@ export class TrainingDetailComponent implements OnInit {
       this.apiService.getTraining(id).subscribe({
         next: (data) => {
           this.training = data;
-          console.log(this.training.category.name);
+
           this.myForm.setValue({
             id: this.training.id,
             name: this.training.name,
@@ -74,8 +76,12 @@ export class TrainingDetailComponent implements OnInit {
     this.router.navigateByUrl('trainings');
   }
 
-  onUpdateTraining(training: Training) {
-    this.router.navigateByUrl('trainingDetail/' + training.id);
+  onSubmit(form: FormGroup) {
+    if (this.status) {
+      this.updateTraining(form);
+    } else {
+      this.onAddTraining(form);
+    }
   }
 
   /**
@@ -128,7 +134,6 @@ export class TrainingDetailComponent implements OnInit {
     formData.append('file', this.selectedFile as File, this.selectedFile?.name);
     this.apiService.postImg(formData).subscribe(
       (response) => {
-        console.log(response);
         this.apiService
           .postTraining({
             name: form.value.name,
