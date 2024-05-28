@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { environment } from 'src/environments/environment';
+import { CategoryService } from 'src/app/services/category.service';
 
 @Component({
   selector: 'app-trainings',
@@ -19,13 +20,14 @@ import { environment } from 'src/environments/environment';
  * delors, il aura accès à des fonctionnalités spécifiques suplémentaires
  */
 export class TrainingsComponent implements OnInit {
-  imgPath: any = 'localhost:8080/fileSystem/cuisine.png';
   listTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
+  idCategorySelected: number | undefined;
   error = null;
   urlImg: String = '';
 
   constructor(
+    private categoryService: CategoryService,
     private cartService: CartService,
     private router: Router,
     private apiService: ApiService,
@@ -33,7 +35,12 @@ export class TrainingsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.getAllTrainings();
+    this.idCategorySelected = this.categoryService.getSelectedIdCategory();
+    if(this.idCategorySelected == 0) {
+      this.getAllTrainings();
+    }else {
+      this.displayTrainingsByCategory(this.idCategorySelected);
+    }
     this.getAllCategories();
     this.urlImg = environment.host;
   }

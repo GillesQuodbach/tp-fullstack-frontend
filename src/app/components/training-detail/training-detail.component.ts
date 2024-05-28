@@ -95,6 +95,7 @@ export class TrainingDetailComponent implements OnInit {
    * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
    */
   onAddTraining(form: FormGroup) {
+    console.log(this.selectedFile)
     if (form.valid) {
       if (this.selectedFile == null) {
         // Si aucun fichier n'est sélectionner.
