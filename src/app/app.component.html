@@ -11,9 +11,8 @@
     </li>
   </ul>
   <ul class="navbar-nav ms-auto">
-    <li style="display: flex;">
-        <button type="submit" style="margin: 14px 1em; background: none; border: none;" (click)="onSearch()">Rechercher</button>
-        <input class="form-control mr-sm-2 formulaireRecherche" type="text" id="rechercheTraining">
+    <li>
+      <app-search></app-search>
     </li>
     <li>
       <a class="nav-link connexion" href="#" routerLink="/login">

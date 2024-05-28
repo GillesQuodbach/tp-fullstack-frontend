@@ -15,6 +15,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
+import { SearchComponent } from './components/search/search.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { TrainingDetailComponent } from './components/training-detail/training-d
     AdminComponent,
     OrderConfirmComponent,
     CardsComponent,
-    TrainingDetailComponent
+    TrainingDetailComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

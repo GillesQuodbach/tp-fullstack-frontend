@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { environment } from 'src/environments/environment';
+import { SearchService } from 'src/app/services/search.service';
 
 
 @Component({
@@ -22,23 +23,36 @@ import { environment } from 'src/environments/environment';
 export class TrainingsComponent implements OnInit {
   imgPath: any = 'localhost:8080/fileSystem/cuisine.png';
   listTrainings: Training[] | undefined;
+  listFiltredTrainings : Training[] | undefined;
   listCategories: Category[] | undefined;
   error = null;
   urlImg : String = "";
+  keyword : string = "";
+
 
   constructor(
     private cartService: CartService,
     private router: Router,
     private apiService: ApiService,
     public authService: AuthenticateService,
+    public searchService : SearchService
   ) {}
 
   ngOnInit(): void {
     this.getAllTrainings();
     this.getAllCategories();
     this.urlImg = environment.host;
-    if(this.apiService.search){
-      this.getTrainingsByName();
+    this.searchService.searchKeyword$.subscribe(kw => {
+      this.keyword = kw;
+      this.filterTrainings();
+    });
+  }
+
+  filterTrainings(){
+    if (this.keyword == ""){
+      this.listFiltredTrainings = this.listTrainings;
+    } else {
+      this.listFiltredTrainings = this.listTrainings?.filter(training => training.name.toLowerCase().includes(this.keyword));
     }
   }
 
@@ -59,14 +73,10 @@ export class TrainingsComponent implements OnInit {
    */
   getAllTrainings() {
     this.apiService.getTrainings().subscribe({
-      next: (data) => (this.listTrainings = data),
+      next: (data) => (this.listTrainings = data, this.listFiltredTrainings = data),
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     });
-  }
-
-  getTrainingsByName(){
-    console.log("je suis dedans avec le mot: "+this.apiService.search);
   }
 
   /**
