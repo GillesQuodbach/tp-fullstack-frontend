@@ -42,7 +42,6 @@ export class TrainingsComponent implements OnInit {
   ngOnInit(): void {
     this.idCategorySelected = this.categoryService.getSelectedIdCategory();
     this.nameCategorySelected = this.categoryService.getSelectedNameCategory();
-    console.log("Id de la catégory séléctionner:" + this.idCategorySelected)
     if(this.idCategorySelected == 0) {
       this.getAllTrainings();
     }else {
@@ -58,9 +57,9 @@ export class TrainingsComponent implements OnInit {
 
   filterTrainings(){
     if (this.keyword == ""){
-      this.listFiltredTrainings = this.listTrainings;
+      this.listTrainings = this.listTrainings;
     } else {
-      this.listFiltredTrainings = this.listTrainings?.filter(training => training.name.toLowerCase().includes(this.keyword));
+      this.listTrainings = this.listTrainings?.filter(training => training.name.toLowerCase().includes(this.keyword));
     }
   }
 

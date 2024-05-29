@@ -15,9 +15,9 @@
       </div>
     </nav>
     <div class="container">
-      <p class="h4" style="background-color: yellow; border-radius: 5px; padding: 10px;">Catégorie sélectionnée : <strong>{{ nameCategorySelected }}</strong></h4>
+      <p class="h4" style="background-color: #69F5ED; border-radius: 5px; padding: 10px;">Catégorie sélectionnée : <strong>{{ nameCategorySelected }}</strong></p>
       <div class="row">
-        <div *ngFor="let training of listFiltredTrainings" class="col-lg-4 col-md-6 cartes">
+        <div *ngFor="let training of listTrainings" class="col-lg-4 col-md-6 cartes">
           <app-cards [training]="training"></app-cards>
         </div>
       </div>
