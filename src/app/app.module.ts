@@ -11,7 +11,6 @@ import { CustomerComponent } from './components/customer/customer.component';
 import { OrderComponent } from './components/order/order.component';
 import { LoginoutComponent } from './components/loginout/loginout.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AdminComponent } from './components/admin/admin.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
@@ -26,7 +25,6 @@ import { SearchComponent } from './components/search/search.component';
     CustomerComponent,
     OrderComponent,
     LoginoutComponent,
-    AdminComponent,
     OrderConfirmComponent,
     CardsComponent,
     TrainingDetailComponent,

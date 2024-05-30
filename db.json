@@ -45,7 +45,7 @@
   ],
   "users": [
     {
-      "email": "quodbach.gilles@gmail.com",
+      "email": "git push",
       "password": "1234",
       "roles": ["ADMIN", "USER"]
     },

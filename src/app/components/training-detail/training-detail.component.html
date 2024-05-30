@@ -17,6 +17,7 @@
           />
           <div class="form-group mt-3">
             <input
+              *ngIf="isAdmin"
               type="file"
               formControlName="img"
               class="form-control"
@@ -29,11 +30,18 @@
       <div class="col-md-6">
         <div class="form-group">
           <label class="control-label">Categorie : </label>
+          <input
+          type="text"
+          class="form-control"
+          [value]="myForm.get('category')?.value?.name"
+          *ngIf="!isAdmin"
+          readonly
+        />
           <select
             formControlName="category"
             class="form-select"
             aria-label="Default select example"
-            style="background-color: #69f5ed"
+            *ngIf="isAdmin"
           >
             <option
               *ngFor="let category of categories"
@@ -53,7 +61,7 @@
         </div>
         <div class="form-group mt-3">
           <label class="control-label">Nom de la formation : </label>
-          <input type="text" formControlName="name" class="form-control" />
+          <input type="text" formControlName="name" class="form-control" [readonly]="!isAdmin"/>
         </div>
         <div class="form-group mt-3">
           <label class="control-label">Description : </label>
@@ -61,15 +69,16 @@
             type="text"
             formControlName="description"
             class="form-control"
+            [readonly]="!isAdmin"
           />
         </div>
         <div class="form-group mt-3">
           <label class="control-label">Prix : </label>
-          <input type="number" formControlName="price" class="form-control" />
+          <input type="number" formControlName="price" class="form-control" [readonly]="!isAdmin"/>
         </div>
         <div>
           <button
-            *ngIf="!status"
+            *ngIf="!status && isAdmin"
             type="submit"
             class="btn btn-lg mt-3 me-3 shadow"
             style="background-color: #5984f1"
@@ -77,7 +86,7 @@
             <i class="fa fa-save"></i> Ajouter en base
           </button>
           <button
-            *ngIf="status"
+            *ngIf="status && isAdmin"
             type="submit"
             class="btn btn-lg mt-3 me-3 shadow"
             style="background-color: #5984f1"
@@ -85,19 +94,24 @@
           >
             <i class="fa fa-edit"></i> Mise à jour
           </button>
-          <button *ngIf="status" class="btn btn-danger btn-lg mt-3 shadow">
+          <button (click)="deleteTraining(this.training)" *ngIf="status && isAdmin" type="button" class="btn btn-danger btn-lg mt-3 shadow">
             <i class="fa fa-trash"></i>
           </button>
         </div>
         <button
-          *ngIf="status"
-          type="submit"
+          *ngIf="!isAdmin"
+          type="button"
           class="btn btn-lg mt-3 shadow"
           style="background-color: #ffdd64"
+          (click)="onAddToCart(this.training)"
         >
           <i class="fa fa-shopping-cart"></i> Ajouter
         </button>
       </div>
     </div>
   </form>
+</div>
+
+<div id="notification" class="notification">
+  La formation {{this.training.name}} x1 a bien été ajoutée à votre panier !
 </div>

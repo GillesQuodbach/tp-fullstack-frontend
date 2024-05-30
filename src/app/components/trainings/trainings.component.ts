@@ -86,6 +86,7 @@ export class TrainingsComponent implements OnInit {
     });
     this.categoryService.clearSelectedIdCategory();
     this.categoryService.clearSelectedNameCategory();
+    this.nameCategorySelected = "Toutes";
   }
 
   /**

@@ -5,8 +5,8 @@ import { ApiService } from 'src/app/services/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category.model';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
-import { max } from 'rxjs';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-training-detail',
@@ -23,18 +23,21 @@ export class TrainingDetailComponent implements OnInit {
   selectedFileName: String = '';
   categories: Category[];
   isUpdateAllowed: boolean = true;
+  isAdmin: boolean;
 
   constructor(
     private formBuilder: FormBuilder,
     private apiService: ApiService,
     private router: Router,
     private route: ActivatedRoute,
-    private http: HttpClient
+    private authService: AuthenticateService,
+    private cartService: CartService
   ) {
     const defaultCategory = new Category(0, '', '');
     this.training = new Training(0, '', '', 0, 1, '', defaultCategory);
     this.categories = [];
     this.urlImg = environment.host;
+    this.isAdmin = false;
 
     this.myForm = this.formBuilder.group({
       id: [this.training.id],
@@ -47,6 +50,7 @@ export class TrainingDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
     this.apiService.getCategories().subscribe({
       next: (data) => (this.categories = data),
       error: (err) => (this.error = err),
@@ -209,9 +213,38 @@ export class TrainingDetailComponent implements OnInit {
             complete: () => this.router.navigateByUrl('trainings'),
           });
       });
+  }  
+
+  deleteTraining(training: Training) {
+    if(confirm("Êtes vous sur de vouloir supprimer cette formation ?")) {
+      this.apiService.delTraining(training).subscribe({
+        complete: () => this.router.navigateByUrl('trainings')
+      });
+    }  
   }
 
   navigateToHome() {
     this.router.navigateByUrl('trainings');
+  }
+
+  onAddToCart(training: Training) {
+    if (training.quantity > 0) {
+      this.cartService.addTraining(training);
+    }
+    this.showNotification();
+  }
+
+  showNotification() {
+    const notification = document.getElementById('notification');
+    if (notification) {
+      notification.classList.add('show');
+      setTimeout(() => {
+        notification.classList.remove('show');
+        notification.classList.add('hide');
+        setTimeout(() => {
+          notification.classList.remove('hide');
+        }, 500); 
+      }, 2000); 
+    }
   }
 }

@@ -48,7 +48,7 @@ export class CartComponent implements OnInit {
       if(this.authService.isConnected()) {
         this.router.navigateByUrl('customer');  
       }
-      else this.error = 'Vous devez être connecté pour passer commande';
+      else this.router.navigateByUrl('login');
     }
     else this.error = 'Panier vide';
   }
