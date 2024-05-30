@@ -45,7 +45,7 @@
   ],
   "users": [
     {
-      "email": "git push",
+      "email": "arthur@free.fr",
       "password": "1234",
       "roles": ["ADMIN", "USER"]
     },

@@ -10,12 +10,21 @@ import { ApiService } from './services/api.service';
 })
 export class AppComponent {
   title = 'trainings-front-app';
+  userConected : boolean;
+  isAdmin : boolean;
 
   constructor(
     public cartService : CartService, public authService : AuthenticateService
   ){
-
+    this.userConected = false;
+    this.isAdmin = false;
   }
+
+  ngOnInit(): void {
+    this.userConected = this.authService.isConnected();
+    this.isAdmin = this.authService.isAdmin();
+  }
+
   onLogin(){
   }
 }

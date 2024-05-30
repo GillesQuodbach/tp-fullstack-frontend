@@ -7,7 +7,7 @@
                     <li class="list-group-item">Numéro de commande : {{cartService.getCommand()?.id}} </li>
                     <li class="list-group-item">Prénom du Client : {{cartService.getCustomer().lastname}}</li>
                     <li class="list-group-item">Adresse Client : {{cartService.getCustomer().adress}}</li>
-                    <li class="list-group-item">Date de livraison : {{dateDelivery | date:"MM/dd/yy"}}</li>
+                    <li class="list-group-item">Date de livraison : {{dateDelivery | date:"dd/MM/yy"}}</li>
                 </ul>   
             </div> 
             <div class="card-footer">

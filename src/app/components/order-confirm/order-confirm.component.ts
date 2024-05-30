@@ -16,21 +16,25 @@ export class OrderConfirmComponent implements OnInit {
   /**
    * Date of delivery.
    */
-  public dateDelivery: Date = new Date();
+  public dateDelivery: Date;
 
   /**
    * Constructor for OrderConfirmComponent.
    * @param cartService CartService instance.
    * @param router Router instance.
    */
-  constructor(public cartService: CartService, private router: Router) {}
+  constructor(public cartService: CartService, private router: Router) {
+    this.dateDelivery = new Date();
+  }
 
   /**
    * Lifecycle hook OnInit.
    * Sets the delivery date.
    */
   ngOnInit(): void {
-    this.dateDelivery.setDate(this.dateDelivery.getDate() + 3);
+    const today = new Date();
+    this.dateDelivery = new Date(today.setDate(today.getDate() + 3));
+    console.log(this.dateDelivery)
   }
 
   /**
