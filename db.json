@@ -45,7 +45,7 @@
   ],
   "users": [
     {
-      "email": "arthur@free.fr",
+      "email": "quodbach.gilles@gmail.com",
       "password": "1234",
       "roles": ["ADMIN", "USER"]
     },
