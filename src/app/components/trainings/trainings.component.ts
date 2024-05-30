@@ -22,13 +22,13 @@ import { SearchService } from 'src/app/services/search.service';
  */
 export class TrainingsComponent implements OnInit {
   listTrainings: Training[] | undefined;
-  listFiltredTrainings : Training[] | undefined;
+  listFiltredTrainings: Training[] | undefined;
   listCategories: Category[] | undefined;
   idCategorySelected: number | undefined;
   nameCategorySelected: string = '';
   error = null;
-  urlImg : String = "";
-  keyword : string = "";
+  urlImg: String = '';
+  keyword: string = '';
 
   constructor(
     private categoryService: CategoryService,
@@ -36,30 +36,38 @@ export class TrainingsComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     public authService: AuthenticateService,
-    public searchService : SearchService
+    public searchService: SearchService
   ) {}
 
   ngOnInit(): void {
     this.idCategorySelected = this.categoryService.getSelectedIdCategory();
     this.nameCategorySelected = this.categoryService.getSelectedNameCategory();
-    if(this.idCategorySelected == 0) {
+    if (this.idCategorySelected == 0) {
       this.getAllTrainings();
-    }else {
-      this.displayTrainingsByCategory(this.idCategorySelected, this.nameCategorySelected);
+    } else {
+      this.displayTrainingsByCategory(
+        this.idCategorySelected,
+        this.nameCategorySelected
+      );
     }
     this.getAllCategories();
     this.urlImg = environment.host;
-    this.searchService.searchKeyword$.subscribe(kw => {
+    this.searchService.searchKeyword$.subscribe((kw) => {
       this.keyword = kw;
       this.filterTrainings();
     });
   }
 
-  filterTrainings(){
-    if (this.keyword == ""){
+  /**
+   * Filter trainings based on the keyword.
+   */
+  filterTrainings() {
+    if (this.keyword == '') {
       this.listTrainings = this.listTrainings;
     } else {
-      this.listTrainings = this.listTrainings?.filter(training => training.name.toLowerCase().includes(this.keyword));
+      this.listTrainings = this.listTrainings?.filter((training) =>
+        training.name.toLowerCase().includes(this.keyword)
+      );
     }
   }
 
@@ -80,7 +88,9 @@ export class TrainingsComponent implements OnInit {
    */
   getAllTrainings() {
     this.apiService.getTrainings().subscribe({
-      next: (data) => (this.listTrainings = data, this.listFiltredTrainings = data),
+      next: (data) => (
+        (this.listTrainings = data), (this.listFiltredTrainings = data)
+      ),
       error: (err) => (this.error = err.message),
       complete: () => (this.error = null),
     });
@@ -113,7 +123,11 @@ export class TrainingsComponent implements OnInit {
     this.router.navigateByUrl('trainingDetail/' + training.id);
   }
 
-  // Affichage des training par catégories
+  /**
+   * Display trainings by category.
+   * @param id ID of the category.
+   * @param name Name of the category.
+   */
   displayTrainingsByCategory(id: number, name: string) {
     this.apiService.getTrainingsByCategory(id).subscribe({
       next: (data) => (this.listTrainings = data),

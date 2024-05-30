@@ -72,10 +72,18 @@ export class TrainingDetailComponent implements OnInit {
     }
   }
 
+  /**
+   * Navigates to the home page.
+   */
   goHome() {
     this.router.navigateByUrl('trainings');
   }
 
+  /**
+   * Handles form submission.
+   * If status is true, updates the training, otherwise adds a new training.
+   * @param form FormGroup instance containing form data.
+   */
   onSubmit(form: FormGroup) {
     if (this.status) {
       this.updateTraining(form);
@@ -101,7 +109,7 @@ export class TrainingDetailComponent implements OnInit {
    * @param form comprend le formulaire avec toutes les données saisies par l'utilisateur
    */
   onAddTraining(form: FormGroup) {
-    console.log(this.selectedFile)
+    console.log(this.selectedFile);
     if (form.valid) {
       if (this.selectedFile == null) {
         // Si aucun fichier n'est sélectionner.
@@ -211,6 +219,9 @@ export class TrainingDetailComponent implements OnInit {
       });
   }
 
+  /**
+   * Navigate to the home page.
+   */
   navigateToHome() {
     this.router.navigateByUrl('trainings');
   }

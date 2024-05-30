@@ -3,76 +3,136 @@ import { Customer } from '../model/customer.model';
 import { Training } from '../model/training.model';
 import { Command } from '../model/command.model';
 
+/**
+ * Service for managing the shopping cart.
+ */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-  private cart : Map<number,Training>;
-  private command : Command | null;
+  /**
+   * Map to store the items in the cart.
+   */
+  private cart: Map<number, Training>;
 
-  constructor() {   
-    this.command = null;  
-    // au démarrage du service, je récupère le contenu du local storage : command en cours
+  /**
+   * Command associated with the cart.
+   */
+  private command: Command | null;
+
+  /**
+   * Constructor for CartService.
+   */
+  constructor() {
+    this.command = null;
     let cart = localStorage.getItem('cart');
-    if(cart){  // le panier existe déjà
+    if (cart) {
       this.cart = new Map(JSON.parse(cart));
-    } // sinon il faut le créer
-    else this.cart = new Map<number,Training>();
+    } else {
+      this.cart = new Map<number, Training>();
+    }
   }
 
-  addTraining(training: Training) { 
-    this.cart.set(training.id,training);
-    this.saveCart(); //à chaque fois que j'ajoute un élément au panier, je met à jour le local storage
+  /**
+   * Add a training to the cart.
+   * @param training Training object to be added.
+   */
+  addTraining(training: Training) {
+    this.cart.set(training.id, training);
+    this.saveCart();
   }
 
-  saveCustomer(customer : Customer) {
-    localStorage.setItem('customer',JSON.stringify(customer));
+  /**
+   * Save customer details to local storage.
+   * @param customer Customer object.
+   */
+  saveCustomer(customer: Customer) {
+    localStorage.setItem('customer', JSON.stringify(customer));
   }
 
+  /**
+   * Save cart details to local storage.
+   */
   saveCart() {
-    localStorage.setItem('cart',JSON.stringify([...this.cart]));
+    localStorage.setItem('cart', JSON.stringify([...this.cart]));
   }
 
+  /**
+   * Remove a training from the cart.
+   * @param training Training object to be removed.
+   */
   removeTraining(training: Training) {
     this.cart.delete(training.id);
     this.saveCart();
   }
 
+  /**
+   * Get the items in the cart.
+   * @returns Array of Training objects in the cart.
+   */
   getCart() {
     return Array.from(this.cart.values());
   }
 
-  getSize() {    
+  /**
+   * Get the size of the cart.
+   * @returns Size of the cart.
+   */
+  getSize() {
     return this.cart.size;
   }
 
-  getAmount() : number {
-    let amount : number = 0;
-    this.cart.forEach(training => {
+  /**
+   * Get the total amount of the cart.
+   * @returns Total amount of the cart.
+   */
+  getAmount(): number {
+    let amount: number = 0;
+    this.cart.forEach((training) => {
       amount += training.price * training.quantity;
     });
-    return amount;    
+    return amount;
   }
 
-  getCustomer() : Customer {
+  /**
+   * Get the customer details from local storage.
+   * @returns Customer object.
+   */
+  getCustomer(): Customer {
     let customer = localStorage.getItem('customer');
-    if(customer)  return  JSON.parse(customer);
-    return new Customer(0, "unknown","","","","");
+    if (customer) {
+      return JSON.parse(customer);
+    }
+    return new Customer(0, 'unknown', '', '', '', '');
   }
 
+  /**
+   * Clear the cart.
+   */
   clear() {
     this.cart.clear();
     localStorage.removeItem('cart');
   }
 
-  setCommand(command : Command) {
+  /**
+   * Set the command associated with the cart.
+   * @param command Command object.
+   */
+  setCommand(command: Command) {
     this.command = command;
   }
 
+  /**
+   * Get the command associated with the cart.
+   * @returns Command object.
+   */
   getCommand() {
     return this.command;
   }
 
+  /**
+   * Clear the command associated with the cart.
+   */
   clearCommand() {
     this.command = null;
   }

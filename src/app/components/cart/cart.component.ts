@@ -5,65 +5,116 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { CartService } from 'src/app/services/cart.service';
 import { environment } from 'src/environments/environment';
 
+/**
+ * Component for managing a cart, including displaying the cart, removing items, and proceeding to the next step.
+ */
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
-  styleUrls: ['./cart.component.css']
+  styleUrls: ['./cart.component.css'],
 })
-
-/**
- * Composant de gestion d'un panier permettant l'affichage du panier, la suppression éventuelle de formations et le passage à l'étape suivante
- */
 export class CartComponent implements OnInit {
-  cart : Training[] | undefined;
-  empty_cart : boolean = false;
-  amount : number = 0;
-  error : string | undefined;
-  urlApi : String = "";
-  constructor(private cartService : CartService , private router : Router, private authService : AuthenticateService) { }
+  /**
+   * Array containing cart items.
+   */
+  cart: Training[] | undefined;
 
+  /**
+   * Indicates if the cart is empty.
+   */
+  empty_cart: boolean = false;
+
+  /**
+   * Total amount in the cart.
+   */
+  amount: number = 0;
+
+  /**
+   * Error message.
+   */
+  error: string | undefined;
+
+  /**
+   * URL for API.
+   */
+  urlApi: String = '';
+
+  /**
+   * Constructor for CartComponent.
+   * @param cartService CartService instance.
+   * @param router Router instance.
+   * @param authService AuthenticateService instance.
+   */
+  constructor(
+    private cartService: CartService,
+    private router: Router,
+    private authService: AuthenticateService
+  ) {}
+
+  /**
+   * Lifecycle hook OnInit.
+   */
   ngOnInit(): void {
     this.amount = this.cartService.getAmount();
     this.initCart();
     this.urlApi = environment.host;
   }
 
+  /**
+   * Navigate to home page.
+   */
   navigateToHome() {
     this.router.navigateByUrl('trainings');
   }
 
-  initCart(){
+  /**
+   * Initialize the cart.
+   */
+  initCart() {
     this.cart = this.cartService.getCart();
-    this.empty_cart = (this.cart.length > 0) ? false : true;
+    this.empty_cart = this.cart.length > 0 ? false : true;
   }
 
-  onRemoveFromCart(training : Training){
+  /**
+   * Remove a training from the cart.
+   * @param training Training object to be removed.
+   */
+  onRemoveFromCart(training: Training) {
     this.cartService.removeTraining(training);
     this.amount = this.cartService.getAmount();
     this.initCart();
   }
 
-  onNewOrder(){
-    if(this.cartService.getSize() > 0) {
-      if(this.authService.isConnected()) {
-        this.router.navigateByUrl('customer');  
-      }
-      else this.error = 'Vous devez être connecté pour passer commande';
-    }
-    else this.error = 'Panier vide';
+  /**
+   * Proceed to the next step to create a new order.
+   */
+  onNewOrder() {
+    if (this.cartService.getSize() > 0) {
+      if (this.authService.isConnected()) {
+        this.router.navigateByUrl('customer');
+      } else this.error = 'You must be logged in to place an order';
+    } else this.error = 'Empty cart';
   }
 
+  /**
+   * Decrease quantity of a training in the cart.
+   * @param training Training object whose quantity is to be decreased.
+   */
   decreaseQuantity(training: Training) {
-    if(training.quantity == 1) {
+    if (training.quantity == 1) {
       this.onRemoveFromCart(training);
-    }else {
+    } else {
       training.quantity = training.quantity - 1;
     }
     this.amount = this.cartService.getAmount();
   }
 
+  /**
+   * Increase quantity of a training in the cart.
+   * @param training Training object whose quantity is to be increased.
+   */
   increaseQuantity(training: Training) {
-    if(training.quantity == 10) {
+    if (training.quantity == 10) {
       training.quantity = 10;
     } else {
       training.quantity = training.quantity + 1;
