@@ -3,7 +3,9 @@
     <nav class="navbar navbar-expand-lg navigationCategories">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active" (click)="getAllTrainings()"><a class="nav-link">Toutes</a></li>
+          <li class="nav-item active" (click)="getAllTrainings()">
+            <a class="nav-link">Toutes</a>
+          </li>
           <li
             class="nav-item active"
             *ngFor="let category of listCategories"
@@ -15,9 +17,23 @@
       </div>
     </nav>
     <div class="container">
-      <p class="h4" style="background-color: #69F5ED; border-radius: 5px; padding: 10px;">Catégorie sélectionnée : <strong>{{ nameCategorySelected }}</strong></p>
+      <p
+        class="h4"
+        style="background-color: #69f5ed; border-radius: 5px; padding: 10px"
+      >
+        Catégorie sélectionnée : <strong>{{ nameCategorySelected }}</strong>
+      </p>
       <div class="row">
-        <div *ngFor="let training of listTrainings" class="col-lg-4 col-md-6 cartes">
+        <h2
+          class="text-danger font-weight-bold"
+          *ngIf="listTrainings.length == 0"
+        >
+          Aucune formation trouvée !
+        </h2>
+        <div
+          *ngFor="let training of listTrainings"
+          class="col-lg-4 col-md-6 cartes"
+        >
           <app-cards [training]="training"></app-cards>
         </div>
       </div>

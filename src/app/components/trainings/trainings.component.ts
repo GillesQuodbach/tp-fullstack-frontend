@@ -62,10 +62,10 @@ export class TrainingsComponent implements OnInit {
    * Filter trainings based on the keyword.
    */
   filterTrainings() {
-    if (this.keyword == '') {
-      this.listTrainings = this.listTrainings;
+    if (this.keyword === '') {
+      this.listTrainings = this.listFiltredTrainings; //
     } else {
-      this.listTrainings = this.listTrainings?.filter((training) =>
+      this.listTrainings = this.listFiltredTrainings?.filter((training) =>
         training.name.toLowerCase().includes(this.keyword)
       );
     }
