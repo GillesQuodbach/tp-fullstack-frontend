@@ -1,4 +1,11 @@
-<div class="searchBar">
-    <button class="searchButton" type="submit" (click)="onSearch()">Rechercher</button>
-    <input class="form-control mr-sm-2 formulaireRecherche" type="text" id="rechercheTraining">
-</div>
+<form class="searchBar">
+  <button class="searchButton" type="submit" (click)="onSearch()">
+    Rechercher
+  </button>
+  <input
+    class="form-control mr-sm-2 formulaireRecherche"
+    type="text"
+    id="rechercheTraining"
+    ng-keyup="$event.keyCode == 13 && onSearch()"
+  />
+</form>
