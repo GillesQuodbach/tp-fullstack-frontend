@@ -221,14 +221,14 @@ export class TrainingDetailComponent implements OnInit {
             complete: () => this.router.navigateByUrl('trainings'),
           });
       });
-  }  
+  }
 
   deleteTraining(training: Training) {
-    if(confirm("Êtes vous sur de vouloir supprimer cette formation ?")) {
+    if (confirm('Êtes vous sur de vouloir supprimer cette formation ?')) {
       this.apiService.delTraining(training).subscribe({
-        complete: () => this.router.navigateByUrl('trainings')
+        complete: () => this.router.navigateByUrl('trainings'),
       });
-    }  
+    }
   }
 
   /**
@@ -254,8 +254,8 @@ export class TrainingDetailComponent implements OnInit {
         notification.classList.add('hide');
         setTimeout(() => {
           notification.classList.remove('hide');
-        }, 500); 
-      }, 2000); 
+        }, 500);
+      }, 2000);
     }
   }
 }
