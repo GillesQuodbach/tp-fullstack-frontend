@@ -3,6 +3,7 @@ import { Training } from 'src/app/model/training.model';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
+import { AuthenticateService } from 'src/app/services/authenticate.service';
 
 @Component({
   selector: 'app-cards',
@@ -14,11 +15,15 @@ export class CardsComponent {
 
   urlImage: String = "";
   showCounter: boolean = false;
+  isAdmin: boolean;
 
-  constructor(private router : Router, private cartService : CartService) {}
+  constructor(private router : Router, private cartService : CartService, private authService : AuthenticateService) {
+    this.isAdmin = false;
+  }
 
   ngOnInit(): void {
     this.urlImage = environment.host;
+    this.isAdmin = this.authService.isAdmin();
   }
 
     /**

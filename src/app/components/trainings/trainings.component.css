@@ -8,8 +8,17 @@
   width: 100%;
   top: -60px;
 }
+
 .navigationCategories a {
   color: #000;
   font-size: 20px;
   margin: 0 20px;
+}
+
+.title-category {
+  width: 50%;
+  background-color: #69f5ed;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }

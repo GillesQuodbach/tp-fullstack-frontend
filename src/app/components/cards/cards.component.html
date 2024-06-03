@@ -3,17 +3,23 @@
     <div class="row">
         <div class="col-12">
             <div class="container contenuCarte">
-
                 <div class="row">
                     <div class="col-12">
-                        <a  (click)="onUpdateTraining(training)">
+                        <a (click)="onUpdateTraining(training)">
                             <img [src]="urlImage + '/download/' + training.id" alt="training image" class="card_image">
                         </a>
                     </div>
                 </div>
-
+                <div>
+                    <button *ngIf="isAdmin" class="btn-update-img">
+                        <i class="fa fa-download"></i>
+                    </button>
+                </div>
             </div>
             <div class="row infosCarte">
+                <div>
+                    <button *ngIf="isAdmin" (click)="onUpdateTraining(training)" class="btn-update-training">Mise à jour <i class="fa fa-edit"></i></button>
+                </div>
                 <div class="col-9">
                     <a href=""><h3>{{ training.name }}</h3></a>
                 </div>

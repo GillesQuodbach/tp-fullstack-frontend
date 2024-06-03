@@ -20,6 +20,10 @@
     border: none;
 }
 
+.nav-button:hover {
+    background-color: #FFE68A;
+  }
+
 .container-legend-connection {
     margin-right: 10px;
 }
