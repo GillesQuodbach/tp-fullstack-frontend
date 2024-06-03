@@ -1,34 +1,45 @@
-<nav class="navbar navbar-expand-sm navigation">
-  <a class="navbar-brand" href="#" routerLink="/trainings">
-    <h1 style="margin: 0 1em">MyShopApp</h1>
-  </a>
 
-  <ul class="navbar-nav">  
-      <li *ngIf="this.authService.isAdmin()" class="nav-item">
-        <a class="nav-link h-auto" href="#" routerLink="/trainingDetail/?">Ajouter formation</a>
-      </li>
-  </ul>
-  <ul class="navbar-nav ms-auto">
-    <li>
-      <app-search></app-search>
-    </li>
-    <li>
-      <a
-        class="nav-link connexion"
-        style="background-color: rgb(247, 243, 243)"
-        width="40px"
-        href="#"
-        routerLink="/login"
-      >
-        <img
-          src="assets/img/user.png"
-          style="background-color: rgb(247, 243, 243)"
-          width="50px"
-          alt="Utilisateur"
-        />
-      </a>
-    </li>
-  </ul>
+
+<nav class="navigation">
+  <div>
+    <a href="#" routerLink="/trainings">
+      <h1 style="margin: 0 1em">MyShopApp</h1>
+    </a>
+  </div>
+  <div>
+    <button class="nav-button" *ngIf="this.authService.isAdmin()" routerLink="/trainingDetail/?"> Ajouter formation <i class="fa fa-edit"></i></button>
+  </div>
+  <div>
+    <app-search></app-search>
+  </div>
+  <div class="container-legend-connection">
+    <a
+    width="40px"
+    href="#"
+    routerLink="/login"
+  >
+    <img class="img-connection" *ngIf="this.authService.isConnected() && this.authService.isAdmin()"
+      src="assets/img/admin.png"
+      width="50px"
+      alt="Utilisateur"
+    />
+    <img class="img-connection" *ngIf="this.authService.isConnected() && !this.authService.isAdmin()"
+    src="assets/img/users.png"
+    width="50px"
+    alt="Utilisateur"
+    />
+    <img class="img-connection" *ngIf="!this.authService.isConnected()"
+    src="assets/img/visitor.png"
+    width="50px"
+    alt="Utilisateur"
+    />
+    <p class="connection-legend color-danger" *ngIf="this.authService.isConnected() && this.authService.isAdmin()">[ Admin ]</p>
+    <p class="connection-legend color-success" *ngIf="this.authService.isConnected() && !this.authService.isAdmin()">[ User ]</p>
+    <p class="connection-legend" *ngIf="!this.authService.isConnected()">[ Visitor ]</p>
+  </a>
+  </div>
+</nav>
+<div class="fondMenu">
   <div class="panier">
     <a
       class="nav-link"
@@ -51,6 +62,5 @@
       [{{ this.cartService.getSize() }}]
     </a>
   </div>
-</nav>
-<div class="fondMenu"></div>
-<router-outlet class="backColor"> </router-outlet>
+</div>
+<router-outlet class="backColor"></router-outlet>
