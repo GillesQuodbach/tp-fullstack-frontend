@@ -9,6 +9,7 @@ import { LoginoutComponent } from './components/loginout/loginout.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { UserGuard } from './guards/user.guard';
+import { FormsModule } from '@angular/forms';
 
 
 const routes : Routes = [
@@ -36,7 +37,7 @@ const routes : Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), FormsModule],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

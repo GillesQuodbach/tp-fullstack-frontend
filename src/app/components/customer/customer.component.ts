@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/model/customer.model';
 import { CartService } from 'src/app/services/cart.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, PatternValidator, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -22,10 +22,10 @@ export class CustomerComponent implements OnInit {
   constructor(public cartService : CartService, private router : Router, private formBuilder : FormBuilder) {  
     this.customer = this.cartService.getCustomer();  
     this.myForm = this.formBuilder.group({
-      name : [this.customer.name, Validators.required],
-      firstName : [this.customer.lastname, Validators.required],
-      address : [this.customer.adress, [Validators.required,Validators.minLength(15)]],
-      phone : [this.customer.phone, [Validators.required,Validators.maxLength(10)]],
+      name : [this.customer.name, [Validators.required,  Validators.pattern('^[a-zA-Z]+$')]],
+      firstName : [this.customer.lastname, [Validators.required, Validators.pattern('^[a-zA-Z]+$')]], 
+      address : [this.customer.address, [Validators.required,Validators.minLength(5)]],
+      phone : [this.customer.phone, [Validators.required,Validators.maxLength(10), Validators.pattern('^\\d{10}$')]],
       email : [this.customer.email, [Validators.required,Validators.pattern(environment.regExEmail)]]
     })
   }
