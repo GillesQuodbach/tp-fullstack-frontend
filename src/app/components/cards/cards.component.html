@@ -6,19 +6,22 @@
                 <div class="row">
                     <div class="col-12">
                         <a (click)="onUpdateTraining(training)">
-                            <img [src]="urlImage + '/download/' + training.id" alt="training image" class="card_image">
+                            <img [src]="urlImage" alt="training image" class="card_image">
                         </a>
                     </div>
                 </div>
-                <div>
-                    <button *ngIf="isAdmin" class="btn-update-img">
-                        <i class="fa fa-download"></i>
-                    </button>
-                </div>
             </div>
             <div class="row infosCarte">
-                <div>
-                    <button *ngIf="isAdmin" (click)="onUpdateTraining(training)" class="btn-update-training">Mise à jour <i class="fa fa-edit"></i></button>
+                <div class="container-btn-upload">
+                    <button *ngIf="isAdmin" (click)="showFileInput()" class="btn-update-img">
+                        <i class="fa fa-download"></i> Mise à jour de l'image
+                    </button>
+                    <button *ngIf="isAdmin" (click)="onUpdateTraining(training)" class="btn-update-training"><i class="fa fa-edit"></i> Mise à jour</button>
+                </div>
+                <div class="container-input-file">
+                    <input *ngIf="fileInput" type="file" (change)="onFileSelected($event)"/>
+                    <button *ngIf="validateBtnFile" (click)="updateImg(training.id)" class="validate-file-btn"><i class="fa fa-check"></i></button>
+                    <!-- <button class="validate-file-btn"><i class="fa fa-times"></i></button> -->
                 </div>
                 <div class="col-9">
                     <a href=""><h3>{{ training.name }}</h3></a>

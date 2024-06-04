@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectorRef } from '@angular/core';
 import { Training } from 'src/app/model/training.model';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { CartService } from 'src/app/services/cart.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-cards',
@@ -15,14 +16,19 @@ export class CardsComponent {
 
   urlImage: String = "";
   showCounter: boolean = false;
+  fileInput: boolean = false;
+  validateBtnFile: boolean = false;
+  selectedFile: File | null = null; 
   isAdmin: boolean;
 
-  constructor(private router : Router, private cartService : CartService, private authService : AuthenticateService) {
+  constructor(private router : Router, private cartService : CartService, private authService : AuthenticateService, private apiService: ApiService, private cdr: ChangeDetectorRef) {
     this.isAdmin = false;
   }
 
   ngOnInit(): void {
-    this.urlImage = environment.host;
+    if(this.training) {
+      this.urlImage = environment.host + '/download/' + this.training.id;
+    }
     this.isAdmin = this.authService.isAdmin();
   }
 
@@ -48,4 +54,32 @@ export class CardsComponent {
     onUpdateTraining(training: Training) {
       this.router.navigateByUrl('trainingDetail/' + training.id);
     }
+
+    showFileInput() {
+      this.fileInput = true;
+    }
+
+    onFileSelected(event:any) {
+      const file = event.target.files[0];
+      if (file) {
+        console.log('Fichier sélectionné:', file);
+        this.validateBtnFile = true;
+        this.selectedFile = event.target.files[0] as File;
+      }
+    }
+
+    updateImg(id: number) {
+      if(this.training) {}
+      const formData = new FormData();
+      formData.append('file', this.selectedFile as File, this.selectedFile?.name);
+      this.apiService.updateImgTraining(formData, id).subscribe((response) => {
+        if(this.training) {
+          this.urlImage = environment.host + '/download/' + this.training.id + '?' + new Date().getTime();
+          this.cdr.detectChanges();
+          this.validateBtnFile = false;
+          this.fileInput = false;
+        }
+      })
+    }
+
 }

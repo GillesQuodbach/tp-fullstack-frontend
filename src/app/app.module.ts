@@ -15,6 +15,7 @@ import { OrderConfirmComponent } from './components/order-confirm/order-confirm.
 import { CardsComponent } from './components/cards/cards.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { SearchComponent } from './components/search/search.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
