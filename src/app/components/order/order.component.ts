@@ -12,6 +12,7 @@ import { Command } from 'src/app/model/command.model';
 import { Customer } from 'src/app/model/customer.model';
 import { ApiService } from 'src/app/services/api.service';
 import { OrderItem } from 'src/app/model/orderItem.model';
+import { Training } from 'src/app/model/training.model';
 
 /**
  * Component for managing an order.
@@ -84,9 +85,10 @@ export class OrderComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
    * If confirmed, saves the order and navigates to the order confirmation page.
    */
   onOrder() {
+    this.updateCapacityTraining();
     if (confirm('Do you want to confirm the order?')) {
       this.saveOrder();
-      this.router.navigateByUrl('orderConfirm');
+      this.updateCapacityTraining();
     }
   }
 
@@ -129,5 +131,26 @@ export class OrderComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
         error: (err) => (this.error = err),
       });
     }
+  }
+
+  updateCapacityTraining() {
+    this.cartService.getCart().map((cartItem => {
+      this.apiService.postTraining({
+        id: cartItem.id,
+        name: cartItem.name,
+        description: cartItem.description,
+        price: cartItem.price,
+        quantity: 1,
+        capacity: cartItem.capacity - cartItem.quantity,
+        img: cartItem.img,
+        active: cartItem.active,
+        category: cartItem.category
+      })
+      .subscribe({
+        next: (data) => console.log(data),
+        error: (err) => (this.error = err.message),
+        complete: () => this.router.navigateByUrl('orderConfirm')
+      })
+    }))
   }
 }
