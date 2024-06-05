@@ -8,6 +8,8 @@
                         <a (click)="onUpdateTraining(training)">
                             <img [src]="urlImage" alt="training image" class="card_image">
                         </a>
+                        <div *ngIf="isAdmin && training.active == true" class="container-active"><i class="fa fa-eye"></i></div>
+                        <div *ngIf="isAdmin && training.active == false" class="container-inactive"><i class="fa fa-eye-slash"></i></div>
                     </div>
                 </div>
             </div>

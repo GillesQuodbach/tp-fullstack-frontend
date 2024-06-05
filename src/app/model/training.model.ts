@@ -8,9 +8,10 @@ export class Training {
     quantity : number;
     capacity: number;
     img : string;
-    category : Category
-
-    constructor(id:number, name:string, description:string, price:number, quantity:number, capacity:number, img:string, category:Category) {
+    active : boolean;
+    category : Category;
+    
+    constructor(id:number, name:string, description:string, price:number, quantity:number, capacity:number, img:string, active:boolean, category:Category) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -18,6 +19,7 @@ export class Training {
         this.quantity = quantity;
         this.capacity = capacity;
         this.img = img;
+        this.active = active;
         this.category = category;
     }
 };

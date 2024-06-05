@@ -27,12 +27,14 @@
         >
           Aucune formation trouvée !
         </h2>
-        <div
-          *ngFor="let training of listTrainings"
-          class="col-lg-4 col-md-6 cartes"
-        >
-          <app-cards [training]="training"></app-cards>
-        </div>
+        <ng-container *ngFor="let training of listTrainings">
+          <div *ngIf="isAdmin" class="col-lg-4 col-md-6 cartes">
+            <app-cards [training]="training"></app-cards>
+          </div>
+          <div *ngIf="training.active && !isAdmin" class="col-lg-4 col-md-6 cartes">
+            <app-cards [training]="training"></app-cards>
+          </div>
+        </ng-container>
       </div>
     </div>
   </ng-container>

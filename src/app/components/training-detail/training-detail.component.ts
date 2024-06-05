@@ -34,7 +34,7 @@ export class TrainingDetailComponent implements OnInit {
     private cartService: CartService
   ) {
     const defaultCategory = new Category(0, '', '');
-    this.training = new Training(0, '', '', 0, 1, 40, '', defaultCategory);
+    this.training = new Training(0, '', '', 0, 1, 40, '', true, defaultCategory);
     this.categories = [];
     this.urlImg = environment.host;
     this.isAdmin = false;
@@ -46,7 +46,8 @@ export class TrainingDetailComponent implements OnInit {
       price: [this.training.price, [Validators.required, Validators.min(50)]],
       capacity: [this.training.capacity, [Validators.required, Validators.min(0)]],
       img: [this.training.img],
-      category: [this.training.category, Validators.required],
+      active: [this.training.active, Validators.required],
+      category: [this.training.category, Validators.required]
     });
   }
 
@@ -70,7 +71,8 @@ export class TrainingDetailComponent implements OnInit {
             price: this.training.price,
             capacity: this.training.capacity,
             img: this.training.img,
-            category: this.training.category,
+            active: this.training.active,
+            category: this.training.category
           });
         },
         error: (err) => (this.error = err),
@@ -127,7 +129,8 @@ export class TrainingDetailComponent implements OnInit {
             quantity: 1,
             capacity: form.value.capacity,
             img: 'default.jpg',
-            category: form.value.category,
+            active: form.value.active,
+            category: form.value.category
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -157,7 +160,8 @@ export class TrainingDetailComponent implements OnInit {
             quantity: 1,
             capacity: form.value.capacity,
             img: this.selectedFileName,
-            category: form.value.category,
+            active: form.value.active,
+            category: form.value.category
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -188,7 +192,8 @@ export class TrainingDetailComponent implements OnInit {
             quantity: 1,
             capacity: form.value.capacity,
             img: form.value.img,
-            category: form.value.category,
+            active: form.value.active,
+            category: form.value.category
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -219,7 +224,8 @@ export class TrainingDetailComponent implements OnInit {
             quantity: 1,
             capacity: form.value.capacity,
             img: this.selectedFileName,
-            category: form.value.category,
+            active: form.value.active,
+            category: form.value.category
           })
           .subscribe({
             next: (data) => console.log(data),

@@ -29,6 +29,7 @@ export class TrainingsComponent implements OnInit {
   error = null;
   urlImg: String = '';
   keyword: string = '';
+  isAdmin: boolean;
 
   constructor(
     private categoryService: CategoryService,
@@ -37,9 +38,12 @@ export class TrainingsComponent implements OnInit {
     private apiService: ApiService,
     public authService: AuthenticateService,
     public searchService: SearchService
-  ) {}
+  ) {
+    this.isAdmin = false;
+  }
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdmin();
     this.idCategorySelected = this.categoryService.getSelectedIdCategory();
     this.nameCategorySelected = this.categoryService.getSelectedNameCategory();
     if (this.idCategorySelected == 0) {
