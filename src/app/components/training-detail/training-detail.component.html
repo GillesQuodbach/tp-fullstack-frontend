@@ -83,6 +83,16 @@
             [readonly]="!isAdmin"
           />
         </div>
+        <div class="form-group mt-3">
+          <label class="control-label">Place restante : </label>
+          <input
+            type="number"
+            formControlName="capacity"
+            class="form-control"
+            min="0"
+            [readonly]="!isAdmin"
+          />
+        </div>
         <div>
           <button
             *ngIf="!status && isAdmin"
@@ -101,17 +111,9 @@
           >
             <i class="fa fa-edit"></i> Mise à jour
           </button>
-          <button
-            (click)="deleteTraining(this.training)"
-            *ngIf="status && isAdmin"
-            type="button"
-            class="btn btn-danger btn-lg mt-3 shadow"
-          >
-            <i class="fa fa-trash"></i>
-          </button>
         </div>
         <button
-          *ngIf="!isAdmin"
+          *ngIf="!isAdmin && training.capacity > 0"
           type="button"
           class="btn btn-lg mt-3 shadow"
           style="background-color: #ffdd64"
@@ -119,6 +121,7 @@
         >
           <i class="fa fa-shopping-cart"></i> Ajouter
         </button>
+        <div *ngIf="!isAdmin && training.capacity == 0" style="color: red; margin-top: 20px;"><i class="fa fa-lock"></i><strong> Aucune place restante !</strong></div>
       </div>
     </div>
   </form>

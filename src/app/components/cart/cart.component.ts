@@ -113,8 +113,8 @@ export class CartComponent implements OnInit {
    * @param training Training object whose quantity is to be increased.
    */
   increaseQuantity(training: Training) {
-    if (training.quantity == 10) {
-      training.quantity = 10;
+    if (training.quantity == training.capacity) {
+      training.quantity = training.capacity;
     } else {
       training.quantity = training.quantity + 1;
     }

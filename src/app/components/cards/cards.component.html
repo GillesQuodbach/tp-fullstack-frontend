@@ -23,24 +23,28 @@
                     <button *ngIf="validateBtnFile" (click)="updateImg(training.id)" class="validate-file-btn"><i class="fa fa-check"></i></button>
                     <!-- <button class="validate-file-btn"><i class="fa fa-times"></i></button> -->
                 </div>
-                <div class="col-9">
-                    <a href=""><h3>{{ training.name }}</h3></a>
+                <div class="col-9 container-title-card">
+                    <h3>{{ training.name }}</h3>
+                    <div *ngIf="training.capacity > 0" class="col-3 text-centre container-btn-add">
+                        <input
+                        type="number"
+                        name="quantity"
+                        style="width: 60px"
+                        [(ngModel)]="training.quantity"
+                        min="1"
+                        [max]="training.capacity"/>
+                        <button *ngIf="training" class="cartPanier" (click)="onAddToCart(training)">
+                            <i class="fa fa-shopping-cart"></i>
+                            <span *ngIf="showCounter" class="counter">+{{training.quantity}}</span>
+                        </button>    
+                    </div>
                 </div>
-                <div class="col-3 text-centre ">
-                    <input
-                    type="number"
-                    name="quantity"
-                    style="width: 60px"
-                    [(ngModel)]="training.quantity"
-                    min="1"
-                    max="10"/>
-                    <button *ngIf="training" class="cartPanier" (click)="onAddToCart(training)">
-                        <i class="fa fa-shopping-cart"></i>
-                        <span *ngIf="showCounter" class="counter">+{{training.quantity}}</span>
-                    </button>    
+                <div *ngIf="training.capacity > 0" class="col-9 container-price">
+                    <div><i class="fa fa-users"></i> {{ training.capacity }} place(s) restante(s)</div>
+                    <div class="col-3 text-right prix">$ {{ training.price }}</div>
                 </div>
-                <div class="row">
-                    <div class="col-9"></div>
+                <div *ngIf="training.capacity == 0" class="col-9 container-price">
+                    <div style="color: red"><i class="fa fa-lock"></i><strong> Aucune place restante !</strong></div>
                     <div class="col-3 text-right prix">$ {{ training.price }}</div>
                 </div>
             </div>

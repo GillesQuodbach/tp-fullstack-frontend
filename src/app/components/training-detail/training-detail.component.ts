@@ -34,7 +34,7 @@ export class TrainingDetailComponent implements OnInit {
     private cartService: CartService
   ) {
     const defaultCategory = new Category(0, '', '');
-    this.training = new Training(0, '', '', 0, 1, '', defaultCategory);
+    this.training = new Training(0, '', '', 0, 1, 40, '', defaultCategory);
     this.categories = [];
     this.urlImg = environment.host;
     this.isAdmin = false;
@@ -44,6 +44,7 @@ export class TrainingDetailComponent implements OnInit {
       name: [this.training.name, Validators.required],
       description: [this.training.description, Validators.required],
       price: [this.training.price, [Validators.required, Validators.min(50)]],
+      capacity: [this.training.capacity, [Validators.required, Validators.min(0)]],
       img: [this.training.img],
       category: [this.training.category, Validators.required],
     });
@@ -67,6 +68,7 @@ export class TrainingDetailComponent implements OnInit {
             name: this.training.name,
             description: this.training.description,
             price: this.training.price,
+            capacity: this.training.capacity,
             img: this.training.img,
             category: this.training.category,
           });
@@ -123,6 +125,7 @@ export class TrainingDetailComponent implements OnInit {
             description: form.value.description,
             price: form.value.price,
             quantity: 1,
+            capacity: form.value.capacity,
             img: 'default.jpg',
             category: form.value.category,
           })
@@ -152,6 +155,7 @@ export class TrainingDetailComponent implements OnInit {
             description: form.value.description,
             price: form.value.price,
             quantity: 1,
+            capacity: form.value.capacity,
             img: this.selectedFileName,
             category: form.value.category,
           })
@@ -182,6 +186,7 @@ export class TrainingDetailComponent implements OnInit {
             description: form.value.description,
             price: form.value.price,
             quantity: 1,
+            capacity: form.value.capacity,
             img: form.value.img,
             category: form.value.category,
           })
@@ -212,6 +217,7 @@ export class TrainingDetailComponent implements OnInit {
             description: form.value.description,
             price: form.value.price,
             quantity: 1,
+            capacity: form.value.capacity,
             img: this.selectedFileName,
             category: form.value.category,
           })
@@ -223,13 +229,13 @@ export class TrainingDetailComponent implements OnInit {
       });
   }
 
-  deleteTraining(training: Training) {
-    if (confirm('Êtes vous sur de vouloir supprimer cette formation ?')) {
-      this.apiService.delTraining(training).subscribe({
-        complete: () => this.router.navigateByUrl('trainings'),
-      });
-    }
-  }
+  // deleteTraining(training: Training) {
+  //   if (confirm('Êtes vous sur de vouloir supprimer cette formation ?')) {
+  //     this.apiService.delTraining(training).subscribe({
+  //       complete: () => this.router.navigateByUrl('trainings'),
+  //     });
+  //   }
+  // }
 
   /**
    * Navigate to the home page.
