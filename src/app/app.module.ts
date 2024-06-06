@@ -16,6 +16,7 @@ import { CardsComponent } from './components/cards/cards.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { SearchComponent } from './components/search/search.component';
 import { RouterModule } from '@angular/router';
+import { OrdersListComponent } from './components/orders-list/orders-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { RouterModule } from '@angular/router';
     OrderConfirmComponent,
     CardsComponent,
     TrainingDetailComponent,
-    SearchComponent
+    SearchComponent,
+    OrdersListComponent
   ],
   imports: [
     BrowserModule,

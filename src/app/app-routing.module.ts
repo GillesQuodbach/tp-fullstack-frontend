@@ -10,9 +10,11 @@ import { OrderConfirmComponent } from './components/order-confirm/order-confirm.
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { UserGuard } from './guards/user.guard';
 import { FormsModule } from '@angular/forms';
+import { OrdersListComponent } from './components/orders-list/orders-list.component';
 
 
 const routes : Routes = [
+    { path : 'ordersList', component : OrdersListComponent},
     { path : 'trainings', component : TrainingsComponent },
     { path : 'cart' , component : CartComponent },
     { 

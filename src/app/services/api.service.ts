@@ -53,6 +53,10 @@ export class ApiService {
     return this.http.get<Training[]>(environment.host + '/trainings');
   }
 
+  public getOrders() {
+    return this.http.get<Command[]>(environment.host + '/ordersList')
+  }
+
   /**
    * Get trainings by name.
    * @param name Name of the training.

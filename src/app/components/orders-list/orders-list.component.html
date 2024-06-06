@@ -1,0 +1,18 @@
+<div class="container" style="padding-top: 15px;">
+    <div class="card" style="max-width: 700px;">
+        <div class="card-header">Liste de commandes</div>
+
+        <div class="col-md" *ngFor= "let command of listOrders">
+            <div class="grid">
+
+                <button><i class="fa fa-shopping-cart"></i></button>
+                {{command.id}}
+                {{command.customer.name}}
+                {{command.customer.lastname}}
+                {{command.customer.email}}
+                {{command.customer.phone}}
+                {{command.amount}}
+            </div>
+        </div>
+    </div>
+</div>
