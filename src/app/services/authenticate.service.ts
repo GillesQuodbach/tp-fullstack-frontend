@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../model/user.model';
 import { ApiService } from './api.service';
+import { jwtDecode } from 'jwt-decode';
 
 /**
  * Service for authentication-related operations.
@@ -88,11 +89,77 @@ export class AuthenticateService {
   }
 
   /**
-   * Set the connected user.
-   * @param user User object.
+   * Store the JWT token in local storage.
+   * @param token JWT token.
    */
-  setUser(user: User): any {
-    this.userConnected = user;
-    localStorage.setItem('user', btoa(JSON.stringify(user))); // Encryption of data before storing in local storage
+  setToken(token: string) {
+    localStorage.setItem('authToken', token);
+  }
+
+  /**
+   * Retrieve the JWT token from local storage.
+   * @returns JWT token or null if not found.
+   */
+  getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
+  /**
+   * Decode the JWT token.
+   * @returns Decoded token or null if token is not found.
+   */
+  decodeToken(): any {
+    const token = this.getToken();
+    if (token) {
+      return jwtDecode(token) as any;
+    }
+    return null;
+  }
+
+  /**
+   * Check if the user has the admin role.
+   * @returns True if the user is an admin, otherwise false.
+   */
+  isAdminToken(): boolean {
+    const decodedToken = this.decodeToken();
+    if (decodedToken) {
+      return decodedToken.roles.includes('ADMIN');
+    }
+    return false;
+  }
+
+  /**
+   * Check if the user has the user role.
+   * @returns True if the user is a regular user, otherwise false.
+   */
+  isUserToken(): boolean {
+    const decodedToken = this.decodeToken();
+    if (decodedToken) {
+      return decodedToken.roles.includes('USER');
+    }
+    return false;
+  }
+
+  UsernameToken() {
+    const decodedToken = this.decodeToken();
+    if (decodedToken) {
+      return decodedToken.sub;
+    }
+  }
+
+  /**
+   * Check if a user is connected.
+   * @returns True if user is connected, otherwise false.
+   */
+  isConnectedToken(): boolean {
+    return this.getToken() !== null;
+  }
+
+  /**
+   * Disconnect the user.
+   */
+  disconnectedToken() {
+    localStorage.removeItem('authToken');
+    this.userConnected = new User('', '', []);
   }
 }

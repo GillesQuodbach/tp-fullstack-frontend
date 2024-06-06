@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Customer } from 'src/app/model/customer.model';
 import { CartService } from 'src/app/services/cart.service';
-import { FormBuilder, FormControl, FormGroup, PatternValidator, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 
 @Component({

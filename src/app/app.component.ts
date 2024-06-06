@@ -21,10 +21,7 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-    this.userConected = this.authService.isConnected();
-    this.isAdmin = this.authService.isAdmin();
-  }
-
-  onLogin(){
+    this.userConected = this.authService.isConnectedToken();
+    this.isAdmin = this.authService.isAdminToken();
   }
 }

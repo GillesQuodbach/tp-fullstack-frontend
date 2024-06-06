@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Training } from 'src/app/model/training.model';
 import { Category } from 'src/app/model/category.model';
-import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
@@ -33,7 +32,6 @@ export class TrainingsComponent implements OnInit {
 
   constructor(
     private categoryService: CategoryService,
-    private cartService: CartService,
     private router: Router,
     private apiService: ApiService,
     public authService: AuthenticateService,
@@ -43,7 +41,7 @@ export class TrainingsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAdmin = this.authService.isAdmin();
+    this.isAdmin = this.authService.isAdminToken();
     this.idCategorySelected = this.categoryService.getSelectedIdCategory();
     this.nameCategorySelected = this.categoryService.getSelectedNameCategory();
     if (this.idCategorySelected == 0) {

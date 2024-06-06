@@ -87,7 +87,7 @@ export class CartComponent implements OnInit {
 
   onNewOrder(){
     if(this.cartService.getSize() > 0) {
-      if(this.authService.isConnected()) {
+      if(this.authService.isConnectedToken()) {
         this.router.navigateByUrl('customer');  
       }
       else this.router.navigateByUrl('login');

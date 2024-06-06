@@ -52,7 +52,7 @@ export class TrainingDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAdmin = this.authService.isAdmin();
+    this.isAdmin = this.authService.isAdminToken();
     this.apiService.getCategories().subscribe({
       next: (data) => (this.categories = data),
       error: (err) => (this.error = err),

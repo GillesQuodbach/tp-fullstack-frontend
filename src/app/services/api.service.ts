@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Training } from '../model/training.model';
@@ -7,6 +7,7 @@ import { Category } from '../model/category.model';
 import { Customer } from '../model/customer.model';
 import { Command } from '../model/command.model';
 import { OrderItem } from '../model/orderItem.model';
+import { Observable } from 'rxjs';
 
 /**
  * Service for making API requests.
@@ -185,5 +186,12 @@ export class ApiService {
    */
   public updateImgTraining(formData: FormData, id: number) {
     return this.http.post<any>(environment.host + '/download/' + id, formData);
+  }
+
+  public getToken(username:string, password:string) : Observable<any>{
+    let formData:FormData = new FormData();
+    formData.append('username',username);
+    formData.append('password',password);
+    return this.http.post<any>(environment.host + '/login', formData, {observe:'response'});
   }
 }

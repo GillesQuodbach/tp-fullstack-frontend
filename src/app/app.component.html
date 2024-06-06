@@ -7,7 +7,7 @@
     </a>
   </div>
   <div>
-    <button class="nav-button" *ngIf="this.authService.isAdmin()" routerLink="/trainingDetail/?"> Ajouter formation <i class="fa fa-edit"></i></button>
+    <button class="nav-button" *ngIf="this.authService.isAdminToken()" routerLink="/trainingDetail/?"> Ajouter formation <i class="fa fa-edit"></i></button>
   </div>
   <div>
     <app-search></app-search>
@@ -18,24 +18,24 @@
     href="#"
     routerLink="/login"
   >
-    <img class="img-connection" *ngIf="this.authService.isConnected() && this.authService.isAdmin()"
+    <img class="img-connection" *ngIf="this.authService.isConnectedToken() && this.authService.isAdminToken()"
       src="assets/img/admin.png"
       width="50px"
       alt="Utilisateur"
     />
-    <img class="img-connection" *ngIf="this.authService.isConnected() && !this.authService.isAdmin()"
+    <img class="img-connection" *ngIf="this.authService.isConnectedToken() && !this.authService.isAdminToken()"
     src="assets/img/users.png"
     width="50px"
     alt="Utilisateur"
     />
-    <img class="img-connection" *ngIf="!this.authService.isConnected()"
+    <img class="img-connection" *ngIf="!this.authService.isConnectedToken()"
     src="assets/img/visitor.png"
     width="50px"
     alt="Utilisateur"
     />
-    <p class="connection-legend color-danger" *ngIf="this.authService.isConnected() && this.authService.isAdmin()">[ Admin ]</p>
-    <p class="connection-legend color-success" *ngIf="this.authService.isConnected() && !this.authService.isAdmin()">[ User ]</p>
-    <p class="connection-legend" *ngIf="!this.authService.isConnected()">[ Visitor ]</p>
+    <p class="connection-legend color-danger" *ngIf="this.authService.isConnectedToken() && this.authService.isAdminToken()">[ Admin ]</p>
+    <p class="connection-legend color-success" *ngIf="this.authService.isConnectedToken() && !this.authService.isAdminToken()">[ User ]</p>
+    <p class="connection-legend" *ngIf="!this.authService.isConnectedToken()">[ Visitor ]</p>
   </a>
   </div>
 </nav>

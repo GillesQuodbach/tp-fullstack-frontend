@@ -29,7 +29,7 @@ export class CardsComponent {
     if(this.training) {
       this.urlImage = environment.host + '/download/' + this.training.id;
     }
-    this.isAdmin = this.authService.isAdmin();
+    this.isAdmin = this.authService.isAdminToken();
   }
 
     /**

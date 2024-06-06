@@ -21,7 +21,7 @@
             </div>
         </div>
         <ng-template #deconnect>
-            <label style="margin-left:20px; margin-top:10px; margin-bottom: 10px;">login : {{this.authService.getUser().email}}</label> 
+            <label style="margin-left:20px; margin-top:10px; margin-bottom: 10px;">login : {{this.authService.UsernameToken()}}</label> 
             <div >
                 <a class="btn btn-primary" (click)="disconnect()"> Deconnexion </a>
             </div>

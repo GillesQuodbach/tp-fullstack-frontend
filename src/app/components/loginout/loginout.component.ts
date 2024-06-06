@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { User } from 'src/app/model/user.model';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { environment } from 'src/environments/environment';
+import { ApiService } from 'src/app/services/api.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-loginout',
@@ -20,9 +22,9 @@ export class LoginoutComponent implements OnInit {
   error : string | undefined;
   connected : boolean = false;
   
-  constructor(private formBuilder : FormBuilder, public authService : AuthenticateService, private router : Router) { 
+  constructor(private formBuilder : FormBuilder, public authService : AuthenticateService, private router : Router, private apiService : ApiService) { 
     this.user = authService.getUser(); 
-    this.connected = authService.isConnected();
+    this.connected = authService.isConnectedToken();
     this.myForm = this.formBuilder.group({
       email : [this.user.email, [Validators.required,Validators.pattern(environment.regExEmail)]],
       password : [this.user.password, [Validators.required]]
@@ -38,22 +40,40 @@ export class LoginoutComponent implements OnInit {
    * En cas de succès, la session de l'utilisateur reste jusqu'à la déconnexion
    * @param form 
    */
-  onLogin(form : FormGroup){
-    if(form.valid){
-      this.authService.login(form.value.email).subscribe({
-        next : (data) => {
-            this.user = data[0];
-            if((this.user.email == form.value.email) && (this.user.password == form.value.password)){
-                this.authService.setUser(this.user);
-                this.router.navigateByUrl('cart');
-            }
-            else this.error = "Email or Password incorrecte";     //ToDo tester tous les cas
-          },
-        error : (err) => this.error = err.message,  //pb sur la requete
-        complete : () => console.log("Welcome")
-      })
-    }
-    else this.error = 'Erreur de saisie';
+  // onLogin(form : FormGroup){
+  //   if(form.valid){
+  //     this.authService.login(form.value.email).subscribe({
+  //       next : (data) => {
+  //           this.user = data[0];
+  //           if((this.user.email == form.value.email) && (this.user.password == form.value.password)){
+  //               this.authService.setUser(this.user);
+  //               this.router.navigateByUrl('cart');
+  //           }
+  //           else this.error = "Email or Password incorrecte";     //ToDo tester tous les cas
+  //         },
+  //       error : (err) => this.error = err.message,  //pb sur la requete
+  //       complete : () => console.log("Welcome")
+  //     })
+  //   }
+  //   else this.error = 'Erreur de saisie';
+  // }
+
+  onLogin(myForm: FormGroup) {
+    this.apiService.getToken(myForm.value.email, myForm.value.password).subscribe({
+      next: response => {
+        const token = response.headers.get('Authorization');
+        console.log(token);
+        if (token) {
+          this.authService.setToken(token);
+          this.router.navigateByUrl('cart');
+        } else {
+          console.error('Token non trouvé dans les en-têtes de la réponse.');
+        }
+      },
+      error: err => {
+        this.error = "Email ou mot de passe incorrect"
+      }
+    });
   }
 
   /**
@@ -66,7 +86,7 @@ export class LoginoutComponent implements OnInit {
    * Méthode de déconnexion d'un utilisateur
    */
   disconnect(){
-    this.authService.disconnected();
+    this.authService.disconnectedToken();
     this.connected = false;
     this.router.navigateByUrl('trainings');
   }

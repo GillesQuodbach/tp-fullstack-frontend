@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TrainingsComponent } from './components/trainings/trainings.component';
@@ -16,6 +16,7 @@ import { CardsComponent } from './components/cards/cards.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { SearchComponent } from './components/search/search.component';
 import { RouterModule } from '@angular/router';
+import { AuthInterceptor } from './auth.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,13 @@ import { RouterModule } from '@angular/router';
     ReactiveFormsModule,
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true 
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
