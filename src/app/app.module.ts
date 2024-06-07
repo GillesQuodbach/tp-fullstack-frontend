@@ -17,6 +17,7 @@ import { TrainingDetailComponent } from './components/training-detail/training-d
 import { SearchComponent } from './components/search/search.component';
 import { RouterModule } from '@angular/router';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { OrdersListComponent } from './components/orders-list/orders-list.compon
     CardsComponent,
     TrainingDetailComponent,
     SearchComponent,
-    OrdersListComponent
+    OrdersListComponent,
+    OrderDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,52 @@
+<div class="container" style="padding-top: 15px;" >
+    <div class="card" style="max-width: 700px;">
+        <div class="card-header">Détails de commande</div> 
+        <div class="row m-0">
+            <div class="col-md-6"> 
+
+             
+                  
+                </div>
+            </div>  
+        </div>
+
+    <div class="container" style="padding-top: 15px;">
+        <div class="card" style="max-width: 900px;">
+          <div class="card-header">Récap de votre commande</div>
+      
+          <div class="row">
+            <div class="col-md-6">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Nom du Client : {{this.order?.customer?.name}} </li>
+                <li class="list-group-item">Prénom du Client : {{this.order?.customer?.lastname}}</li>
+                <li class="list-group-item">Adresse Client : {{this.order?.customer?.adress}}</li>
+                <li class="list-group-item">Tel Client : {{this.order?.customer?.phone}} </li>
+                <li class="list-group-item">Email :{{this.order?.customer?.email}} </li>
+              </ul>
+            </div>
+      
+            <div class="row">
+                <div class="col-md-6">
+                  
+                    <form>
+                    <div class="form-group">
+                        <label>Coût total</label>
+                        <input type="number"/>  
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                            <select>
+                                <option [value]="this.order?.status">
+                                    {{this.order?.status}}
+                                </option>
+                                <option *ngFor="let status of listStatus" [value]="status">
+                                    {{status}}
+                                </option>
+                            </select>
+                    </div> 
+                </form>
+                </div>
+         
+          
+      </div>
+</div>

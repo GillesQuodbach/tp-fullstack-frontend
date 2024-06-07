@@ -11,9 +11,11 @@ import { TrainingDetailComponent } from './components/training-detail/training-d
 import { UserGuard } from './guards/user.guard';
 import { FormsModule } from '@angular/forms';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 
 const routes : Routes = [
+    { path : 'orderDetail', component : OrderDetailComponent},
     { path : 'ordersList', component : OrdersListComponent},
     { path : 'trainings', component : TrainingsComponent },
     { path : 'cart' , component : CartComponent },

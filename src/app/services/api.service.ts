@@ -57,6 +57,12 @@ export class ApiService {
     return this.http.get<Command[]>(environment.host + '/orders');
   }
 
+  /*ALE*/
+  public getOrdersById(id: number) {
+    return this.http.get<Command>(
+      environment.host + '/orders/' + id);
+  }
+
   /**
    * Get trainings by name.
    * @param name Name of the training.
