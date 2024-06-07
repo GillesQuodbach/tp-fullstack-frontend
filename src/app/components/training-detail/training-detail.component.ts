@@ -53,10 +53,6 @@ export class TrainingDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdminToken();
-    this.apiService.getCategories().subscribe({
-      next: (data) => (this.categories = data),
-      error: (err) => (this.error = err),
-    });
     let id = this.route.snapshot.params['id'];
     if (id > 0) {
       this.status = true;
@@ -73,6 +69,13 @@ export class TrainingDetailComponent implements OnInit {
             img: this.training.img,
             active: this.training.active,
             category: this.training.category
+          });
+          this.apiService.getCategories().subscribe({
+            next: (data) => {
+              this.categories = data,
+              this.filterCategories();
+            },
+            error: (err) => (this.error = err),
           });
         },
         error: (err) => (this.error = err),
@@ -255,6 +258,12 @@ export class TrainingDetailComponent implements OnInit {
       this.cartService.addTraining(training);
     }
     this.showNotification();
+  }
+
+  filterCategories(): void {
+    if (this.training && this.training.category) {
+      this.categories = this.categories.filter(category => category.id !== this.training.category.id);
+    }
   }
 
   showNotification() {
