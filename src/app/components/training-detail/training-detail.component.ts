@@ -33,7 +33,7 @@ export class TrainingDetailComponent implements OnInit {
     private authService: AuthenticateService,
     private cartService: CartService
   ) {
-    const defaultCategory = new Category(0, '', '');
+    const defaultCategory = new Category(0, '');
     this.training = new Training(0, '', '', 0, 1, 40, '', true, defaultCategory);
     this.categories = [];
     this.urlImg = environment.host;
