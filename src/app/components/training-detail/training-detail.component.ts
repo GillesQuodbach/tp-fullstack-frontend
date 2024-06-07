@@ -63,7 +63,7 @@ export class TrainingDetailComponent implements OnInit {
       this.apiService.getTraining(id).subscribe({
         next: (data) => {
           this.training = data;
-
+          console.log(this.training.category);
           this.myForm.setValue({
             id: this.training.id,
             name: this.training.name,

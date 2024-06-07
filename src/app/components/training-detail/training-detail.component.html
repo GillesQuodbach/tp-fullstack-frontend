@@ -42,6 +42,9 @@
             aria-label="Default select example"
             *ngIf="isAdmin"
           >
+          <option [ngValue]="this.training.category">
+            {{ this.training.category.name }}
+          </option>
             <option *ngFor="let category of categories" [ngValue]="category">
               {{ category.name }}
             </option>
