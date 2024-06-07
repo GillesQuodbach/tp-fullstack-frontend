@@ -6,7 +6,8 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">Numéro de commande : {{cartService.getCommand()?.id}} </li>
                     <li class="list-group-item">Prénom du Client : {{cartService.getCustomer().lastname}}</li>
-                    <li class="list-group-item">Adresse Client : {{cartService.getCustomer().address}}</li>
+                    <li class="list-group-item">Nom du Client : {{cartService.getCustomer().name}}</li>
+                    <li class="list-group-item">Adresse Client : {{cartService.getCustomer().adress}}</li>
                     <li class="list-group-item">Date de livraison : {{dateDelivery | date:"dd/MM/yy"}}</li>
                 </ul>   
             </div> 

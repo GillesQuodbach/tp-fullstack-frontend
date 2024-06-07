@@ -85,7 +85,6 @@ export class OrderComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
    * If confirmed, saves the order and navigates to the order confirmation page.
    */
   onOrder() {
-    this.updateCapacityTraining();
     if (confirm('Do you want to confirm the order?')) {
       this.saveOrder();
       this.updateCapacityTraining();

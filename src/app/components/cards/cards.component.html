@@ -1,49 +1,56 @@
 <div *ngIf="training" class="container debutCarte">
 
-    <div class="row">
-        <div class="col-12">
+    <div class="row container-training-detail">
+        <div class="col-12 sous-container-training-detail">
             <div class="container contenuCarte">
                 <div class="row">
                     <div class="col-12">
                         <a (click)="onUpdateTraining(training)">
                             <img [src]="urlImage" alt="training image" class="card_image">
                         </a>
-                        <div *ngIf="isAdmin && training.active == true" class="container-active"><i class="fa fa-eye"></i></div>
-                        <div *ngIf="isAdmin && training.active == false" class="container-inactive"><i class="fa fa-eye-slash"></i></div>
                     </div>
                 </div>
             </div>
             <div class="row infosCarte">
                 <div class="container-btn-upload">
-                    <button *ngIf="isAdmin" (click)="showFileInput()" class="btn-update-img">
-                        <i class="fa fa-download"></i> Mise à jour de l'image
-                    </button>
-                    <button *ngIf="isAdmin" (click)="onUpdateTraining(training)" class="btn-update-training"><i class="fa fa-edit"></i> Mise à jour</button>
+                    <div title="Télécharger une nouvelle image">                    
+                        <button *ngIf="isAdmin" (click)="showFileInput()" class="btn-update-img" >
+                        <i class="fa fa-download"></i>
+                        </button>
+                    </div>
+                    <div title="Modifier la formation">
+                        <button *ngIf="isAdmin" (click)="onUpdateTraining(training)" class="btn-update-training"><i class="fa fa-edit"></i></button>
+                    </div>
+                    <div *ngIf="isAdmin && training.active == true" class="container-active" title="Formation active"><i class="fa fa-eye"></i></div>
+                    <div *ngIf="isAdmin && training.active == false" class="container-inactive" title="Formation inactive"><i class="fa fa-eye-slash"></i></div>
                 </div>
-                <div class="container-input-file">
-                    <input *ngIf="fileInput" type="file" (change)="onFileSelected($event)"/>
+                <div *ngIf="fileInput" class="container-input-file">
+                    <input type="file" (change)="onFileSelected($event)"/>
                     <button *ngIf="validateBtnFile" (click)="updateImg(training.id)" class="validate-file-btn"><i class="fa fa-check"></i></button>
-                    <!-- <button class="validate-file-btn"><i class="fa fa-times"></i></button> -->
                 </div>
                 <div class="col-9 container-title-card">
-                    <h3>{{ training.name }}</h3>
-                    <div *ngIf="training.capacity > 0" class="col-3 text-centre container-btn-add">
-                        <input
-                        type="number"
-                        name="quantity"
-                        style="width: 60px"
-                        [(ngModel)]="training.quantity"
-                        min="1"
-                        [max]="training.capacity"/>
-                        <button *ngIf="training" class="cartPanier" (click)="onAddToCart(training)">
-                            <i class="fa fa-shopping-cart"></i>
-                            <span *ngIf="showCounter" class="counter">+{{training.quantity}}</span>
-                        </button>    
+                    <div>
+                        <h3>{{ training.name }}</h3>
+                    </div>
+                    <div class="container-btn-add">
+                        <div *ngIf="training.capacity > 0" class="col-3 text-centre sous-container-btn-add">
+                            <input
+                            type="number"
+                            name="quantity"
+                            style="width: 60px"
+                            [(ngModel)]="training.quantity"
+                            min="1"
+                            [max]="training.capacity"/>
+                            <button *ngIf="training" class="cartPanier" (click)="onAddToCart(training)">
+                                <i class="fa fa-shopping-cart"></i>
+                                <span *ngIf="showCounter" class="counter">+{{training.quantity}}</span>
+                            </button>    
+                        </div>
                     </div>
                 </div>
                 <div *ngIf="training.capacity > 0" class="col-9 container-price">
                     <div><i class="fa fa-users"></i> {{ training.capacity }} place(s) restante(s)</div>
-                    <div class="col-3 text-right prix">$ {{ training.price }}</div>
+                    <div class="col-3 text-right prix"><strong>$ {{ training.price }}</strong></div>
                 </div>
                 <div *ngIf="training.capacity == 0" class="col-9 container-price">
                     <div style="color: red"><i class="fa fa-lock"></i><strong> Aucune place restante !</strong></div>

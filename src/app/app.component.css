@@ -50,6 +50,9 @@
     color: rgb(8, 188, 8);
 }
 
+.userDetail-container {
+    display: flex;
+}
 /* .navbar {
     display: flex;
     justify-content: space-between;
