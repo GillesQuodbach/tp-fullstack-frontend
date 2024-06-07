@@ -54,7 +54,7 @@ export class ApiService {
   }
 
   public getOrders() {
-    return this.http.get<Command[]>(environment.host + '/ordersList')
+    return this.http.get<Command[]>(environment.host + '/orders');
   }
 
   /**

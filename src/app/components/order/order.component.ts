@@ -103,7 +103,12 @@ export class OrderComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
             next: (customerSaved) => {
               this.apiService
                 .postCommand(
-                  new Command(0, this.cartService.getAmount(), customerSaved)
+                  new Command(
+                    0,
+                    this.cartService.getAmount(),
+                    customerSaved,
+                    'En cours'
+                  )
                 )
                 .subscribe({
                   next: (commandSaved) => {
@@ -134,23 +139,24 @@ export class OrderComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
   }
 
   updateCapacityTraining() {
-    this.cartService.getCart().map((cartItem => {
-      this.apiService.postTraining({
-        id: cartItem.id,
-        name: cartItem.name,
-        description: cartItem.description,
-        price: cartItem.price,
-        quantity: 1,
-        capacity: cartItem.capacity - cartItem.quantity,
-        img: cartItem.img,
-        active: cartItem.active,
-        category: cartItem.category
-      })
-      .subscribe({
-        next: (data) => console.log(data),
-        error: (err) => (this.error = err.message),
-        complete: () => this.router.navigateByUrl('orderConfirm')
-      })
-    }))
+    this.cartService.getCart().map((cartItem) => {
+      this.apiService
+        .postTraining({
+          id: cartItem.id,
+          name: cartItem.name,
+          description: cartItem.description,
+          price: cartItem.price,
+          quantity: 1,
+          capacity: cartItem.capacity - cartItem.quantity,
+          img: cartItem.img,
+          active: cartItem.active,
+          category: cartItem.category,
+        })
+        .subscribe({
+          next: (data) => console.log(data),
+          error: (err) => (this.error = err.message),
+          complete: () => this.router.navigateByUrl('orderConfirm'),
+        });
+    });
   }
 }

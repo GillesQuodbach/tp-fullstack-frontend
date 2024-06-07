@@ -1,18 +1,53 @@
-<div class="container" style="padding-top: 15px;">
-    <div class="card" style="max-width: 700px;">
-        <div class="card-header">Liste de commandes</div>
-
-        <div class="col-md" *ngFor= "let command of listOrders">
-            <div class="grid">
-
-                <button><i class="fa fa-shopping-cart"></i></button>
-                {{command.id}}
-                {{command.customer.name}}
-                {{command.customer.lastname}}
-                {{command.customer.email}}
-                {{command.customer.phone}}
-                {{command.amount}}
-            </div>
-        </div>
+<div class="container" style="padding-top: 15px">
+  <div class="card" style="max-width: 700px; margin: auto">
+    <div class="card-header">Liste de commandes</div>
+    <div class="card-body">
+      <div class="form-group">
+        <label for="statusSelect">Filtrer par status:</label>
+        <select
+          id="statusSelect"
+          class="form-control"
+          (change)="onStatusChange($event)"
+        >
+          <option value="">Tous</option>
+          <option *ngFor="let status of listStatus" [value]="status">
+            {{ status }}
+          </option>
+        </select>
+      </div>
+      <div class="table-responsive">
+        <ng-container *ngIf="listFilteredOrders?.length != 0">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Prénom</th>
+                <th scope="col">Nom</th>
+                <th scope="col">Email</th>
+                <th scope="col">Téléphone</th>
+                <th scope="col">Montant</th>
+                <th scope="col">Statut</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let command of listFilteredOrders">
+                <td>{{ command.id }}</td>
+                <td>{{ command.customer.name }}</td>
+                <td>{{ command.customer.lastname }}</td>
+                <td>{{ command.customer.email }}</td>
+                <td>{{ command.customer.phone }}</td>
+                <td>{{ command.amount }}</td>
+                <td>{{ command.status }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+        <ng-container *ngIf="listFilteredOrders?.length == 0">
+          <tbody>
+            <h3 class="text-danger">Aucun commande trouvée</h3>
+          </tbody>
+        </ng-container>
+      </div>
     </div>
+  </div>
 </div>

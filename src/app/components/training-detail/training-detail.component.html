@@ -36,13 +36,27 @@
             *ngIf="!isAdmin"
             readonly
           />
+
+          <!-- <select
+          id="statusSelect"
+          class="form-control"
+          (change)="onStatusChange($event)"
+        >
+          <option value="">Tous</option>
+          <option *ngFor="let status of listStatus" [value]="status">
+            {{ status }}
+          </option>
+        </select> -->
+
           <select
             formControlName="category"
-            class="form-select"
-            aria-label="Default select example"
+            class="form-control"
             *ngIf="isAdmin"
           >
-            <option *ngFor="let category of categories" [ngValue]="category">
+            <option value="" selected disabled>
+              {{ categories }}
+            </option>
+            <option *ngFor="let category of categories" [value]="category">
               {{ category.name }}
             </option>
           </select>
@@ -96,14 +110,30 @@
         <div *ngIf="isAdmin" class="form-group mt-3">
           <label for="active">Statut :</label>
           <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="active" id="active" [value]="true" [checked]="training.active === true" required>
-              <label class="form-check-label" for="active">Active</label>
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="active"
+              id="active"
+              [value]="true"
+              [checked]="training.active === true"
+              required
+            />
+            <label class="form-check-label" for="active">Active</label>
           </div>
           <div class="form-check">
-              <input class="form-check-input" type="radio" formControlName="active" id="inactive" [value]="false" [checked]="training.active === false" required>
-              <label class="form-check-label" for="inactive">Inactive</label>
+            <input
+              class="form-check-input"
+              type="radio"
+              formControlName="active"
+              id="inactive"
+              [value]="false"
+              [checked]="training.active === false"
+              required
+            />
+            <label class="form-check-label" for="inactive">Inactive</label>
           </div>
-      </div>
+        </div>
         <div>
           <button
             *ngIf="!status && isAdmin"
@@ -132,7 +162,12 @@
         >
           <i class="fa fa-shopping-cart"></i> Ajouter
         </button>
-        <div *ngIf="!isAdmin && training.capacity == 0" style="color: red; margin-top: 20px;"><i class="fa fa-lock"></i><strong> Aucune place restante !</strong></div>
+        <div
+          *ngIf="!isAdmin && training.capacity == 0"
+          style="color: red; margin-top: 20px"
+        >
+          <i class="fa fa-lock"></i><strong> Aucune place restante !</strong>
+        </div>
       </div>
     </div>
   </form>
