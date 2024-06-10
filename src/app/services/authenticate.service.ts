@@ -140,6 +140,14 @@ export class AuthenticateService {
     return false;
   }
 
+  isOrderManagerToken(): boolean {
+    const decodedToken = this.decodeToken();
+    if (decodedToken) {
+      return decodedToken.roles.includes('ORDER_MANAGER');
+    }
+    return false;
+  }
+
   UsernameToken() {
     const decodedToken = this.decodeToken();
     if (decodedToken) {

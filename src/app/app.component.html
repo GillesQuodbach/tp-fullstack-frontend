@@ -36,7 +36,8 @@
     <div class="userDetail-container">
       <p>{{this.authService.UsernameToken()}} </p>
       <p class="connection-legend color-danger" *ngIf="this.authService.isConnectedToken() && this.authService.isAdminToken()">[ Admin ]</p>
-      <p class="connection-legend color-success" *ngIf="this.authService.isConnectedToken() && !this.authService.isAdminToken()">[ User ]</p>
+      <p class="connection-legend color-success" *ngIf="this.authService.isConnectedToken() && !this.authService.isAdminToken() && !this.authService.isOrderManagerToken()">[ User ]</p>
+      <p class="connection-legend color-success" *ngIf="this.authService.isConnectedToken() && this.authService.isOrderManagerToken()">[ Order-Manager ]</p>
       <p class="connection-legend" *ngIf="!this.authService.isConnectedToken()">[ Visitor ]</p>
     </div>
   </a>

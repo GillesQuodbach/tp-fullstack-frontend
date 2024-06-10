@@ -90,6 +90,10 @@ export class TrainingDetailComponent implements OnInit {
     this.router.navigateByUrl('trainings');
   }
 
+  getTrainingImageUrl(): string {
+    return this.status ? `${this.urlImg}/download/${this.training.id}?${new Date().getTime()}` : 'assets/img/default.jpg';
+  }
+
   /**
    * Handles form submission.
    * If status is true, updates the training, otherwise adds a new training.
