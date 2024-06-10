@@ -54,19 +54,11 @@ export class ApiService {
     return this.http.get<Training[]>(environment.host + '/trainings');
   }
 
-<<<<<<< HEAD
-=======
-  public getOrders() {
-    return this.http.get<Command[]>(environment.host + '/orders');
-  }
-
   /*ALE*/
   public getOrdersById(id: number) {
-    return this.http.get<Command>(
-      environment.host + '/orders/' + id);
+    return this.http.get<Command>(environment.host + '/orders/' + id);
   }
 
->>>>>>> order-detail
   /**
    * Get trainings by name.
    * @param name Name of the training.
@@ -174,7 +166,7 @@ export class ApiService {
   }
 
   /*ALE*/
-  public getOrderItemByOrderId(id:number) {
+  public getOrderItemByOrderId(id: number) {
     return this.http.get<OrderItem>(environment.host + '/ordersitems/' + id);
   }
 

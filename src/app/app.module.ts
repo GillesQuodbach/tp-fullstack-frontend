@@ -36,10 +36,7 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
     TrainingDetailComponent,
     SearchComponent,
     OrdersListComponent,
-<<<<<<< HEAD
-=======
-    OrderDetailComponent
->>>>>>> order-detail
+    OrderDetailComponent,
   ],
   imports: [
     BrowserModule,
