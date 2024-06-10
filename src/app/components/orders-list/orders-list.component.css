@@ -1,0 +1,32 @@
+.status-btn {
+  margin-left: 8px;
+  margin-right: 8px;
+}
+
+.status-btn-all {
+  margin-right: 8px;
+}
+
+.update-container {
+  text-align: center;
+}
+
+.trash-container {
+  text-align: center;
+}
+
+.trash-icon {
+  cursor: pointer;
+}
+
+.btn-container {
+  margin-top: 8px;
+}
+
+.order-list-header {
+  font-size: 1.2rem;
+}
+
+.no-order-message {
+  margin-top: 1rem;
+}

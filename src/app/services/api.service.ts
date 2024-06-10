@@ -7,6 +7,7 @@ import { Category } from '../model/category.model';
 import { Customer } from '../model/customer.model';
 import { Command } from '../model/command.model';
 import { OrderItem } from '../model/orderItem.model';
+import { Observable } from 'rxjs';
 
 /**
  * Service for making API requests.
@@ -51,10 +52,6 @@ export class ApiService {
    */
   public getTrainings() {
     return this.http.get<Training[]>(environment.host + '/trainings');
-  }
-
-  public getOrders() {
-    return this.http.get<Command[]>(environment.host + '/orders');
   }
 
   /**
@@ -189,5 +186,16 @@ export class ApiService {
    */
   public updateImgTraining(formData: FormData, id: number) {
     return this.http.post<any>(environment.host + '/download/' + id, formData);
+  }
+
+  public getOrders() {
+    return this.http.get<Command[]>(environment.host + '/orders');
+  }
+
+  public updateOrderStatus(orderId: number, status: string): Observable<any> {
+    return this.http.put(
+      `${environment.host}/orders/${orderId}/status`,
+      status
+    );
   }
 }

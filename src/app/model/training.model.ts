@@ -1,25 +1,35 @@
-import { Category } from "./category.model";
+import { Category } from './category.model';
 
 export class Training {
-    id : number;
-    name : string;
-    description : string;
-    price : number;
-    quantity : number;
-    capacity: number;
-    img : string;
-    active : boolean;
-    category : Category;
-    
-    constructor(id:number, name:string, description:string, price:number, quantity:number, capacity:number, img:string, active:boolean, category:Category) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.quantity = quantity;
-        this.capacity = capacity;
-        this.img = img;
-        this.active = active;
-        this.category = category;
-    }
-};
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  quantity: number;
+  capacity: number;
+  img: string;
+  active: boolean;
+  category: Category;
+
+  constructor(
+    id: number,
+    name: string,
+    description: string,
+    price: number,
+    quantity: number,
+    capacity: number,
+    img: string,
+    active: boolean,
+    category: Category
+  ) {
+    this.id = id;
+    this.name = name;
+    this.description = description;
+    this.price = price;
+    this.quantity = quantity;
+    this.capacity = capacity;
+    this.img = img;
+    this.active = active;
+    this.category = category;
+  }
+}

@@ -1,5 +1,3 @@
-
-
 <nav class="navigation">
   <div>
     <a href="#" routerLink="/trainings">
@@ -7,36 +5,63 @@
     </a>
   </div>
   <div>
-    <button class="nav-button" *ngIf="this.authService.isAdmin()" routerLink="/trainingDetail/?"> Ajouter formation <i class="fa fa-edit"></i></button>
+    <button
+      class="nav-button"
+      *ngIf="this.authService.isAdmin()"
+      routerLink="/trainingDetail/?"
+    >
+      Ajouter formation <i class="fa fa-edit"></i>
+    </button>
+    <button
+      class="nav-button orders-btn"
+      *ngIf="this.authService.isAdmin()"
+      routerLink="/ordersList"
+    >
+      Gérer commandes <i class="fa fa-edit"></i>
+    </button>
   </div>
   <div>
     <app-search></app-search>
   </div>
   <div class="container-legend-connection">
-    <a
-    width="40px"
-    href="#"
-    routerLink="/login"
-  >
-    <img class="img-connection" *ngIf="this.authService.isConnected() && this.authService.isAdmin()"
-      src="assets/img/admin.png"
-      width="50px"
-      alt="Utilisateur"
-    />
-    <img class="img-connection" *ngIf="this.authService.isConnected() && !this.authService.isAdmin()"
-    src="assets/img/users.png"
-    width="50px"
-    alt="Utilisateur"
-    />
-    <img class="img-connection" *ngIf="!this.authService.isConnected()"
-    src="assets/img/visitor.png"
-    width="50px"
-    alt="Utilisateur"
-    />
-    <p class="connection-legend color-danger" *ngIf="this.authService.isConnected() && this.authService.isAdmin()">[ Admin ]</p>
-    <p class="connection-legend color-success" *ngIf="this.authService.isConnected() && !this.authService.isAdmin()">[ User ]</p>
-    <p class="connection-legend" *ngIf="!this.authService.isConnected()">[ Visitor ]</p>
-  </a>
+    <a width="40px" href="#" routerLink="/login">
+      <img
+        class="img-connection"
+        *ngIf="this.authService.isConnected() && this.authService.isAdmin()"
+        src="assets/img/admin.png"
+        width="50px"
+        alt="Utilisateur"
+      />
+      <img
+        class="img-connection"
+        *ngIf="this.authService.isConnected() && !this.authService.isAdmin()"
+        src="assets/img/users.png"
+        width="50px"
+        alt="Utilisateur"
+      />
+      <img
+        class="img-connection"
+        *ngIf="!this.authService.isConnected()"
+        src="assets/img/visitor.png"
+        width="50px"
+        alt="Utilisateur"
+      />
+      <p
+        class="connection-legend color-danger"
+        *ngIf="this.authService.isConnected() && this.authService.isAdmin()"
+      >
+        [ Admin ]
+      </p>
+      <p
+        class="connection-legend color-success"
+        *ngIf="this.authService.isConnected() && !this.authService.isAdmin()"
+      >
+        [ User ]
+      </p>
+      <p class="connection-legend" *ngIf="!this.authService.isConnected()">
+        [ Visitor ]
+      </p>
+    </a>
   </div>
 </nav>
 <div class="fondMenu">

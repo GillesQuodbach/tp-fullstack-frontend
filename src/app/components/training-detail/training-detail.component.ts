@@ -7,6 +7,7 @@ import { Category } from 'src/app/model/category.model';
 import { environment } from 'src/environments/environment';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { CartService } from 'src/app/services/cart.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-training-detail',
@@ -31,10 +32,21 @@ export class TrainingDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticateService,
-    private cartService: CartService
+    private cartService: CartService,
+    private http: HttpClient
   ) {
     const defaultCategory = new Category(0, '', '');
-    this.training = new Training(0, '', '', 0, 1, 40, '', true, defaultCategory);
+    this.training = new Training(
+      0,
+      '',
+      '',
+      0,
+      1,
+      40,
+      '',
+      true,
+      defaultCategory
+    );
     this.categories = [];
     this.urlImg = environment.host;
     this.isAdmin = false;
@@ -44,17 +56,22 @@ export class TrainingDetailComponent implements OnInit {
       name: [this.training.name, Validators.required],
       description: [this.training.description, Validators.required],
       price: [this.training.price, [Validators.required, Validators.min(50)]],
-      capacity: [this.training.capacity, [Validators.required, Validators.min(0)]],
+      capacity: [
+        this.training.capacity,
+        [Validators.required, Validators.min(0)],
+      ],
       img: [this.training.img],
       active: [this.training.active, Validators.required],
-      category: [this.training.category, Validators.required]
+      category: [this.training.category, Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdmin();
     this.apiService.getCategories().subscribe({
-      next: (data) => (this.categories = data),
+      next: (data) => {
+        this.categories = data;
+      },
       error: (err) => (this.error = err),
     });
     let id = this.route.snapshot.params['id'];
@@ -63,7 +80,7 @@ export class TrainingDetailComponent implements OnInit {
       this.apiService.getTraining(id).subscribe({
         next: (data) => {
           this.training = data;
-
+          console.log(data);
           this.myForm.setValue({
             id: this.training.id,
             name: this.training.name,
@@ -72,7 +89,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: this.training.capacity,
             img: this.training.img,
             active: this.training.active,
-            category: this.training.category
+            category: this.training.category,
           });
         },
         error: (err) => (this.error = err),
@@ -130,7 +147,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: 'default.jpg',
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -161,7 +178,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: this.selectedFileName,
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -193,7 +210,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: form.value.img,
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -225,7 +242,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: this.selectedFileName,
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),

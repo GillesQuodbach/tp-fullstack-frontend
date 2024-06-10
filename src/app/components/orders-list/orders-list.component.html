@@ -1,10 +1,10 @@
-<div class="container" style="padding-top: 15px">
-  <div class="card" style="max-width: 700px; margin: auto">
-    <div class="card-header">Liste de commandes</div>
+<div class="order-list-main-container" style="padding-top: 15px">
+  <div class="card" style="max-width: 900px; margin: auto">
+    <div class="card-header order-list-header">Liste de commandes</div>
     <div class="card-body">
       <div class="form-group">
         <label for="statusSelect">Filtrer par status:</label>
-        <select
+        <!-- <select
           id="statusSelect"
           class="form-control"
           (change)="onStatusChange($event)"
@@ -13,7 +13,26 @@
           <option *ngFor="let status of listStatus" [value]="status">
             {{ status }}
           </option>
-        </select>
+        </select> -->
+        <div class="btn-container">
+          <button
+            (click)="onStatusChange('')"
+            class="btn status-btn-all"
+            [class.btn-primary]="selectedStatus === ''"
+            [class.btn-outline-primary]="selectedStatus !== ''"
+          >
+            Tous
+          </button>
+          <button
+            *ngFor="let status of listStatus"
+            (click)="onStatusChange(status)"
+            class="btn status-btn"
+            [class.btn-primary]="selectedStatus === status"
+            [class.btn-outline-primary]="selectedStatus !== status"
+          >
+            {{ status }}
+          </button>
+        </div>
       </div>
       <div class="table-responsive">
         <ng-container *ngIf="listFilteredOrders?.length != 0">
@@ -27,6 +46,7 @@
                 <th scope="col">Téléphone</th>
                 <th scope="col">Montant</th>
                 <th scope="col">Statut</th>
+                <th scope="col">Modification</th>
               </tr>
             </thead>
 
@@ -38,7 +58,23 @@
                 <td>{{ command.customer.email }}</td>
                 <td>{{ command.customer.phone }}</td>
                 <td>{{ command.amount }}</td>
-                <td>{{ command.status }}</td>
+                <td>
+                  <select
+                    id="statusSelect"
+                    class="form-control"
+                    (change)="updateOrderStatus(command.id, $event)"
+                    [(ngModel)]="command.status"
+                  >
+                    <option *ngFor="let status of listStatus">
+                      {{ status }}
+                    </option>
+                  </select>
+                </td>
+                <td class="update-container">
+                  <button type="button" class="btn btn-primary">
+                    Modifier
+                  </button>
+                </td>
               </tr>
             </tbody>
           </table>

@@ -53,10 +53,7 @@
             class="form-control"
             *ngIf="isAdmin"
           >
-            <option value="" selected disabled>
-              {{ categories }}
-            </option>
-            <option *ngFor="let category of categories" [value]="category">
+            <option *ngFor="let category of categories" [ngValue]="category">
               {{ category.name }}
             </option>
           </select>

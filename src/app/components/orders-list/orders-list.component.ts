@@ -43,9 +43,25 @@ export class OrdersListComponent implements OnInit {
     }
   }
 
-  onStatusChange(event: Event) {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedStatus = selectElement.value;
+  onStatusChange(status: string) {
+    this.selectedStatus = status;
     this.filterOrders();
+  }
+
+  updateOrderStatus(id: number, event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const newStatus = selectElement.value;
+
+    this.apiService.updateOrderStatus(id, newStatus).subscribe({
+      next: (updatedCommand) => {
+        const index = this.listFilteredOrders?.findIndex(
+          (order) => order.id === updatedCommand.id
+        );
+        if (index !== undefined && index !== -1 && this.listFilteredOrders) {
+          this.listFilteredOrders[index] = updatedCommand;
+        }
+      },
+      error: (err) => console.error('Error updating status', err),
+    });
   }
 }
