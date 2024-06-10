@@ -20,6 +20,7 @@ import { AuthInterceptor } from './auth.interceptor';
 
 import { RouterModule } from '@angular/router';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
+import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,10 @@ import { OrdersListComponent } from './components/orders-list/orders-list.compon
     TrainingDetailComponent,
     SearchComponent,
     OrdersListComponent,
+<<<<<<< HEAD
+=======
+    OrderDetailComponent
+>>>>>>> order-detail
   ],
   imports: [
     BrowserModule,
