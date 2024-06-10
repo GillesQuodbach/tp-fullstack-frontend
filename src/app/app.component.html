@@ -7,14 +7,14 @@
   <div>
     <button
       class="nav-button"
-      *ngIf="this.authService.isAdmin()"
+      *ngIf="this.authService.isAdminToken()"
       routerLink="/trainingDetail/?"
     >
       Ajouter formation <i class="fa fa-edit"></i>
     </button>
     <button
       class="nav-button orders-btn"
-      *ngIf="this.authService.isAdmin()"
+      *ngIf="this.authService.isAdminToken()"
       routerLink="/ordersList"
     >
       Gérer commandes <i class="fa fa-edit"></i>
