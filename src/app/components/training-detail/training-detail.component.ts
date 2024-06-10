@@ -7,6 +7,7 @@ import { Category } from 'src/app/model/category.model';
 import { environment } from 'src/environments/environment';
 import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { CartService } from 'src/app/services/cart.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-training-detail',
@@ -31,10 +32,22 @@ export class TrainingDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private authService: AuthenticateService,
-    private cartService: CartService
+    private cartService: CartService,
+    private http: HttpClient
   ) {
     const defaultCategory = new Category(0, '');
-    this.training = new Training(0, '', '', 0, 1, 40, '', true, defaultCategory);
+    this.training = new Training(
+      0,
+      '',
+      '',
+      0,
+      1,
+      40,
+      '',
+      true,
+      defaultCategory
+    );
+
     this.categories = [];
     this.urlImg = environment.host;
     this.isAdmin = false;
@@ -44,22 +57,33 @@ export class TrainingDetailComponent implements OnInit {
       name: [this.training.name, Validators.required],
       description: [this.training.description, Validators.required],
       price: [this.training.price, [Validators.required, Validators.min(50)]],
-      capacity: [this.training.capacity, [Validators.required, Validators.min(0)]],
+      capacity: [
+        this.training.capacity,
+        [Validators.required, Validators.min(0)],
+      ],
       img: [this.training.img],
       active: [this.training.active, Validators.required],
-      category: [this.training.category, Validators.required]
+      category: [this.training.category, Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.isAdmin = this.authService.isAdminToken();
+
+    this.apiService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+      },
+      error: (err) => (this.error = err),
+    });
+
     let id = this.route.snapshot.params['id'];
     if (id > 0) {
       this.status = true;
       this.apiService.getTraining(id).subscribe({
         next: (data) => {
           this.training = data;
-          console.log(this.training.category);
+
           this.myForm.setValue({
             id: this.training.id,
             name: this.training.name,
@@ -68,12 +92,11 @@ export class TrainingDetailComponent implements OnInit {
             capacity: this.training.capacity,
             img: this.training.img,
             active: this.training.active,
-            category: this.training.category
+            category: this.training.category,
           });
           this.apiService.getCategories().subscribe({
             next: (data) => {
-              this.categories = data,
-              this.filterCategories();
+              (this.categories = data), this.filterCategories();
             },
             error: (err) => (this.error = err),
           });
@@ -91,7 +114,9 @@ export class TrainingDetailComponent implements OnInit {
   }
 
   getTrainingImageUrl(): string {
-    return this.status ? `${this.urlImg}/download/${this.training.id}?${new Date().getTime()}` : 'assets/img/default.jpg';
+    return this.status
+      ? `${this.urlImg}/download/${this.training.id}?${new Date().getTime()}`
+      : 'assets/img/default.jpg';
   }
 
   /**
@@ -137,7 +162,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: 'default.jpg',
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -168,7 +193,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: this.selectedFileName,
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -200,7 +225,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: form.value.img,
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -232,7 +257,7 @@ export class TrainingDetailComponent implements OnInit {
             capacity: form.value.capacity,
             img: this.selectedFileName,
             active: form.value.active,
-            category: form.value.category
+            category: form.value.category,
           })
           .subscribe({
             next: (data) => console.log(data),
@@ -266,7 +291,9 @@ export class TrainingDetailComponent implements OnInit {
 
   filterCategories(): void {
     if (this.training && this.training.category) {
-      this.categories = this.categories.filter(category => category.id !== this.training.category.id);
+      this.categories = this.categories.filter(
+        (category) => category.id !== this.training.category.id
+      );
     }
   }
 

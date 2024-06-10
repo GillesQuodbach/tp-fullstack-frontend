@@ -188,10 +188,23 @@ export class ApiService {
     return this.http.post<any>(environment.host + '/download/' + id, formData);
   }
 
-  public getToken(username:string, password:string) : Observable<any>{
-    let formData:FormData = new FormData();
-    formData.append('username',username);
-    formData.append('password',password);
-    return this.http.post<any>(environment.host + '/login', formData, {observe:'response'});
+  public getToken(username: string, password: string): Observable<any> {
+    let formData: FormData = new FormData();
+    formData.append('username', username);
+    formData.append('password', password);
+    return this.http.post<any>(environment.host + '/login', formData, {
+      observe: 'response',
+    });
+  }
+
+  public getOrders() {
+    return this.http.get<Command[]>(environment.host + '/orders');
+  }
+
+  public updateOrderStatus(orderId: number, status: string): Observable<any> {
+    return this.http.put(
+      `${environment.host}/orders/${orderId}/status`,
+      status
+    );
   }
 }
