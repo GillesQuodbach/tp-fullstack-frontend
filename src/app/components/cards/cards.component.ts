@@ -28,6 +28,7 @@ export class CardsComponent {
   ngOnInit(): void {
     if(this.training) {
       this.urlImage = environment.host + '/download/' + this.training.id + '?' + new Date().getTime();
+      this.cdr.detectChanges();
     }
     this.isAdmin = this.authService.isAdminToken();
   }
