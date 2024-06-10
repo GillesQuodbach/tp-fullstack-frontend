@@ -169,6 +169,11 @@ export class ApiService {
     );
   }
 
+  /*ALE*/
+  public getOrderItemByOrderId(id:number) {
+    return this.http.get<OrderItem>(environment.host + '/ordersitems/' + id);
+  }
+
   /**
    * Get an image by ID.
    * @param id Image ID.

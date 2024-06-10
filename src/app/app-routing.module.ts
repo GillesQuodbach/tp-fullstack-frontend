@@ -15,7 +15,7 @@ import { OrderDetailComponent } from './components/order-detail/order-detail.com
 
 
 const routes : Routes = [
-    { path : 'orderDetail', component : OrderDetailComponent},
+    { path : 'orderDetail/:id', component : OrderDetailComponent},
     { path : 'ordersList', component : OrdersListComponent},
     { path : 'trainings', component : TrainingsComponent },
     { path : 'cart' , component : CartComponent },

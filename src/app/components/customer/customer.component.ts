@@ -24,7 +24,7 @@ export class CustomerComponent implements OnInit {
     this.myForm = this.formBuilder.group({
       name : [this.customer.name, [Validators.required,  Validators.pattern('^[a-zA-Z]+$')]],
       firstName : [this.customer.lastname, [Validators.required, Validators.pattern('^[a-zA-Z]+$')]], 
-      address : [this.customer.adress, [Validators.required,Validators.minLength(5)]],
+      adress : [this.customer.adress, [Validators.required,Validators.minLength(5)]],
       phone : [this.customer.phone, [Validators.required,Validators.maxLength(10), Validators.pattern('^\\d{10}$')]],
       email : [this.customer.email, [Validators.required,Validators.pattern(environment.regExEmail)]]
     })
