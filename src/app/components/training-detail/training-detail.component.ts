@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Training } from 'src/app/model/training.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -25,6 +25,7 @@ export class TrainingDetailComponent implements OnInit {
   categories: Category[];
   isUpdateAllowed: boolean = true;
   isAdmin: boolean;
+  imageUrl: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -33,7 +34,8 @@ export class TrainingDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthenticateService,
     private cartService: CartService,
-    private http: HttpClient
+    private http: HttpClient,
+    private cdr: ChangeDetectorRef
   ) {
     const defaultCategory = new Category(0, '');
     this.training = new Training(
@@ -65,6 +67,7 @@ export class TrainingDetailComponent implements OnInit {
       active: [this.training.active, Validators.required],
       category: [this.training.category, Validators.required],
     });
+    this.imageUrl = 'assets/img/default.jpg';
   }
 
   ngOnInit(): void {
@@ -94,6 +97,9 @@ export class TrainingDetailComponent implements OnInit {
             active: this.training.active,
             category: this.training.category,
           });
+
+          this.imageUrl = this.getTrainingImageUrl();
+
           this.apiService.getCategories().subscribe({
             next: (data) => {
               (this.categories = data), this.filterCategories();
@@ -103,6 +109,8 @@ export class TrainingDetailComponent implements OnInit {
         },
         error: (err) => (this.error = err),
       });
+    } else {
+      this.imageUrl = 'assets/img/default.jpg';
     }
   }
 
@@ -117,6 +125,11 @@ export class TrainingDetailComponent implements OnInit {
     return this.status
       ? `${this.urlImg}/download/${this.training.id}?${new Date().getTime()}`
       : 'assets/img/default.jpg';
+  }
+
+  refreshImageUrl(): void {
+    this.imageUrl = this.getTrainingImageUrl();
+    this.cdr.detectChanges();
   }
 
   /**
@@ -228,7 +241,10 @@ export class TrainingDetailComponent implements OnInit {
             category: form.value.category,
           })
           .subscribe({
-            next: (data) => console.log(data),
+            next: (data) => {
+              console.log(data);
+              this.refreshImageUrl();
+            },
             error: (err) => (this.error = err.message),
             complete: () => this.router.navigateByUrl('trainings'),
           });

@@ -6,11 +6,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="container">
-          <img
-            [src]="getTrainingImageUrl()"
-            class="img-thumbnail"
-            alt="..."
-          />
+          <img [src]="imageUrl" class="img-thumbnail" alt="..." />
           <div class="form-group mt-3">
             <input
               *ngIf="isAdmin"
@@ -49,9 +45,9 @@
             class="form-control"
             *ngIf="isAdmin"
           >
-          <option [ngValue]="this.training.category">
-            {{ this.training.category.name }}
-          </option>
+            <option [ngValue]="this.training.category">
+              {{ this.training.category.name }}
+            </option>
             <option *ngFor="let category of categories" [ngValue]="category">
               {{ category.name }}
             </option>
