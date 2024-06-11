@@ -11,14 +11,6 @@
   text-align: center;
 }
 
-.trash-container {
-  text-align: center;
-}
-
-.trash-icon {
-  cursor: pointer;
-}
-
 .btn-container {
   margin-top: 8px;
 }
@@ -29,4 +21,19 @@
 
 .no-order-message {
   margin-top: 1rem;
+}
+
+.status-btn-all.btn-primary,
+.status-btn.btn-primary {
+  background-color: rgb(255, 221, 100);
+}
+
+.no-category-msg {
+  margin-top: 1rem;
+}
+
+.edit-btn {
+  background-color: #5984f1;
+  border: none;
+  border-radius: 0;
 }

@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterContentInit,
+  AfterViewInit,
+  Component,
+  OnInit,
+} from '@angular/core';
 import { Command } from 'src/app/model/command.model';
 import { ApiService } from 'src/app/services/api.service';
 
@@ -7,7 +12,7 @@ import { ApiService } from 'src/app/services/api.service';
   templateUrl: './orders-list.component.html',
   styleUrls: ['./orders-list.component.css'],
 })
-export class OrdersListComponent implements OnInit {
+export class OrdersListComponent implements OnInit, AfterViewInit {
   listOrders: Command[] | undefined;
   listFilteredOrders: Command[] | undefined;
   listStatus: string[];
@@ -20,6 +25,25 @@ export class OrdersListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllOrders();
+  }
+
+  ngAfterViewInit() {
+    const allBtns = document.querySelectorAll('.status-btn');
+    const tousBtn = document.querySelector('.status-btn-all');
+    tousBtn?.classList.add('active');
+
+    allBtns.forEach((btn) =>
+      btn.addEventListener('click', (e) => {
+        tousBtn?.classList.remove('active');
+        allBtns.forEach((btn) => btn.classList.remove('active'));
+        const clickedBtn = e.target as HTMLElement;
+        clickedBtn.classList.add('active');
+      })
+    );
+
+    tousBtn?.addEventListener('click', () => {
+      allBtns.forEach((btn) => btn.classList.remove('active'));
+    });
   }
 
   getAllOrders() {

@@ -17,7 +17,7 @@
         <div class="btn-container">
           <button
             (click)="onStatusChange('')"
-            class="btn status-btn-all"
+            class="btn status-btn-all btn-outline-warning text-dark"
             [class.btn-primary]="selectedStatus === ''"
             [class.btn-outline-primary]="selectedStatus !== ''"
           >
@@ -26,7 +26,7 @@
           <button
             *ngFor="let status of listStatus"
             (click)="onStatusChange(status)"
-            class="btn status-btn"
+            class="btn status-btn btn-outline-warning text-dark"
             [class.btn-primary]="selectedStatus === status"
             [class.btn-outline-primary]="selectedStatus !== status"
           >
@@ -46,7 +46,7 @@
                 <th scope="col">Téléphone</th>
                 <th scope="col">Montant</th>
                 <th scope="col">Statut</th>
-                <th scope="col">Modification</th>
+                <th scope="col">Editer</th>
               </tr>
             </thead>
 
@@ -71,8 +71,11 @@
                   </select>
                 </td>
                 <td class="update-container">
-                  <button type="button" class="btn btn-primary">
-                    Modifier
+                  <button type="button" class="btn btn-primary edit-btn">
+                    <i
+                      class="fa fa-lg fa-pencil-square-o"
+                      aria-hidden="true"
+                    ></i>
                   </button>
                 </td>
               </tr>
@@ -81,7 +84,7 @@
         </ng-container>
         <ng-container *ngIf="listFilteredOrders?.length == 0">
           <tbody>
-            <h3 class="text-danger">Aucun commande trouvée</h3>
+            <h3 class="text-danger no-category-msg">Aucun commande trouvée</h3>
           </tbody>
         </ng-container>
       </div>
