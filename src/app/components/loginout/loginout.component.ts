@@ -6,39 +6,52 @@ import { AuthenticateService } from 'src/app/services/authenticate.service';
 import { environment } from 'src/environments/environment';
 import { ApiService } from 'src/app/services/api.service';
 import { jwtDecode } from 'jwt-decode';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-loginout',
   templateUrl: './loginout.component.html',
-  styleUrls: ['./loginout.component.css']
+  styleUrls: ['./loginout.component.css'],
 })
 
 /**
  * Composant de gestion de l'authentification d'un utilisateur
  */
 export class LoginoutComponent implements OnInit {
-  myForm : FormGroup;
-  user : User | undefined;
-  error : string | undefined;
-  connected : boolean = false;
-  
-  constructor(private formBuilder : FormBuilder, public authService : AuthenticateService, private router : Router, private apiService : ApiService) { 
-    this.user = authService.getUser(); 
+  myForm: FormGroup;
+  user: User | undefined;
+  error: string | undefined;
+  connected: boolean = false;
+  cartSize: number | null;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    public authService: AuthenticateService,
+    private router: Router,
+    private apiService: ApiService,
+    private cartService: CartService
+  ) {
+    this.user = authService.getUser();
     this.connected = authService.isConnectedToken();
     this.myForm = this.formBuilder.group({
-      email : [this.user.email, [Validators.required,Validators.pattern(environment.regExEmail)]],
-      password : [this.user.password, [Validators.required]]
-    })
+      email: [
+        this.user.email,
+        [Validators.required, Validators.pattern(environment.regExEmail)],
+      ],
+      password: [this.user.password, [Validators.required]],
+    });
+    this.cartSize = this.cartService.getSize();
+    console.log('cart size', this.cartSize);
   }
 
   ngOnInit(): void {
-    this.user = new User("","",[]);
+    this.user = new User('', '', []);
   }
 
   /**
-   * Méthode de demande d'authentification à partir des credentials (login + pwd) saisis et comparer avec l'api 
+   * Méthode de demande d'authentification à partir des credentials (login + pwd) saisis et comparer avec l'api
    * En cas de succès, la session de l'utilisateur reste jusqu'à la déconnexion
-   * @param form 
+   * @param form
    */
   // onLogin(form : FormGroup){
   //   if(form.valid){
@@ -59,33 +72,37 @@ export class LoginoutComponent implements OnInit {
   // }
 
   onLogin(myForm: FormGroup) {
-    this.apiService.getToken(myForm.value.email, myForm.value.password).subscribe({
-      next: response => {
-        const token = response.headers.get('Authorization');
-        console.log(token);
-        if (token) {
-          this.authService.setToken(token);
-          this.router.navigateByUrl('cart');
-        } else {
-          console.error('Token non trouvé dans les en-têtes de la réponse.');
-        }
-      },
-      error: err => {
-        this.error = "Email ou mot de passe incorrect"
-      }
-    });
+    this.apiService
+      .getToken(myForm.value.email, myForm.value.password)
+      .subscribe({
+        next: (response) => {
+          const token = response.headers.get('Authorization');
+          console.log(token);
+          if (token && this.cartSize != 0) {
+            this.authService.setToken(token);
+            this.router.navigateByUrl('cart');
+          } else if (token && this.cartSize === 0) {
+            this.authService.setToken(token);
+            this.router.navigateByUrl('trainings');
+          } else {
+            console.error('Token non trouvé dans les en-têtes de la réponse.');
+          }
+        },
+        error: (err) => {
+          this.error = 'Email ou mot de passe incorrect';
+        },
+      });
   }
 
   /**
    * ToDo Ajouter un nouvel utilisateur
    */
-  onAddUser(){
-  }
+  onAddUser() {}
 
   /**
    * Méthode de déconnexion d'un utilisateur
    */
-  disconnect(){
+  disconnect() {
     this.authService.disconnectedToken();
     this.connected = false;
     this.router.navigateByUrl('trainings');
