@@ -34,7 +34,6 @@ export class TrainingDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private authService: AuthenticateService,
     private cartService: CartService,
-    private http: HttpClient,
     private cdr: ChangeDetectorRef
   ) {
     const defaultCategory = new Category(0, '');
@@ -51,6 +50,7 @@ export class TrainingDetailComponent implements OnInit {
     );
 
     this.categories = [];
+    this.training.category = defaultCategory;
     this.urlImg = environment.host;
     this.isAdmin = false;
 
