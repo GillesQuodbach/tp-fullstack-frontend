@@ -45,7 +45,15 @@
             class="form-control"
             *ngIf="isAdmin"
           >
-            <option [ngValue]="this.training.category">
+            <option
+              [ngValue]="null"
+              disabled
+              selected
+              *ngIf="training.id === 0"
+            >
+              Selectionnez une catégorie
+            </option>
+            <option [ngValue]="this.training.category" *ngIf="training.id != 0">
               {{ this.training.category.name }}
             </option>
             <option *ngFor="let category of categories" [ngValue]="category">

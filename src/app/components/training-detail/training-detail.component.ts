@@ -65,7 +65,10 @@ export class TrainingDetailComponent implements OnInit {
       ],
       img: [this.training.img],
       active: [this.training.active, Validators.required],
-      category: [this.training.category, Validators.required],
+      category: [
+        this.training.id === 0 ? null : this.training.category,
+        Validators.required,
+      ],
     });
     this.imageUrl = 'assets/img/default.jpg';
   }

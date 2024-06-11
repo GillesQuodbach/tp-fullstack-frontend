@@ -41,7 +41,6 @@ export class LoginoutComponent implements OnInit {
       password: [this.user.password, [Validators.required]],
     });
     this.cartSize = this.cartService.getSize();
-    console.log('cart size', this.cartSize);
   }
 
   ngOnInit(): void {
@@ -77,7 +76,6 @@ export class LoginoutComponent implements OnInit {
       .subscribe({
         next: (response) => {
           const token = response.headers.get('Authorization');
-          console.log(token);
           if (token && this.cartSize != 0) {
             this.authService.setToken(token);
             this.router.navigateByUrl('cart');
