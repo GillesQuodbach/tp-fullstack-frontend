@@ -1,242 +1,238 @@
 .debutCarte {
-    height: 390px;
-    margin-bottom: 32px;
+  height: 390px;
+  margin-bottom: 32px;
 }
 
 .container-training-detail {
-    background-color: #69F5ED;
-    border-radius: 5px;
-    box-shadow: 2px 3px 3px #AAA;
+  background-color: #69f5ed;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px #aaa;
 }
 .sous-container-training-detail {
-    padding: 0;
+  padding: 0;
 }
 
 .contenuCarte {
-    width: 100%;
-    min-height: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin : 0;
-    padding: 20px;
-    background: #D9D9D9;
-    border-radius: 5px;
-    box-shadow: 2px 3px 3px #AAA;
+  width: 100%;
+  min-height: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  background: #d9d9d9;
+  border-radius: 5px;
+  box-shadow: 2px 3px 3px #aaa;
 }
 
-.contenuCarte a{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+.contenuCarte a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
 }
 
 .card_image {
-   height: 200px;
-   width: 300px;
-   border-radius: 5px;
+  height: 200px;
+  width: 300px;
+  border-radius: 5px;
 }
 
 .container-active {
-    display: inline-block; 
-    padding: 5px 8px; 
-    background-color: rgb(115, 115, 240); 
-    border-radius: 10px; 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+  display: inline-block;
+  padding: 5px 8px;
+  background-color: #ffdd64;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .container-active .fa-eye {
-    font-size: 20px; 
+  font-size: 20px;
 }
 
 .container-inactive {
-    display: inline-block; 
-    padding: 5px 8px; 
-    background-color: rgb(226, 40, 40); 
-    border-radius: 10px; 
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); 
+  display: inline-block;
+  padding: 5px 8px;
+  background-color: #ffdd64;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .container-inactive .fa-eye-slash {
-    font-size: 20px; 
+  font-size: 20px;
 }
 
 .container-btn-upload {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 10px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
 .container-input-file {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border: solid 2px #F5A469 ;  
-    border-radius: 8px;      
-    padding: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);  
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: solid 2px #f5a469;
+  border-radius: 8px;
+  padding: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .btn-update-img {
-    background-color: #FFDD64;
-    font-weight: bold;
-    border-radius: 8px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin-right: 8px;
+  background-color: #ffdd64;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-right: 8px;
 }
 
 .btn-update-img:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .btn-update-img:hover {
-    background-color: #FFE68A; 
+  background-color: #ffe68a;
 }
 
 .btn-update-training {
-    background-color: #FFDD64;
-    font-weight: bold;
-    border-radius: 8px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    padding: 5px 10px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin-right: 8px;
+  background-color: #ffdd64;
+  font-weight: bold;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin-right: 8px;
 }
 
 .btn-update-training:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .btn-update-training:hover {
-    background-color: #FFE68A; 
+  background-color: #ffe68a;
 }
 
 .validate-file-btn {
-    background-color: #FFDD64;
-    border-radius: 8px; 
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 30px;
-    border: none;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin: 2px;
+  background-color: #ffdd64;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 30px;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin: 2px;
 }
 
 .validate-file-btn:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .validate-file-btn:hover {
-    background-color: #FFE68A; 
+  background-color: #ffe68a;
 }
 
-.infosCarte{
-    padding: 15px;
+.infosCarte {
+  padding: 15px;
 }
 
 .container-title-card {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .container-title-card h3 {
-    margin: 10px 0px;
+  margin: 10px 0px;
 }
 
 .sous-container-btn-add {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .sous-container-btn-add input {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .container-price {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 5px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
 .prix {
-    font-size:20px;
+  font-size: 20px;
 }
-
-.cartPanier{
-    background: none;
-    border: none;
-    font-size: 30px;
-}
-
 
 .cartPanier {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    padding: 0;
+  background: none;
+  border: none;
+  font-size: 30px;
+}
+
+.cartPanier {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
 }
 
 .cartPanier i {
-    font-size: 24px; 
-    color: #333; 
-    transition: transform 0.3s ease; 
+  font-size: 24px;
+  color: #333;
+  transition: transform 0.3s ease;
 }
 
 .cartPanier:hover i {
-    transform: scale(1.2); 
+  transform: scale(1.2);
 }
 
 .cartPanier {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    outline: none;
-    padding: 0;
-    position: relative;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  position: relative;
 }
 
 .cartPanier i {
-    font-size: 24px;
-    color: #333;
+  font-size: 24px;
+  color: #333;
 }
 
 .counter {
-    position: absolute;
-    top: -10px; 
-    right: -10px; 
-    background-color: #FF5733; 
-    color: white; 
-    border-radius: 50%; 
-    padding: 5px 8px;
-    font-size: 12px; 
-    opacity: 0;
-    animation: counterAnimation 1s ease-out forwards; 
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: #ff5733;
+  color: white;
+  border-radius: 50%;
+  padding: 5px 8px;
+  font-size: 12px;
+  opacity: 0;
+  animation: counterAnimation 1s ease-out forwards;
 }
-
-
 
 @keyframes counterAnimation {
-    0% {
-        opacity: 1; 
-        transform: translateY(0); 
-    }
-    100% {
-        opacity: 0; 
-        transform: translateY(-50px); 
-    }
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
 }
-
