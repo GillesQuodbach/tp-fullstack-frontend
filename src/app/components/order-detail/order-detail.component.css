@@ -24,6 +24,7 @@
 .amount-container {
     margin-top: 44px;
     margin-bottom: 10px;
+    width: fit-content;
 }
 
 .amount-container label{
@@ -57,3 +58,16 @@
 .btn-submit:hover {
     background-color: #88a9fd; 
 }
+
+.table{
+    margin: 10px;
+    padding: 20px;
+    width: 90%;
+  }
+
+  .modif-container{
+    background-color: rgb(191, 190, 195);
+    width: fit-content;
+    padding-bottom: 15px;
+    background-color: #E5EAF8;
+  }

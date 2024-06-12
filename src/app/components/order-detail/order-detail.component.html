@@ -22,9 +22,9 @@
                 <li class="list-group-item">Date de livraison : {{dateDelivery | date:"dd/MM/yy"}}</li>
               </ul>
             </div>
-
+    
               <div class="row col-md-8 update-container">
-                <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
+                <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="modif-container">
                   <div class="amount-container">
                     <label>Coût Total :</label>
                     <input type="number" formControlName="amount"/>
@@ -38,7 +38,8 @@
                     <button class="btn-submit shadow" type="submit">Modifier</button>
                   </div>
                 </form>
-                <table>
+          
+                <table class="table">
                   <thead>
                     <tr>
                       <th>Id</th><th>Nom</th><th>Quantité</th><th>Prix</th>

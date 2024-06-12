@@ -24,3 +24,7 @@
     visibility: hidden;
     opacity: 0;
   }
+
+  .table{
+    padding: -50px;
+  }
