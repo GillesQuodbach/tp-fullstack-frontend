@@ -49,13 +49,14 @@ newOrderItemQuantity: number;
   ngOnInit(): void {
     let id = this.route.snapshot.params['id'];
     if(id>0) {
+      const today = new Date();
+      this.dateDelivery = new Date(today.setDate(today.getDate() + 3));
       this.getAllTrainings();
       this.getOrderById(id);
       this.filterStatus();
-      // this.getOrderItem(id);
+    }else {
+      this.router.navigateByUrl('404');
     }
-    const today = new Date();
-    this.dateDelivery = new Date(today.setDate(today.getDate() + 3));
   }
   
   
