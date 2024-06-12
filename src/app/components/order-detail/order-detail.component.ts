@@ -70,7 +70,10 @@ newOrderItemQuantity: number;
         this.filterStatus();
         this.getOrderItem(data.id);
       },
-      error: (err) => (this.error = err.message)
+      error: (err) => {
+        (this.error = err.message);
+        (this.router.navigateByUrl('404'));
+      }
     })
   }
 
