@@ -33,17 +33,14 @@
 }
 
 .card_image {
-  height: 200px;
-  width: 300px;
-  border-radius: 5px;
+   height: 200px;
+   width: 350px;
+   border-radius: 5px;
 }
 
 .container-active {
-  display: inline-block;
-  padding: 5px 8px;
-  background-color: #ffdd64;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    display: inline-block; 
+    margin-left: auto;
 }
 
 .container-active .fa-eye {
@@ -51,11 +48,8 @@
 }
 
 .container-inactive {
-  display: inline-block;
-  padding: 5px 8px;
-  background-color: #ffdd64;
-  border-radius: 10px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    display: inline-block; 
+    margin-left: auto;
 }
 
 .container-inactive .fa-eye-slash {
