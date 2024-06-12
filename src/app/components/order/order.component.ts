@@ -116,6 +116,7 @@ export class OrderComponent implements OnInit, OnChanges, DoCheck, OnDestroy {
                       this.apiService
                         .postOrderItem(
                           new OrderItem(
+                            0,
                             cartItem.quantity,
                             cartItem.price,
                             commandSaved,

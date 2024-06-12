@@ -9,14 +9,19 @@ import { LoginoutComponent } from './components/loginout/loginout.component';
 import { OrderConfirmComponent } from './components/order-confirm/order-confirm.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { UserGuard } from './guards/user.guard';
+import { OrderManagerGuard } from './guards/order-manager.guard';
 import { FormsModule } from '@angular/forms';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
 
 
 const routes : Routes = [
-    { path : 'orderDetail/:id', component : OrderDetailComponent},
-    { path : 'ordersList', component : OrdersListComponent},
+    { path : 'orderDetail/:id', component : OrderDetailComponent,
+      canActivate : [OrderManagerGuard]
+    },
+    { path : 'ordersList', component : OrdersListComponent,
+      canActivate : [OrderManagerGuard]
+    },
     { path : 'trainings', component : TrainingsComponent },
     { path : 'cart' , component : CartComponent },
     { 

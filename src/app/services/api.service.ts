@@ -167,7 +167,7 @@ export class ApiService {
 
   /*ALE*/
   public getOrderItemByOrderId(id: number) {
-    return this.http.get<OrderItem>(environment.host + '/ordersitems/' + id);
+    return this.http.get<OrderItem[]>(environment.host + '/ordersitems/' + id);
   }
 
   /**
@@ -216,5 +216,13 @@ export class ApiService {
       `${environment.host}/orders/${orderId}/status`,
       status
     );
+  }
+
+  public deleteOrderItemByOrderId(orderId: number) {
+    return this.http.delete(environment.host + '/ordersitems/' + orderId);
+  }
+
+  public deleteOrderById(orderId: number) {
+    return this.http.delete(environment.host + '/orders/' + orderId);
   }
 }
