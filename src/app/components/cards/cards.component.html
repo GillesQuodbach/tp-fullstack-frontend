@@ -29,8 +29,8 @@
                     <button *ngIf="validateBtnFile" (click)="updateImg(training.id)" class="validate-file-btn"><i class="fa fa-check"></i></button>
                 </div>
                 <div class="col-9 container-title-card">
-                    <div>
-                        <h3>{{ training.name }}</h3>
+                    <div class="training-name-container">
+                        <h3 class="training-name">{{ training.name }}</h3>
                     </div>
                     <div class="container-btn-add">
                         <div *ngIf="training.capacity > 0" class="col-3 text-centre sous-container-btn-add">
