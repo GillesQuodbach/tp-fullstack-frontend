@@ -56,7 +56,7 @@ export class TrainingDetailComponent implements OnInit {
 
     this.myForm = this.formBuilder.group({
       id: [this.training.id],
-      name: [this.training.name, Validators.required],
+      name: [this.training.name, Validators.required, Validators.min(30), Validators.pattern('^[a-zA-Z]+$')],
       description: [this.training.description, Validators.required],
       price: [this.training.price, [Validators.required, Validators.min(50)]],
       capacity: [
