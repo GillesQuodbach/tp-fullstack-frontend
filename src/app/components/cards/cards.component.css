@@ -226,6 +226,16 @@
   animation: counterAnimation 1s ease-out forwards;
 }
 
+.training-name-container {
+  width: 70%;
+}
+
+.training-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
 @keyframes counterAnimation {
   0% {
     opacity: 1;
