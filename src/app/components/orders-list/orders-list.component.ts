@@ -5,7 +5,11 @@ import {
   OnInit,
 } from '@angular/core';
 import { Command } from 'src/app/model/command.model';
+import { OrderItem } from 'src/app/model/orderItem.model';
 import { ApiService } from 'src/app/services/api.service';
+import { Route, Router } from '@angular/router';
+import { OrderComponent } from '../order/order.component';
+import { OrderDetailComponent } from '../order-detail/order-detail.component';
 
 @Component({
   selector: 'app-orders-list',
@@ -13,14 +17,17 @@ import { ApiService } from 'src/app/services/api.service';
   styleUrls: ['./orders-list.component.css'],
 })
 export class OrdersListComponent implements OnInit, AfterViewInit {
+
   listOrders: Command[] | undefined;
   listFilteredOrders: Command[] | undefined;
   listStatus: string[];
   selectedStatus: string | undefined;
   error = null;
+  isAdmin: boolean;
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router : Router ) {
     this.listStatus = ['Non payé', 'Payé', 'En cours', 'Validée', 'Annulée'];
+    this.isAdmin = false;
   }
 
   ngOnInit(): void {
@@ -72,6 +79,7 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
     this.filterOrders();
   }
 
+ 
   updateOrderStatus(id: number, event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     const newStatus = selectElement.value;
@@ -88,4 +96,12 @@ export class OrdersListComponent implements OnInit, AfterViewInit {
       error: (err) => console.error('Error updating status', err),
     });
   }
+
+     /*ALE*/
+     onUpdateOrderDetailById(id: number) {
+      this.router.navigateByUrl('orderDetail/' + id);
+    }
 }
+
+
+
