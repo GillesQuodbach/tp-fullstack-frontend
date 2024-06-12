@@ -33,7 +33,7 @@
                         <h3>{{ training.name }}</h3>
                     </div>
                     <div class="container-btn-add">
-                        <div *ngIf="training.capacity > 0" class="col-3 text-centre sous-container-btn-add">
+                        <div *ngIf="training.capacity > 0 && training.active == true" class="col-3 text-centre sous-container-btn-add">
                             <input
                             type="number"
                             name="quantity"

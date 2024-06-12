@@ -15,9 +15,7 @@ import { OrderConfirmComponent } from './components/order-confirm/order-confirm.
 import { CardsComponent } from './components/cards/cards.component';
 import { TrainingDetailComponent } from './components/training-detail/training-detail.component';
 import { SearchComponent } from './components/search/search.component';
-
 import { AuthInterceptor } from './auth.interceptor';
-
 import { RouterModule } from '@angular/router';
 import { OrdersListComponent } from './components/orders-list/orders-list.component';
 import { OrderDetailComponent } from './components/order-detail/order-detail.component';
