@@ -58,10 +58,10 @@ export class TrainingDetailComponent implements OnInit {
       id: [this.training.id],
       name: [this.training.name, Validators.required],
       description: [this.training.description, Validators.required],
-      price: [this.training.price, [Validators.required, Validators.min(50)]],
+      price: [this.training.price, [Validators.required, Validators.min(50), Validators.max(5000)]],
       capacity: [
         this.training.capacity,
-        [Validators.required, Validators.min(0)],
+        [Validators.required, Validators.min(0), Validators.max(40)],
       ],
       img: [this.training.img],
       active: [this.training.active, Validators.required],
@@ -149,6 +149,7 @@ export class TrainingDetailComponent implements OnInit {
     });
 
     this.imageUrl = 'assets/img/default.jpg';
+    this.status = false;
   }
 
   /**
