@@ -131,7 +131,7 @@
         </div>
         <div>
           <button
-            *ngIf="!status && isAdmin"
+            *ngIf="(!status && isAdmin) || training.id === 0"
             type="submit"
             class="btn btn-lg mt-3 me-3 shadow"
             style="background-color: #5984f1"

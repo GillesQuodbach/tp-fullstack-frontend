@@ -33,14 +33,14 @@
 }
 
 .card_image {
-   height: 200px;
-   width: 350px;
-   border-radius: 5px;
+  height: 200px;
+  width: 350px;
+  border-radius: 5px;
 }
 
 .container-active {
-    display: inline-block; 
-    margin-left: auto;
+  display: inline-block;
+  margin-left: auto;
 }
 
 .container-active .fa-eye {
@@ -48,8 +48,8 @@
 }
 
 .container-inactive {
-    display: inline-block; 
-    margin-left: auto;
+  display: inline-block;
+  margin-left: auto;
 }
 
 .container-inactive .fa-eye-slash {
@@ -228,6 +228,7 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding-bottom: 0.3rem;
 }
 
 @keyframes counterAnimation {

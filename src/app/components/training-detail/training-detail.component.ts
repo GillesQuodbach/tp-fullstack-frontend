@@ -149,6 +149,7 @@ export class TrainingDetailComponent implements OnInit {
     });
 
     this.imageUrl = 'assets/img/default.jpg';
+    this.status = false;
   }
 
   /**

@@ -1,4 +1,26 @@
 .btn-circle {
-    border: 3px solid black; 
-    border-radius: 50%;
+  border: 3px solid black;
+  border-radius: 50%;
+}
+
+.cart-training-name-container {
+  width: 70%;
+}
+
+.cart-training-name {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.cart-training-description {
+  display: inline-block;
+  min-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.order-item-price {
+  margin-left: 1rem;
 }

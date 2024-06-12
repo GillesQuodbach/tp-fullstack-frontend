@@ -38,9 +38,14 @@
                               style="width: 65px; height: 65px"
                             />
                           </div>
-                          <div class="ms-3">
-                            <h5>{{ training.name }}</h5>
-                            <p class="small mb-0" style="width: 120px">
+                          <div class="ms-3 cart-training-name-container">
+                            <h5 class="cart-training-name">
+                              {{ training.name }}
+                            </h5>
+                            <p
+                              class="small mb-0 cart-training-description"
+                              style="width: 120px"
+                            >
                               {{ training.description }}
                             </p>
                           </div>
@@ -69,7 +74,7 @@
                         </div>
                         <div class="d-flex flex-row align-items-center">
                           <div style="width: 80px">
-                            <h5 class="mb-0">
+                            <h5 class="mb-0 order-item-price">
                               ${{ training.price * training.quantity }}
                             </h5>
                           </div>

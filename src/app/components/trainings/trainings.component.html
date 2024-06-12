@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container training-main-container">
   <ng-container *ngIf="listTrainings; else loading">
     <nav class="navbar navbar-expand-lg navigationCategories">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -16,9 +16,11 @@
         </ul>
       </div>
     </nav>
-    <div class="container">
+    <div class="container all-trainings-cards-container">
       <div class="title-category">
-        <p class="h4">Catégorie sélectionnée : <strong>{{ nameCategorySelected }}</strong></p>
+        <p class="h4">
+          Catégorie sélectionnée : <strong>{{ nameCategorySelected }}</strong>
+        </p>
       </div>
       <div class="row">
         <h2
@@ -31,7 +33,10 @@
           <div *ngIf="isAdmin" class="col-lg-4 col-md-6 cartes">
             <app-cards [training]="training"></app-cards>
           </div>
-          <div *ngIf="training.active && !isAdmin" class="col-lg-4 col-md-6 cartes">
+          <div
+            *ngIf="training.active && !isAdmin"
+            class="col-lg-4 col-md-6 cartes"
+          >
             <app-cards [training]="training"></app-cards>
           </div>
         </ng-container>
