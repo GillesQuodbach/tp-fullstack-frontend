@@ -115,6 +115,40 @@ export class TrainingDetailComponent implements OnInit {
     } else {
       this.imageUrl = 'assets/img/default.jpg';
     }
+    this.route.params.subscribe((params) => {
+      let id = +params['id'];
+      console.log(id);
+      if (id != 0) {
+        console.log('id : ' + id + ' loadtraining');
+        this.loadTraining(id);
+      } else if (id == 0) {
+        console.log('reset form');
+        this.resetForm();
+      }
+    });
+  }
+
+  loadTraining(id: number) {
+    this.apiService.getTraining(id).subscribe((training) => {
+      this.training = training;
+      this.myForm.patchValue(this.training);
+      this.refreshImageUrl();
+    });
+  }
+
+  resetForm() {
+    this.myForm.reset({
+      id: 0,
+      name: '',
+      description: '',
+      price: null,
+      capacity: null,
+      img: 'assets/img/default.jpg',
+      active: true,
+      category: null,
+    });
+
+    this.imageUrl = 'assets/img/default.jpg';
   }
 
   /**
